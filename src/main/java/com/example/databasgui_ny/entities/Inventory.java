@@ -9,11 +9,11 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inventory_id;
     @Column(name = "film_id", length = 255)
-private String film_id;
+    private String film_id;
     @Column(name = "store_id", length = 255)
-private String store_id;
+    private String store_id;
     @Column(name = "last_update", length = 60)
-private String last_update;
+    private String last_update;
 
         public Inventory(){}
 
