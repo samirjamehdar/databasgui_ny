@@ -8,16 +8,18 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customer_id;
-    @Column(name = "store_id")
-    private int store_id;
-    @Column(name = "firts_name", length = 45)
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+    @Column(name = "first_name", length = 45)
     private String first_name;
     @Column(name = "last_name", length = 45)
     private String last_name;
     @Column(name = "email", length = 50)
     private String email;
-    @Column(name = "address_id")
-    private int address_id;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
     @Column(name = "active")
     private boolean active;
     @Column(name = "create_date")
@@ -31,9 +33,9 @@ public class Customer {
 
     public void setCustomer_id(int customer_id) {this.customer_id = customer_id;}
 
-    public int getStore_id() {return store_id;}
+    public Store getStore() {return store;}
 
-    public void setStore_id(int store_id) {this.store_id = store_id;}
+    public void setStore(Store store) {this.store = store;}
 
     public String getFirst_name() {return first_name;}
 
@@ -47,9 +49,9 @@ public class Customer {
 
     public void setEmail(String email) {this.email = email;}
 
-    public int getAddress_id() {return address_id;}
+    public Address getAddress() {return address;}
 
-    public void setAddress_id(int address_id) {this.address_id = address_id;}
+    public void setAddress(Address address) {this.address = address;}
 
     public boolean isActive() {return active;}
 

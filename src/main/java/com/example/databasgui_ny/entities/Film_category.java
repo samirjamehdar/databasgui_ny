@@ -6,9 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "Film_category")
 public class Film_category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id")
-    private int film_id;
+    @ManyToOne
+    @JoinColumn(name = "film_id")
+    private Film film;
     @Column(name = "category_id")
     private int category_id;
     @Column(name = "last_update")
@@ -17,12 +17,12 @@ public class Film_category {
     public Film_category() {
     }
 
-    public int getFilm_id() {
-        return film_id;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
     public int getCategory_id() {
