@@ -19,9 +19,9 @@ public class Store {
     @Column(name = "last_update", length = 60)
     private String last_update;
 
-    @ManyToOne
-    @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
-    private Staff managerStaff;
+//    @ManyToOne
+//    @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
+//    private Staff managerStaff;
 
     @ManyToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")

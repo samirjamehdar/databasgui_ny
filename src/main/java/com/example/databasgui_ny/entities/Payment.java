@@ -25,9 +25,9 @@ public class Payment {
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-    private Staff staff;
+//    @ManyToOne
+//    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+//    private Staff staff;
 
     public Payment(){}
 
