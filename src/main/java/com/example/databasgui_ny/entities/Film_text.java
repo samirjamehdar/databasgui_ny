@@ -16,6 +16,12 @@ public class Film_text {
 
 public Film_text(){}
 
+    public Film_text(Film film, String title, String description){
+        this.film = film;
+        this.title = title;
+        this.description = description;
+    }
+
         public Film getFilm() {return film;}
 
         public void setFilm(Film film_id) {this.film = film;}

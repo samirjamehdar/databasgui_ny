@@ -19,6 +19,11 @@ public class Actor {
 
     public Actor(){}
 
+    public Actor(String first_name, String last_name){
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
     public int getActor_id() {return actor_id;}
 
     public void setActor_id(int actor_id) {this.actor_id = actor_id;}

@@ -28,6 +28,15 @@ public class Address {
 
     public Address(){}
 
+    public Address(String address, String address2, String district, City city, String postal_code, String phone){
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.city = city;
+        this.postal_code = postal_code;
+        this.phone = phone;
+    }
+
     public int getAddress_id() {return address_id;}
 
     public void setAddress_id(int address_id) {this.address_id = address_id;}

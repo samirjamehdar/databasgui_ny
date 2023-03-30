@@ -14,7 +14,11 @@ public class Film_category {
     @Column(name = "last_update")
     private String last_update;
 
-    public Film_category() {
+    public Film_category() {}
+
+    public Film_category(Film film, int category_id) {
+        this.film = film;
+        this.category_id = category_id;
     }
 
     public Film getFilm() {

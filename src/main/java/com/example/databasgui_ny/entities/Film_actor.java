@@ -18,6 +18,11 @@ public class Film_actor {
 
     public Film_actor(){}
 
+    public Film_actor(Actor actor, Film film){
+        this.actor = actor;
+        this.film = film;
+    }
+
     public Actor getActor() {return actor;}
 
     public void setActor(Actor actor) {this.actor = actor;}

@@ -17,6 +17,11 @@ public class City {
 
     public City(){}
 
+    public City(String city, int country_id){
+        this.city = city;
+        this.country_id = country_id;
+    }
+
     public int getCity_id() {return city_id;}
 
     public void setCity_id(int city_id) {this.city_id = city_id;}

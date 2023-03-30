@@ -29,6 +29,16 @@ public class Customer {
 
     public Customer(){}
 
+    public Customer(Store store, String first_name, String last_name, String email, Address address, boolean active, String create_date){
+        this.store = store;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.address = address;
+        this.active = active;
+        this.create_date = create_date;
+    }
+
     public int getCustomer_id() {return customer_id;}
 
     public void setCustomer_id(int customer_id) {this.customer_id = customer_id;}
