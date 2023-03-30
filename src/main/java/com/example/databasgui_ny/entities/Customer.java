@@ -75,4 +75,18 @@ public class Customer {
 
     public void setLast_update(String last_update) {this.last_update = last_update;}
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customer_id=" + customer_id +
+                ", store=" + store +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", active=" + active +
+                ", create_date='" + create_date + '\'' +
+                ", last_update='" + last_update + '\'' +
+                '}';
+    }
 }

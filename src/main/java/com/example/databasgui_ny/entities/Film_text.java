@@ -33,4 +33,13 @@ public Film_text(){}
         public String getDescription() {return description;}
 
         public void setDescription(String description) {this.description = description;}
+
+    @Override
+    public String toString() {
+        return "Film_text{" +
+                "film=" + film +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

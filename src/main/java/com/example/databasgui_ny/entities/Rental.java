@@ -64,7 +64,19 @@ public class Rental {
 
     public void setLast_update(String last_update) {this.last_update = last_update;}
 
-
-
-
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "rental_id=" + rental_id +
+                ", rental_date='" + rental_date + '\'' +
+                ", inventory_id='" + inventory_id + '\'' +
+                ", customer_id='" + customer_id + '\'' +
+                ", return_date='" + return_date + '\'' +
+                ", staff_id='" + staff_id + '\'' +
+                ", last_update='" + last_update + '\'' +
+                ", inventory=" + inventory +
+                ", customer=" + customer +
+                ", staff=" + staff +
+                '}';
+    }
 }

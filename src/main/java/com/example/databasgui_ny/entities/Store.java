@@ -56,4 +56,17 @@ public class Store {
     public String getLast_update() {return last_update;}
 
     public void setLast_update(String last_update) {this.last_update = last_update;}
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "store_id=" + store_id +
+                ", manager_staff_id='" + manager_staff_id + '\'' +
+                ", address_id='" + address_id + '\'' +
+                ", last_update='" + last_update + '\'' +
+                ", managerStaff=" + managerStaff +
+                ", address=" + address +
+                ", inventoryList=" + inventoryList +
+                '}';
+    }
 }

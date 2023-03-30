@@ -103,4 +103,24 @@ public class Film {
     public void setSpecial_features(String special_features) {this.special_features = special_features;}
 
     public String getLast_update() {return last_update;}
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "film_id=" + film_id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", release_year='" + release_year + '\'' +
+                ", language_id='" + language_id + '\'' +
+                ", original_language_id='" + original_language_id + '\'' +
+                ", rental_duration='" + rental_duration + '\'' +
+                ", rental_rate='" + rental_rate + '\'' +
+                ", length='" + length + '\'' +
+                ", replacement_cost='" + replacement_cost + '\'' +
+                ", rating='" + rating + '\'' +
+                ", special_features='" + special_features + '\'' +
+                ", last_update='" + last_update + '\'' +
+                ", inventoryList=" + inventoryList +
+                '}';
+    }
 }

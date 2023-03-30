@@ -38,4 +38,13 @@ public class City {
 
     public void setLast_update(String last_update) {this.last_update = last_update;}
 
+    @Override
+    public String toString() {
+        return "City{" +
+                "city_id=" + city_id +
+                ", city='" + city + '\'' +
+                ", country_id=" + country_id +
+                ", last_update='" + last_update + '\'' +
+                '}';
+    }
 }

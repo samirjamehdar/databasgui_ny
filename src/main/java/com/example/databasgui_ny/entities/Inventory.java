@@ -43,4 +43,16 @@ private String last_update;
         public String getLast_update() {return last_update;}
 
         public void setLast_update(String last_update) {this.last_update = last_update;}
+
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventory_id=" + inventory_id +
+                ", film_id='" + film_id + '\'' +
+                ", store_id='" + store_id + '\'' +
+                ", last_update='" + last_update + '\'' +
+                ", film=" + film +
+                ", store=" + store +
+                '}';
+    }
 }
