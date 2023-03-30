@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "staff_id")
 private int staff_id;
     @Column(name = "first_name", length = 45)
 private String first_name;
@@ -28,6 +29,16 @@ private String username;
 private String password;
     @Column(name = "last_update", length = 60)
 private String last_update;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    private Address address;
+
+
 
         public Staff(){}
 

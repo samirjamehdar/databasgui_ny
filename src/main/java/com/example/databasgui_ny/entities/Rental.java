@@ -21,6 +21,19 @@ public class Rental {
     @Column(name = "last_update", length = 60)
     private String last_update;
 
+    @ManyToOne
+    @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id")
+    private Inventory inventory;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+    private Staff staff;
+
+
     public Rental(){}
 
     public int getRental_id() {return rental_id;}
