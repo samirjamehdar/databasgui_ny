@@ -21,6 +21,14 @@ public class Payment {
     @Column(name = "last_update", length = 60)
     private String last_update;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+    private Staff staff;
+
     public Payment(){}
 
     public int getPayment_id() {return payment_id;}

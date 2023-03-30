@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inventory_id")
     private int inventory_id;
     @Column(name = "film_id", length = 255)
     private String film_id;
@@ -14,6 +15,16 @@ public class Inventory {
     private String store_id;
     @Column(name = "last_update", length = 60)
     private String last_update;
+
+    @ManyToOne
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+    private Film film;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
+
+
 
         public Inventory(){}
 
