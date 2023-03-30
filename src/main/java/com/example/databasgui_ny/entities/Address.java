@@ -15,8 +15,9 @@ public class Address {
     @Column(name = "district", length = 20)
     private String district;
 
-    @Column(name = "city_id")
-    private int city_id;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     @Column(name = "postal_code", length = 10)
     private String postal_code;
@@ -43,9 +44,9 @@ public class Address {
 
     public void setDistrict(String district) {this.district = district;}
 
-    public int getCity_id() {return city_id;}
+    public City getCity() {return city;}
 
-    public void setCity_id(int city_id) {this.city_id = city_id;}
+    public void setCity_id(City city) {this.city = city;}
 
     public String getPostal_code() {return postal_code;}
 

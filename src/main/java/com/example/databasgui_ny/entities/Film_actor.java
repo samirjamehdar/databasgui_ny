@@ -5,23 +5,26 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Film_actor")
 public class Film_actor {
-@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actor_id;
-    @Column(name = "film_id", length = 255)
-    private String film_id;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "actor_id")
+    private Actor actor;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "film_id")
+    private Film film;
     @Column(name = "last_update", length = 60)
     private String last_update;
 
     public Film_actor(){}
 
-    public int getActor_id() {return actor_id;}
+    public Actor getActor() {return actor;}
 
-    public void setActor_id(int actor_id) {this.actor_id = actor_id;}
+    public void setActor(Actor actor) {this.actor = actor;}
 
-    public String getFilm_id() {return film_id;}
+    public Film getFilm() {return film;}
 
-    public void setFilm_id(String film_id) {this.film_id = film_id;}
+    public void setFilm(Film film) {this.film = film;}
 
     public String getLast_update() {return last_update;}
 
