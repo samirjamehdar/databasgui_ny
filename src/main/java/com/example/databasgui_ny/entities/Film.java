@@ -2,6 +2,8 @@ package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Film")
 public class Film {
@@ -32,6 +34,9 @@ public class Film {
     private String special_features;
     @Column(name = "last_update", length = 60)
     private String last_update;
+
+    @OneToMany(mappedBy = "film")
+    private List<Inventory> inventoryList;
 
     public Film(){}
 
