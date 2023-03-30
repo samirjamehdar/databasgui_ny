@@ -12,10 +12,10 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private int store_id;
-    @Column(name = "manager_staff_id", length = 255)
+    /*@Column(name = "manager_staff_id", length = 255)
     private String manager_staff_id;
     @Column(name = "address_id", length = 255)
-    private String address_id;
+    private String address_id;*/
     @Column(name = "last_update", length = 60)
     private String last_update;
 
@@ -32,10 +32,9 @@ public class Store {
 
 
 
-    public Store(int store_id, String manager_staff_id, String address_id, String last_update) {
-        this.store_id = store_id;
-        this.manager_staff_id = manager_staff_id;
-        this.address_id = address_id;
+    public Store( Staff managerStaff, String address_id, String last_update) {
+        this.managerStaff = managerStaff;
+        this.address = address;
         this.last_update = last_update;
     }
 
@@ -45,13 +44,13 @@ public class Store {
 
     public void setStore_id(int store_id) {this.store_id = store_id;}
 
-    public String getManager_staff_id() {return manager_staff_id;}
+    public Staff getManager_staff_id() {return managerStaff;}
 
-    public void setManager_staff_id(String manager_staff_id) {this.manager_staff_id = manager_staff_id;}
+    public void setManager_staff_id(Staff manager_staff_id) {this.managerStaff = manager_staff_id;}
 
-    public String getAddress_id() {return address_id;}
+    public Address address() {return address;}
 
-    public void setAddress_id(String address_id) {this.address_id = address_id;}
+    public void setAddress_id(String address_id) {this.address = address;}
 
     public String getLast_update() {return last_update;}
 
