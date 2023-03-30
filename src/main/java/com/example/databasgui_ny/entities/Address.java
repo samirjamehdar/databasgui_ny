@@ -26,6 +26,7 @@ public class Address {
     @Column(name = "last_update")
     private String last_update;
 
+
     public Address(){}
 
     public int getAddress_id() {return address_id;}

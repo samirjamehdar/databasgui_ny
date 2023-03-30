@@ -8,10 +8,10 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int payment_id;
-    @Column(name = "customer_id", length = 255)
+    /*@Column(name = "customer_id", length = 255)
     private String customer_id;
     @Column(name = "staff_id", length = 255)
-    private String staff_id;
+    private String staff_id;*/
     @Column(name = "rental_id", length = 255)
     private String rental_id;
     @Column(name = "amount", length = 255)
@@ -35,13 +35,13 @@ public class Payment {
 
     public void setPayment_id(int payment_id) {this.payment_id = payment_id;}
 
-    public String getCustomer_id() {return customer_id;}
+    public Customer getCustomer_id() {return customer;}
 
-    public void setCustomer_id(String customer_id) {this.customer_id = customer_id;}
+    public void setCustomer_id(String customer_id) {this.customer = customer;}
 
-    public String getStaff_id() {return staff_id;}
+    public Staff getStaff_id() {return staff;}
 
-    public void setStaff_id(String staff_id) {this.staff_id = staff_id;}
+    public void setStaff_id(String staff_id) {this.staff = staff;}
 
     public String getRental_id() {return rental_id;}
 

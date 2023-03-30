@@ -13,14 +13,14 @@ private int staff_id;
 private String first_name;
     @Column(name = "last_name", length = 45)
 private String last_name;
-    @Column(name = "address_id", length = 255)
-private String address_id;
+    /*@Column(name = "address_id", length = 255)
+private String address_id;*/
     @Column(name = "picture", length = 255)
 private String picture;
     @Column(name = "email", length = 50)
 private String email;
-    @Column(name = "store_id", length = 255)
-private String store_id;
+    /*@Column(name = "store_id", length = 255)
+private String store_id;*/
     @Column(name = "active", length = 255)
 private String active;
     @Column(name = "username", length = 16)
@@ -54,9 +54,9 @@ private String last_update;
 
         public void setLast_name(String last_name) {this.last_name = last_name;}
 
-        public String getAddress_id() {return address_id;}
+        public Address getAddress_id() {return address;}
 
-        public void setAddress_id(String address_id) {this.address_id = address_id;}
+        public void setAddress_id(String address_id) {this.address = address;}
 
         public String getPicture() {return picture;}
 
@@ -66,9 +66,9 @@ private String last_update;
 
         public void setEmail(String email) {this.email = email;}
 
-        public String getStore_id() {return store_id;}
+        public Store getStore_id() {return store;}
 
-        public void setStore_id(String store_id) {this.store_id = store_id;}
+        public void setStore_id(String store_id) {this.store = store;}
 
         public String getActive() {return active;}
 
