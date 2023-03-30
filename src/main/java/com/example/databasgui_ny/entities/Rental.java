@@ -10,14 +10,14 @@ public class Rental {
     private int rental_id;
     @Column(name = "rental_date", length = 60)
     private String rental_date;
-    @Column(name = "inventory_id", length = 255)
-    private String inventory_id;
-    @Column(name = "customer_id", length = 255)
-    private String customer_id;
+/*    @Column(name = "inventory_id", length = 255)
+    private String inventory_id;*/
+/*    @Column(name = "customer_id", length = 255)
+    private String customer_id;*/
     @Column(name = "return_date", length = 60)
     private String return_date;
-    @Column(name = "staff_id", length = 255)
-    private String staff_id;
+  /*  @Column(name = "staff_id", length = 255)
+    private String staff_id;*/
     @Column(name = "last_update", length = 60)
     private String last_update;
 
@@ -44,21 +44,21 @@ public class Rental {
 
     public void setRental_date(String rental_date) {this.rental_date = rental_date;}
 
-    public String getInventory_id() {return inventory_id;}
+    public Inventory getInventory_id() {return inventory;}
 
-    public void setInventory_id(String inventory_id) {this.inventory_id = inventory_id;}
+    public void setInventory_id(String inventory_id) {this.inventory = inventory;}
 
-    public String getCustomer_id() {return customer_id;}
+    public Customer getCustomer_id() {return customer;}
 
-    public void setCustomer_id(String customer_id) {this.customer_id = customer_id;}
+    public void setCustomer_id(String customer_id) {this.customer = customer;}
 
     public String getReturn_date() {return return_date;}
 
     public void setReturn_date(String return_date) {this.return_date = return_date;}
 
-    public String getStaff_id() {return staff_id;}
+    public Staff getStaff_id() {return staff;}
 
-    public void setStaff_id(String staff_id) {this.staff_id = staff_id;}
+    public void setStaff_id(String staff_id) {this.staff = staff;}
 
     public String getLast_update() {return last_update;}
 
