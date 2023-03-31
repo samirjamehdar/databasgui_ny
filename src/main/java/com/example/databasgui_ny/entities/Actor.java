@@ -9,7 +9,7 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int actor_id;
-//    @Column(name = "first_name", length = 45)
+
     private String first_name;
 //    @Column(name = "last_name", length = 45)
     private String last_name;
@@ -35,13 +35,13 @@ public class Actor {
 //
 //    public void setLast_update(String last_update) {this.last_update = last_update;}
 
+
     @Override
     public String toString() {
         return "Actor{" +
                 "actor_id=" + actor_id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
-                ", last_update='" + /*last_update*/ + '\'' +
                 '}';
     }
 }
