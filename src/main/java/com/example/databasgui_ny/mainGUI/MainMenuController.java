@@ -1,6 +1,9 @@
 package com.example.databasgui_ny.mainGUI;
 
 import com.example.databasgui_ny.dao.ActorDAO;
+import com.example.databasgui_ny.dao.AddressDAO;
+import com.example.databasgui_ny.dao.CityDAO;
+import com.example.databasgui_ny.dao.CustomerDAO;
 import com.example.databasgui_ny.entities.Actor;
 import com.example.databasgui_ny.entities.Address;
 import com.example.databasgui_ny.entities.City;
@@ -87,7 +90,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Customer":
                     selectedTable = "Customer";
-                    System.out.println("Customer is selected, refresh te table to actor values");
+                    handleCustomerTable();
                     break;
                 case "Film":
                     selectedTable = "Film";
@@ -195,7 +198,7 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(cityLastUpdateCol);
         }
     }
-    public void handleAddressTable() {
+    public void handleCustomerTable() {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
