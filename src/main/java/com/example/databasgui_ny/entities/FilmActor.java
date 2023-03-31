@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "Film_actor")
-public class Film_actor {
+public class FilmActor {
     @Id
     @ManyToOne
     @JoinColumn(name = "actor_id")
@@ -18,7 +18,7 @@ public class Film_actor {
     @Column(name = "last_update", length = 60)
     private Date last_update;
 
-    public Film_actor(){}
+    public FilmActor(){}
 
     public Actor getActor() {return actor;}
 
