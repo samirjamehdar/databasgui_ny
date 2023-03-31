@@ -1,7 +1,6 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
 
 @Entity
