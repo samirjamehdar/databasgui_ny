@@ -13,11 +13,10 @@
    <children>
       <VBox layoutX="14.0" layoutY="20.0" prefHeight="672.0" prefWidth="1251.0" spacing="10.0">
          <children>
-            <ChoiceBox fx:id="MainMenu_TableChoice" prefHeight="25.0" prefWidth="225.0" />
-            <TableView fx:id="MainMenu_TableView" onSort="#refreshTableView" prefHeight="603.0" prefWidth="1251.0">
+            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="225.0" />
+            <TableView fx:id="tableView" prefHeight="603.0" prefWidth="1251.0">
               <columns>
                 <TableColumn fx:id="menuCol1" prefWidth="88.0" text="C1" />
-                <TableColumn fx:id="menuCol2" prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
             <HBox prefHeight="99.0" prefWidth="1251.0" spacing="20.0">

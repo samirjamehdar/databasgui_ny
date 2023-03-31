@@ -1,5 +1,6 @@
 package com.example.databasgui_ny;
 
+import com.example.databasgui_ny.dao.ActorDAO;
 import com.example.databasgui_ny.entities.Actor;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
@@ -10,18 +11,11 @@ import java.util.List;
 
 public class mainTest {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Actor actor = session.get(Actor.class, 1);
-
-        List<Actor> actorList = session.createQuery("FROM Actor").list();
-        System.out.println(actorList.size());
-
-        System.out.println(actor.getFirst_name());
-        session.getTransaction().commit();
-        session.close();
-
-
+        ActorDAO actorDao = new ActorDAO();
+        actorDao.displayActors();
+//        List<Actor> actors = actorDao.readAll();
+//        for (Actor actor : actors) {
+//            System.out.println(actor.getFirst_name());
+//        }
     }
 }
