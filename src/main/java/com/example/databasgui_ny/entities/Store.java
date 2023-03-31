@@ -3,57 +3,90 @@ package com.example.databasgui_ny.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.Set;
 
 @Entity
-@Table(name = "Store")
+@Table(name = "store")
 public class Store {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
-    private int store_id;
-    @Column(name = "manager_staff_id", length = 255)
-    private String manager_staff_id;
-    @Column(name = "address_id", length = 255)
-    private String address_id;
-    @Column(name = "last_update", length = 60)
-    private Date last_update;
+    private Integer storeId;
 
     @ManyToOne
-    @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
+    @JoinColumn(name = "manager_staff_id")
     private Staff managerStaff;
 
     @ManyToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "store")
-    private List<Inventory> inventoryList;
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Staff> staff;
 
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Inventory> inventory;
 
-    public Store( Staff managerStaff, String address_id, Date last_update) {
-        this.managerStaff = managerStaff;
-        this.address = address;
-        this.last_update = last_update;
+    public Store() {
     }
 
-    public Store(){}
+    public Store(Staff managerStaff, Address address, LocalDateTime lastUpdate) {
+        this.managerStaff = managerStaff;
+        this.address = address;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public int getStore_id() {return store_id;}
+    public Integer getStoreId() {
+        return storeId;
+    }
 
-    public void setStore_id(int store_id) {this.store_id = store_id;}
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
 
-    public Staff getManager_staff_id() {return managerStaff;}
+    public Staff getManagerStaff() {
+        return managerStaff;
+    }
 
-    public void setManager_staff_id(Staff manager_staff_id) {this.managerStaff = manager_staff_id;}
+    public void setManagerStaff(Staff managerStaff) {
+        this.managerStaff = managerStaff;
+    }
 
-    public Address address() {return address;}
+    public Address getAddress() {
+        return address;
+    }
 
-    public void setAddress_id(String address_id) {this.address = address;}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-    public Date getLast_update() {return last_update;}
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
 
-    public void setLast_update(Date last_update) {this.last_update = last_update;}
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Set<Staff> staff) {
+        this.staff = staff;
+    }
+
+    public Set<Inventory> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Set<Inventory> inventory) {
+        this.inventory = inventory;
+    }
 }

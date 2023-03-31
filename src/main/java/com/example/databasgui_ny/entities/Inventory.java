@@ -3,46 +3,78 @@ package com.example.databasgui_ny.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "Inventory")
+@Table(name = "inventory")
 public class Inventory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id")
-    private int inventory_id;
-    @Column(name = "film_id", length = 255)
-    private String film_id;
-    @Column(name = "store_id", length = 255)
-    private String store_id;
-    @Column(name = "last_update", length = 60)
-    private Date last_update;
+    private Integer inventoryId;
 
     @ManyToOne
-    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+    @JoinColumn(name = "film_id")
     private Film film;
 
     @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    @JoinColumn(name = "store_id")
     private Store store;
 
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Rental> rentals;
 
-        public Inventory(){}
+    public Inventory() {
+    }
 
-        public int getInventory_id() {return inventory_id;}
+    public Inventory(Film film, Store store, LocalDateTime lastUpdate) {
+        this.film = film;
+        this.store = store;
+        this.lastUpdate = lastUpdate;
+    }
 
-        public void setInventory_id(int inventory_id) {this.inventory_id = inventory_id;}
+    public Integer getInventoryId() {
+        return inventoryId;
+    }
 
-        public String getFilm_id() {return film_id;}
+    public void setInventoryId(Integer inventoryId) {
+        this.inventoryId = inventoryId;
+    }
 
-        public void setFilm_id(String film_id) {this.film_id = film_id;}
+    public Film getFilm() {
+        return film;
+    }
 
-        public String getStore_id() {return store_id;}
+    public void setFilm(Film film) {
+        this.film = film;
+    }
 
-        public void setStore_id(String store_id) {this.store_id = store_id;}
+    public Store getStore() {
+        return store;
+    }
 
-        public Date getLast_update() {return last_update;}
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
-        public void setLast_update(Date last_update) {this.last_update = last_update;}
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Set<Rental> rentals) {
+        this.rentals = rentals;
+    }
 }

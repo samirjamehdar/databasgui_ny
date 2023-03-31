@@ -1,13 +1,7 @@
 package com.example.databasgui_ny.mainGUI;
 
-import com.example.databasgui_ny.dao.ActorDAO;
-import com.example.databasgui_ny.dao.AddressDAO;
-import com.example.databasgui_ny.dao.CityDAO;
-import com.example.databasgui_ny.dao.CustomerDAO;
-import com.example.databasgui_ny.entities.Actor;
-import com.example.databasgui_ny.entities.Address;
-import com.example.databasgui_ny.entities.City;
-import com.example.databasgui_ny.entities.Customer;
+import com.example.databasgui_ny.dao.*;
+import com.example.databasgui_ny.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,6 +69,7 @@ public class MainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(menuItems);
         choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+//            tableView.getColumns().clear();
             switch (newValue) {
                 case "Actor":
                     selectedTable = "Actor";
@@ -96,16 +91,16 @@ public class MainMenuController implements Initializable {
                     selectedTable = "Film";
                     System.out.println("Film is selected, refresh the table to actor values");
                     break;
-                case "Film_actor":
-                    selectedTable = "Film_actor";
+                case "FilmActor":
+                    selectedTable = "FilmActor";
                     System.out.println("Film_actor is selected, refresh the table to actor values");
                     break;
-                case "Film_category":
-                    selectedTable = "Film_category";
+                case "FilmCategory":
+                    selectedTable = "FilmCategory";
                     System.out.println("Film_category is selected, refresh the table to actor values");
                     break;
-                case "Film_text":
-                    selectedTable = "Film_text";
+                case "FilmText":
+                    selectedTable = "FilmText";
                     System.out.println("Film_text is selected, refresh the table to actor values");
                     break;
                 case "Inventory":
@@ -135,7 +130,6 @@ public class MainMenuController implements Initializable {
     public void handleActorTable() {
         if (actorObList.size() == 0) {
         ActorDAO actorDAO = new ActorDAO();
-
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
         actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
@@ -179,6 +173,7 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(addressLastUpdateCol);
         }
     }
+
     public void handleCityTable() {
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
@@ -198,6 +193,7 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(cityLastUpdateCol);
         }
     }
+
     public void handleCustomerTable() {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
@@ -233,7 +229,7 @@ public class MainMenuController implements Initializable {
         Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
 
         if (selectedActor != null) {
-            int actorId = selectedActor.getActor_id();
+            int actorId = selectedActor.getActorId();
             System.out.println("Selected actor ID: " + actorId);
         } else {
             System.out.println("No actor selected.");
@@ -241,12 +237,85 @@ public class MainMenuController implements Initializable {
     }
 
     public void deleteButtonClick(ActionEvent e) {
-        switch (selectedTable) {
-            case "Actor":
-                ActorDAO actorDao = new ActorDAO();
-                Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
-                System.out.println("DELETING ACTOR ID: " + selectedActor.getActor_id());
-                actorDao.delete(selectedActor.getActor_id());
+        if (selectedTable != null) {
+            switch (selectedTable) {
+                case "Actor":
+                    ActorDAO actorDao = new ActorDAO();
+                    Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+                    System.out.println("DELETING ACTOR ID: " + selectedActor.getActorId());
+                    actorObList.remove(selectedActor);
+                    actorDao.delete(selectedActor.getActorId());
+                    break;
+                case "Address":
+                    AddressDAO addressDAO = new AddressDAO();
+                    Address selectedAddress = (Address) tableView.getSelectionModel().getSelectedItem();
+                    addressDAO.delete(selectedAddress.getAddressId());
+                    break;
+                case "City":
+                    CityDAO cityDAO = new CityDAO();
+                    City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
+                    cityDAO.delete(selectedCity.getCityId());
+                    break;
+                case "Customer":
+                    CustomerDAO customerDao = new CustomerDAO();
+                    Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+                    customerDao.delete(selectedCustomer.getCustomerId());
+                    break;
+                case "Film":
+                    FilmDAO filmDAO = new FilmDAO();
+                    Film selectedFilm = (Film) tableView.getSelectionModel().getSelectedItem();
+                    filmDAO.delete(selectedFilm.getFilmId());
+                    break;
+                case "FilmActor":
+//                    FilmActorDAO filmActorDAO = new FilmActorDAO();
+                    /** Vi har ingen kopplingstabell till filmactor så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt actor iställer för en egen tabell.
+                     */
+//                    FilmActor selectedFilmActor = (FilmActor) tableView.getSelectionModel().getSelectedItem();
+//                    filmActorDAO.delete(selectedFilmActor.getActor().getActor_id());
+                    System.out.println("INTE KLAR");
+                    /** Fundera vad som ska tas bort här inne egenligen **/
+                    break;
+                case "FilmCategory":
+//                    FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+                    /** Vi har ingen kopplingstabell till FilmCategory så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt Category iställer för en egen tabell.
+                     */
+//                    FilmCategory selectedCategory = (FilmCategory) tableView.getSelectionModel().getSelectedItem();
+//                    filmCategoryDAO.delete(selectedCategory.getCategory_id());
+                    break;
+                case "FilmText":
+                    FilmTextDAO filmTextDAO = new FilmTextDAO();
+                    FilmText selectedFilmText = (FilmText) tableView.getSelectionModel().getSelectedItem();
+                    System.out.println("INTE KLAR");
+                    /** Fungera vad som ska tas bort här inne **/
+                    break;
+                case "Inventory":
+                    InventoryDAO inventoryDAO = new InventoryDAO();
+                    Inventory selectedInventory = (Inventory) tableView.getSelectionModel().getSelectedItem();
+                    inventoryDAO.delete(selectedInventory.getInventoryId());
+                    break;
+                case "Payment":
+                    PaymentDAO paymentDAO = new PaymentDAO();
+                    Payment selectedPayment = (Payment) tableView.getSelectionModel().getSelectedItem();
+                    paymentDAO.delete(selectedPayment.getPaymentId());
+                    break;
+                case "Rental":
+                    RentalDAO rentalDAO = new RentalDAO();
+                    Rental selectedRental = (Rental) tableView.getSelectionModel().getSelectedItem();
+                    rentalDAO.delete(selectedRental.getRentalId());
+                    break;
+                case "Staff":
+                    StaffDAO staffDAO = new StaffDAO();
+                    Staff selectedStaff = (Staff) tableView.getSelectionModel().getSelectedItem();
+                    staffDAO.delete(selectedStaff.getStaffId());
+                    break;
+                case "Store":
+                    StoreDAO storeDAO = new StoreDAO();
+                    Store selectedStore = (Store) tableView.getSelectionModel().getSelectedItem();
+                    storeDAO.delete(selectedStore.getStoreId());
+                    break;
+            }
         }
     }
 
@@ -255,6 +324,10 @@ public class MainMenuController implements Initializable {
         System.out.println("TestButton clicked! :D");
         String selected = choiceBox.getValue();
         System.out.println(selected);
+    }
+
+    public String getSelectedTable() {
+        return selectedTable;
     }
 
 }
