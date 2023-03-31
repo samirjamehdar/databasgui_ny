@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="14.0" layoutY="78.0" prefHeight="211.0" prefWidth="202.0">
+         <children>
+            <Label fx:id="UpdatePayments_Label2" alignment="CENTER" style="&#10;" text="Enter Customer Name:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="UpdatePayments_Customer" />
+            <Label fx:id="UpdatePayments_Label3" alignment="CENTER" style="&#10;" text="Enter Staff Name:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="UpdatePayments_Staff" />
+            <Label fx:id="UpdatePayments_Label4" alignment="CENTER" style="&#10;" text="Rental:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="UpdatePayments_Rental" />
+            <Label fx:id="UpdatePayments_Label5" alignment="CENTER" style="&#10;" text="Amount:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="UpdatePayments_Amount" />
+         </children>
+      </VBox>
+      <Label fx:id="UpdatePayments_Label" alignment="CENTER" layoutX="172.0" layoutY="8.0" style="&#10;" text="Update" textAlignment="CENTER" wrapText="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="UpdatePayments_ConfirmBtn" layoutX="160.0" layoutY="346.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Confim" />
+      <VBox layoutX="235.0" layoutY="78.0" prefHeight="160.0" prefWidth="202.0">
+         <children>
+            <Label fx:id="UpdatePayments_Label6" alignment="CENTER" style="&#10;" text="Payment Date:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="UpdatePayments_PayDate" prefHeight="25.0" prefWidth="203.0" />
+            <Label fx:id="UpdatePayments_Label7" alignment="CENTER" style="&#10;" text="Enter Date:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="UpdatePayments_Date" prefHeight="25.0" prefWidth="203.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

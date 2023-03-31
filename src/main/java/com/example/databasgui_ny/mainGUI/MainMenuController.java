@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,6 +30,7 @@ public class MainMenuController implements Initializable {
     private TableColumn<Actor, Integer> actorIdCol = new TableColumn<>("Actor ID");
     private TableColumn<Actor, String> actorFirstNameCol = new TableColumn<>("First Name");
     private TableColumn<Actor, String> actorLastNameCol = new TableColumn<>("Last Name");
+    private TableColumn<Actor, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Actor> actorObList = FXCollections.observableArrayList();
 
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
@@ -90,6 +92,7 @@ public class MainMenuController implements Initializable {
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
         actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+        actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
         List<Actor> actorList = actorDAO.readAll();
         actorObList.addAll(actorList);
         tableView.setItems(actorObList);
@@ -97,8 +100,7 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(actorIdCol);
         tableView.getColumns().add(actorFirstNameCol);
         tableView.getColumns().add(actorLastNameCol);
-
-
+        tableView.getColumns().add(actorLastUpdateCol);
     }
 
 
