@@ -1,6 +1,5 @@
 package com.example.databasgui_ny.mainGUI;
 
-import com.example.databasgui_ny.util.SessionFactorySingleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,27 +7,34 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    Button MainMenu_Update;
+    private Button MainMenu_Update;
+    @FXML
+    private ChoiceBox<String> choiceBox = new ChoiceBox();
 
     @FXML
-    ChoiceBox<String> MainMenu_TableChoice = new ChoiceBox();
+    private TableView tableView;
 
-    ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
+//    private TableColumn
+
+
+    private ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
                                                                 "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        MainMenu_TableChoice.setItems(menuItems);
-        MainMenu_TableChoice.valueProperty().addListener((observable, oldValue, newValue) -> {
+        choiceBox.setItems(menuItems);
+        choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case "Actor":
                     System.out.println("Actor is selected, refresh the table to actor values");
+                    handleActorTable();
                     break;
                 case "Address":
                     System.out.println("Address is selected, refresh the table to actor values");
@@ -70,14 +76,21 @@ public class MainMenuController implements Initializable {
         });
     }
 
+    public void handleActorTable() {
+        System.out.println("Fungerar");
+    }
+
+
+
 
     public void refreshTableView() {
-        System.out.println(MainMenu_TableChoice.getValue());
+        System.out.println(choiceBox.getValue());
     }
+
 
     public void testButtonClick(ActionEvent e) {
         System.out.println("TestButton clicked! :D");
-        String selected = MainMenu_TableChoice.getValue();
+        String selected = choiceBox.getValue();
         System.out.println(selected);
     }
 
