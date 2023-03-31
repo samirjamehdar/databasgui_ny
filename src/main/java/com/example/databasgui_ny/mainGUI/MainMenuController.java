@@ -139,20 +139,6 @@ public class MainMenuController implements Initializable {
                 System.out.println("DELETING ACTOR ID: " + selectedActor.getActor_id());
                 actorDao.delete(selectedActor.getActor_id());
         }
-
-//        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
-
-//        if (selectedActor != null) {
-//            int actorId = selectedActor.getActor_id();
-//            System.out.println("Selected actor ID: " + actorId);
-//        } else {
-//            System.out.println("No actor selected.");
-//        };
-    }
-
-
-    public void refreshTableView() {
-        System.out.println(choiceBox.getValue());
     }
 
 
