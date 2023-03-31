@@ -24,7 +24,7 @@
 <!--        <mapping class="com.example.databasgui_ny.entities.Customer"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Film"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Film_actor"/>-->
-<!--        <mapping class="com.example.databasgui_ny.entities.Film_text" />-->
+<!--        <mapping class="com.example.databasgui_ny.entities.FilmText" />-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Inventory"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Payment"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Rental"/>-->

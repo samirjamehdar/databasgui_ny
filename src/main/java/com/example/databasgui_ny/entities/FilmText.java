@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Film_text")
-public class Film_text {
+public class FilmText {
     @Id
     @ManyToOne
     @JoinColumn(name = "film_id")
@@ -14,7 +14,7 @@ public class Film_text {
     @Column(name = "description", length = 255)
     private String description;
 
-public Film_text(){}
+public FilmText(){}
 
         public Film getFilm() {return film;}
 
