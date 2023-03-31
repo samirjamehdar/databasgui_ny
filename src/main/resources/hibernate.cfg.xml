@@ -10,7 +10,7 @@
         <property name="connection.url">jdbc:mysql://localhost/sakila?serverTimezone=UTC</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">9907</property>
+        <property name="connection.password">potatismos</property>
         <property name="connection.pool_size">3</property>
 <!--        <property name="current_session_context_class">thread</property>-->
         <property name="show_sql">true</property>
@@ -24,7 +24,7 @@
 <!--        <mapping class="com.example.databasgui_ny.entities.Customer"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Film"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Film_actor"/>-->
-<!--        <mapping class="com.example.databasgui_ny.entities.Film_text" />-->
+<!--        <mapping class="com.example.databasgui_ny.entities.FilmText" />-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Inventory"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Payment"/>-->
 <!--        <mapping class="com.example.databasgui_ny.entities.Rental"/>-->
