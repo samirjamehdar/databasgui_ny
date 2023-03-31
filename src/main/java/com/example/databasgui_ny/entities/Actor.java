@@ -11,14 +11,12 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int actor_id;
-
+    @Column(length = 45)
     private String first_name;
-
+    @Column(length = 45)
     private String last_name;
-
     @Column
     private Date last_update;
-
 
     public Actor(){}
 
@@ -34,13 +32,10 @@ public class Actor {
 
     public void setLast_name(String last_name) {this.last_name = last_name;}
 
-    public Date getLast_update() {
-        return last_update;
-    }
+    public java.sql.Date getLast_update() {return last_update;}
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
-    }
+    public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
+
 
     @Override
     public String toString() {
