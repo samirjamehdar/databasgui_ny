@@ -1,5 +1,7 @@
 package com.example.databasgui_ny.mainGUI;
 
+import com.example.databasgui_ny.dao.ActorDAO;
+import com.example.databasgui_ny.entities.Actor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,9 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
@@ -21,10 +26,12 @@ public class MainMenuController implements Initializable {
     @FXML
     private TableView tableView;
 
-//    private TableColumn
+    private TableColumn<Actor, Integer> actorIdCol = new TableColumn<>("Actor ID");
+    private TableColumn<Actor, String> actorFirstNameCol = new TableColumn<>("First Name");
+    private TableColumn<Actor, String> actorLastNameCol = new TableColumn<>("Last Name");
+    private ObservableList<Actor> actorObList = FXCollections.observableArrayList();
 
-
-    private ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
+    private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
                                                                 "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
@@ -78,6 +85,20 @@ public class MainMenuController implements Initializable {
 
     public void handleActorTable() {
         System.out.println("Fungerar");
+        ActorDAO actorDAO = new ActorDAO();
+
+        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+        actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+        List<Actor> actorList = actorDAO.readAll();
+        actorObList.addAll(actorList);
+        tableView.setItems(actorObList);
+
+        tableView.getColumns().add(actorIdCol);
+        tableView.getColumns().add(actorFirstNameCol);
+        tableView.getColumns().add(actorLastNameCol);
+
+
     }
 
 

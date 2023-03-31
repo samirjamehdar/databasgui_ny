@@ -9,7 +9,7 @@ module com.example.databasgui_v2 {
 
     opens com.example.databasgui_ny to javafx.fxml;
     opens com.example.databasgui_ny.mainGUI to javafx.fxml;
-    opens com.example.databasgui_ny.entities to org.hibernate.orm.core;
+    opens com.example.databasgui_ny.entities to org.hibernate.orm.core, javafx.base;
     exports com.example.databasgui_ny;
     exports com.example.databasgui_ny.mainGUI;
     exports com.example.databasgui_ny.test;
