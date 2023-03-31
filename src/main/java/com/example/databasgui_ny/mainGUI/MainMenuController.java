@@ -132,18 +132,22 @@ public class MainMenuController implements Initializable {
     }
 
     public void deleteButtonClick(ActionEvent e) {
-//        switch () {
-//
-//        }
+        switch (selectedTable) {
+            case "Actor":
+                ActorDAO actorDao = new ActorDAO();
+                Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+                System.out.println("DELETING ACTOR ID: " + selectedActor.getActor_id());
+                actorDao.delete(selectedActor.getActor_id());
+        }
 
-        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+//        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
 
-        if (selectedActor != null) {
-            int actorId = selectedActor.getActor_id();
-            System.out.println("Selected actor ID: " + actorId);
-        } else {
-            System.out.println("No actor selected.");
-        };
+//        if (selectedActor != null) {
+//            int actorId = selectedActor.getActor_id();
+//            System.out.println("Selected actor ID: " + actorId);
+//        } else {
+//            System.out.println("No actor selected.");
+//        };
     }
 
 

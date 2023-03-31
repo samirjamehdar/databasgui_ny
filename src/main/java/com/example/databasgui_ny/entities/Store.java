@@ -33,7 +33,7 @@ public class Store {
 
 
 
-    public Store( Staff managerStaff, String address_id, String last_update) {
+    public Store(Staff managerStaff, String address_id, Date last_update) {
         this.managerStaff = managerStaff;
         this.address = address;
         this.last_update = last_update;
