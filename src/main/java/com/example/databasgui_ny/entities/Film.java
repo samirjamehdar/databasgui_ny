@@ -1,9 +1,9 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
 import java.util.List;
+
 
 @Entity
 @Table(name = "Film")
