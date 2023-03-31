@@ -2,6 +2,7 @@ package com.example.databasgui_ny.mainGUI;
 
 import com.example.databasgui_ny.dao.ActorDAO;
 import com.example.databasgui_ny.entities.Actor;
+import com.example.databasgui_ny.entities.Address;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +33,16 @@ public class MainMenuController implements Initializable {
     private TableColumn<Actor, String> actorLastNameCol = new TableColumn<>("Last Name");
     private TableColumn<Actor, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Actor> actorObList = FXCollections.observableArrayList();
+
+    private TableColumn<Address, Integer> addressIdCol = new TableColumn<>("Address ID");
+    private TableColumn<Address, String> address1Col = new TableColumn<>("Address 1");
+    private TableColumn<Address, String> address2Col = new TableColumn<>("Address 2");
+    private TableColumn<Address, String> addressDistrictCol = new TableColumn<>("District");
+    private TableColumn<Address, Integer> addressCityIdCol = new TableColumn<>("City ID");
+    private TableColumn<Address, String> addressPostalCol = new TableColumn<>("Postal Code");
+    private TableColumn<Address, String> addressPhoneCol = new TableColumn<>("Phone");
+    private TableColumn<Address, Date> addressLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Address> addressObList = FXCollections.observableArrayList();
 
     private String selectedTable;
 
@@ -118,6 +129,30 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(actorLastUpdateCol);
         }
     }
+
+//    public void handleAddressTable() {
+//        if (addressObList.size() == 0) {
+//            AddressDAO addressDAO = new AddressDAO();
+//
+//            addressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+//            actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+//            actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+//            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//
+//            List<Actor> actorList = actorDAO.readAll();
+//            actorObList.addAll(actorList);
+//
+//            tableView.setItems(actorObList);
+//            tableView.getColumns().add(actorIdCol);
+//            tableView.getColumns().add(actorFirstNameCol);
+//            tableView.getColumns().add(actorLastNameCol);
+//            tableView.getColumns().add(actorLastUpdateCol);
+//        }
+//    }
 
     public void updateButtonClick(ActionEvent e) {
         System.out.println("TestButton clicked! : " + choiceBox.getValue());
