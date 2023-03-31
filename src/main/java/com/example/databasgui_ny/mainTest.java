@@ -13,9 +13,9 @@ public class mainTest {
     public static void main(String[] args) {
         ActorDAO actorDao = new ActorDAO();
         actorDao.displayActors();
-//        List<Actor> actors = actorDao.readAll();
-//        for (Actor actor : actors) {
-//            System.out.println(actor.getFirst_name());
-//        }
+        List<Actor> actors = actorDao.readAll();
+        for (Actor actor : actors) {
+            System.out.println(actor.getFirst_name());
+        }
     }
 }

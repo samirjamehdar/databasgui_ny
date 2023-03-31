@@ -16,9 +16,9 @@
             <TableView fx:id="tableView" prefHeight="603.0" prefWidth="1251.0" />
             <HBox prefHeight="99.0" prefWidth="1251.0" spacing="20.0">
                <children>
-                  <Button fx:id="MainMenu_Update" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Update Selected" />
-                  <Button fx:id="MainMenu_Add" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Add" />
-                  <Button fx:id="MainMenu_Delete" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Delete Selected" />
+                  <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButtonClick" prefHeight="45.0" prefWidth="159.0" text="Update Selected" />
+                  <Button fx:id="addButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Add" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Delete Selected" />
                   <Button fx:id="testButton" mnemonicParsing="false" onAction="#testButtonClick" prefHeight="59.0" prefWidth="470.0" text="Test Button" />
                </children>
                <padding>
