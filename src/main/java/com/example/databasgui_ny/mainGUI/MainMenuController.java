@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -78,6 +77,7 @@ public class MainMenuController implements Initializable {
 
     public void handleActorTable() {
         System.out.println("Fungerar");
+
     }
 
 
