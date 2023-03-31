@@ -102,8 +102,6 @@ public class MainMenuController implements Initializable {
     }
 
 
-
-
     public void refreshTableView() {
         System.out.println(choiceBox.getValue());
     }

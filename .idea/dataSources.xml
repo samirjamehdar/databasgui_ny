@@ -19,5 +19,12 @@ C:/Users/samir/IdeaProjects/databasgui_ny/src/main/resources/hibernate.cfg.xml</
       <jdbc-url>jdbc:mysql://localhost/sakila?serverTimezone=UTC</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="sakila@localhost" uuid="76eba37a-725f-4711-84c6-07c85a50ecaa">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/sakila</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
