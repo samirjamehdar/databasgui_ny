@@ -1,18 +1,25 @@
 package com.example.databasgui_ny.mainGUI;
 
+import com.example.databasgui_ny.HelloApplication;
 import com.example.databasgui_ny.dao.ActorDAO;
 import com.example.databasgui_ny.entities.Actor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -160,6 +167,20 @@ public class MainMenuController implements Initializable {
         System.out.println("TestButton clicked! :D");
         String selected = choiceBox.getValue();
         System.out.println(selected);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/com/example/databasgui_ny/add_actor.fxml"));
+                Scene newScene = new Scene(root);
+                stage.setScene(newScene);
+            }catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public void confirmButtonClick(ActionEvent e) {
+
     }
 
 }
