@@ -12,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -58,6 +59,57 @@ public class MainMenuController implements Initializable {
     private TableColumn<Customer, Date> customerCreateDateCol = new TableColumn<>("Created");
     private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
+
+
+
+
+
+    private TableColumn<FilmText, Integer> filmTextIdCol = new TableColumn<>("Film ID");
+    private TableColumn<FilmText, String> filmTextTitleCol = new TableColumn<>("Title");
+    private TableColumn<FilmText, String> filmTextDescriptionCol = new TableColumn<>("Description");
+    private ObservableList<FilmText> filmTextObList = FXCollections.observableArrayList();
+
+    private TableColumn<Inventory, Integer> inventoryIdCol = new TableColumn<>("Inventory ID");
+    private TableColumn<Inventory, Integer> inventoryFilmIdCol = new TableColumn<>("Film ID");
+    private TableColumn<Inventory, Integer> inventoryStoreIdCol = new TableColumn<>("Store ID");
+    private TableColumn<Inventory, Date> inventoryLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Inventory> inventoryObList = FXCollections.observableArrayList();
+
+    private TableColumn<Payment, Integer> paymentIdCol = new TableColumn<>("Payment ID");
+    private TableColumn<Payment, Integer> paymentCustomerIdCol = new TableColumn<>("Customer ID");
+    private TableColumn<Payment, Integer> paymentStaffIdCol = new TableColumn<>("Staff ID");
+    private TableColumn<Payment, Integer> paymentRentalIdCol = new TableColumn<>("Rental ID");
+    private TableColumn<Payment, Double> paymentAmountCol = new TableColumn<>("Amount");
+    private TableColumn<Payment, Date> paymentPaymentDateCol = new TableColumn<>("Payment Date");
+    private TableColumn<Payment, Date> paymentLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Payment> paymentObList = FXCollections.observableArrayList();
+
+    public TableColumn<Rental, Integer> rentalIdCol = new TableColumn<>("Rental ID");
+    private TableColumn<Rental, Integer> rentalInventoryIdCol = new TableColumn<>("Inventory ID");
+    private TableColumn<Rental, Integer> rentalCustomerIdCol = new TableColumn<>("Customer ID");
+    private TableColumn<Rental, Date> rentalDateCol = new TableColumn<>("Rental Date");
+    private TableColumn<Rental, Date> rentalReturnDateCol = new TableColumn<>("Return Date");
+    private TableColumn<Rental, Integer> rentalStaffIdCol = new TableColumn<>("Staff ID");
+    private TableColumn<Rental, Date> rentalLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Rental> rentalObList = FXCollections.observableArrayList();
+
+    private TableColumn<Staff, Integer> staffIdCol = new TableColumn<>("Staff ID");
+    private TableColumn<Staff, Integer> staffStoreIdCol = new TableColumn<>("Store ID");
+    private TableColumn<Staff, String> staffFirstNameCol = new TableColumn<>("First Name");
+    private TableColumn<Staff, String> staffLastNameCol = new TableColumn<>("Last Name");
+    private TableColumn<Staff, Integer> staffAddressIdCol = new TableColumn<>("Address ID");
+    private TableColumn<Staff, String> staffEmailCol = new TableColumn<>("E-mail");
+    private TableColumn<Staff, Integer> staffActiveCol = new TableColumn<>("Active");
+    private TableColumn<Staff, String> staffUsernameCol = new TableColumn<>("Username");
+    private TableColumn<Staff, String> staffPasswordCol = new TableColumn<>("Password");
+    private TableColumn<Staff, Date> staffLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Staff> staffObList = FXCollections.observableArrayList();
+
+    private TableColumn<Store, Integer> storeIdCol = new TableColumn<>("Store ID");
+    private TableColumn<Store, Integer> storeManagerStaffIdCol = new TableColumn<>("Manager Staff ID");
+    private TableColumn<Store, Integer> storeAddressIdCol = new TableColumn<>("Address ID");
+    private TableColumn<Store, Date> storeLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Store> storeObList = FXCollections.observableArrayList();
 
     private TableColumn<Film, Integer> filmIdCol = new TableColumn<>("Film ID");
     private TableColumn<Film, String> filmTitleCol = new TableColumn<>("Title");
@@ -113,38 +165,46 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-                    handleFilmTable();
+                    System.out.println("Film is selected, refresh the table to actor values");
                     break;
-                case "Film_actor":
+                case "FilmActor":
                     selectedTable = "FilmActor";
-//                    handleFilmActorTable();
+
+                    System.out.println("Film_actor is selected, refresh the table to actor values");
                     break;
-                case "Film_category":
+                case "FilmCategory":
                     selectedTable = "FilmCategory";
-//                    handleFilmCategoryTable();
+
+                    System.out.println("Film_category is selected, refresh the table to actor values");
                     break;
-                case "Film_text":
+                case "FilmText":
                     selectedTable = "FilmText";
+                    handleFilmTextTable();
                     System.out.println("Film_text is selected, refresh the table to actor values");
                     break;
                 case "Inventory":
                     selectedTable = "Inventory";
+                    handleInventoryTable();
                     System.out.println("Inventory is selected, refresh the table to actor values");
                     break;
                 case "Payment":
                     selectedTable = "Payment";
+                    handlePaymentTable();
                     System.out.println("Payment is selected, refresh the table to actor values");
                     break;
                 case "Rental":
                     selectedTable = "Rental";
+                    handleRentalTable();
                     System.out.println("Rental is selected, refresh the table to actor values");
                     break;
                 case "Staff":
                     selectedTable = "Staff";
+                    handleStaffTable();
                     System.out.println("Staff is selected, refresh the table to actor values");
                     break;
                 case "Store":
-                    selectedTable = "Staff";
+                    selectedTable = "Store";
+                    handleStoreTable();
                     System.out.println("Store is selected, refresh the table to actor values");
                     break;
             }
@@ -152,7 +212,6 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleActorTable() {
-        tableView.getColumns().clear();
         if (actorObList.size() == 0) {
         ActorDAO actorDAO = new ActorDAO();
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
@@ -172,7 +231,6 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleAddressTable() {
-        tableView.getColumns().clear();
         if (addressObList.size() == 0) {
             AddressDAO addressDAO = new AddressDAO();
 
@@ -183,7 +241,7 @@ public class MainMenuController implements Initializable {
             addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
             addressPostalCol.setCellValueFactory(new PropertyValueFactory<>("postal_code"));
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            addressLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
             List<Address> addressList = addressDAO.readAll();
             addressObList.addAll(addressList);
@@ -201,11 +259,10 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleCityTable() {
-        tableView.getColumns().clear();
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
-            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
+            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
             cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
             cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country_id"));
             cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
@@ -222,7 +279,6 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleCustomerTable() {
-        tableView.getColumns().clear();
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
@@ -325,6 +381,143 @@ public class MainMenuController implements Initializable {
 //            tableView.getColumns().add(filmCategoryLastUpdateCol);
 //        }
 //    }
+
+
+    public void handleFilmTextTable() {
+        if (filmTextObList.size() == 0) {
+            FilmTextDAO filmTextDAO = new FilmTextDAO();
+
+            filmTextIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmTextTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            filmTextDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+            List<FilmText> filmTextList = filmTextDAO.readAll();
+            filmTextObList.addAll(filmTextList);
+
+            tableView.setItems(filmTextObList);
+            tableView.getColumns().add(filmTextIdCol);
+            tableView.getColumns().add(filmTextTitleCol);
+            tableView.getColumns().add(filmTextDescriptionCol);
+        }
+    }
+
+    public void handleInventoryTable() {
+        if (inventoryObList.size() == 0) {
+            InventoryDAO inventoryDAO = new InventoryDAO();
+
+            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<Inventory> inventoryList = inventoryDAO.readAll();
+            inventoryObList.addAll(inventoryList);
+
+            tableView.setItems(inventoryObList);
+            tableView.getColumns().add(inventoryIdCol);
+            tableView.getColumns().add(inventoryFilmIdCol);
+            tableView.getColumns().add(inventoryStoreIdCol);
+            tableView.getColumns().add(inventoryLastUpdateCol);
+        }
+    }
+
+        public void handlePaymentTable() {
+        if (paymentObList.size() == 0) {
+            PaymentDAO paymentDAO = new PaymentDAO();
+
+            paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("payment_id"));
+            paymentCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+            paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
+            paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
+            paymentAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            paymentPaymentDateCol.setCellValueFactory(new PropertyValueFactory<>("payment_date"));
+            paymentLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<Payment> paymentList = paymentDAO.readAll();
+            paymentObList.addAll(paymentList);
+
+            tableView.setItems(paymentObList);
+            tableView.getColumns().add(paymentIdCol);
+            tableView.getColumns().add(paymentCustomerIdCol);
+            tableView.getColumns().add(paymentStaffIdCol);
+            tableView.getColumns().add(paymentRentalIdCol);
+            tableView.getColumns().add(paymentAmountCol);
+            tableView.getColumns().add(paymentPaymentDateCol);
+            tableView.getColumns().add(paymentLastUpdateCol);
+        }
+    }
+
+        public void handleRentalTable() {
+        if (rentalObList.size() == 0) {
+            RentalDAO rentalDAO = new RentalDAO();
+
+            rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
+            rentalDateCol.setCellValueFactory(new PropertyValueFactory<>("rental_date"));
+            rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+            rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+            rentalReturnDateCol.setCellValueFactory(new PropertyValueFactory<>("return_date"));
+            rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
+            rentalLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<Rental> rentalList = rentalDAO.readAll();
+            rentalObList.addAll(rentalList);
+
+            tableView.setItems(rentalObList);
+            tableView.getColumns().add(rentalIdCol);
+            tableView.getColumns().add(rentalDateCol);
+            tableView.getColumns().add(rentalInventoryIdCol);
+            tableView.getColumns().add(rentalCustomerIdCol);
+            tableView.getColumns().add(rentalReturnDateCol);
+            tableView.getColumns().add(rentalStaffIdCol);
+            tableView.getColumns().add(rentalLastUpdateCol);
+        }
+    }
+
+    public void handleStaffTable() {
+        if (staffObList.size() == 0) {
+            StaffDAO staffDAO = new StaffDAO();
+
+            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
+            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+
+            List<Staff> staffList = staffDAO.readAll();
+            staffObList.addAll(staffList);
+
+            tableView.setItems(staffObList);
+            tableView.getColumns().add(staffIdCol);
+            tableView.getColumns().add(staffFirstNameCol);
+            tableView.getColumns().add(staffLastNameCol);
+            tableView.getColumns().add(staffAddressIdCol);
+            tableView.getColumns().add(staffEmailCol);
+            tableView.getColumns().add(staffStoreIdCol);
+            tableView.getColumns().add(staffActiveCol);
+        }
+    }
+
+    public void handleStoreTable() {
+        if (storeObList.size() == 0) {
+            StoreDAO storeDAO = new StoreDAO();
+
+            storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
+            storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<Store> storeList = storeDAO.readAll();
+            storeObList.addAll(storeList);
+
+            tableView.setItems(storeObList);
+            tableView.getColumns().add(storeIdCol);
+            tableView.getColumns().add(storeManagerStaffIdCol);
+            tableView.getColumns().add(storeAddressIdCol);
+            tableView.getColumns().add(storeLastUpdateCol);
+        }
+    }
 
     public void updateButtonClick(ActionEvent e) {
         System.out.println("TestButton clicked! : " + choiceBox.getValue());
