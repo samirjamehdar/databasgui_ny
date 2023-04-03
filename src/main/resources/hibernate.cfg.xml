@@ -23,7 +23,6 @@
         <mapping class="com.example.databasgui_ny.entities.City"/>
         <mapping class="com.example.databasgui_ny.entities.Customer"/>
         <mapping class="com.example.databasgui_ny.entities.Film"/>
-        <mapping class="com.example.databasgui_ny.entities.FilmActor"/>
         <mapping class="com.example.databasgui_ny.entities.FilmText" />
         <mapping class="com.example.databasgui_ny.entities.Inventory"/>
         <mapping class="com.example.databasgui_ny.entities.Payment"/>

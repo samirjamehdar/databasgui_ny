@@ -74,15 +74,15 @@ public class MainMenuController implements Initializable {
     private TableColumn<Film, Date> filmLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Film> filmObList = FXCollections.observableArrayList();
 
-    private TableColumn<FilmActor, Integer> filmActorId1Col = new TableColumn<>("Actor Id");
-    private TableColumn<FilmActor, Integer> filmActorId2Col = new TableColumn<>("Film Id");
-    private TableColumn<FilmActor, Date> filmActorLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<FilmActor> filmActorObList = FXCollections.observableArrayList();
-
-    private TableColumn<FilmCategory, Integer> filmCategoryId1Col = new TableColumn<>("Film Id");
-    private TableColumn<FilmCategory, Integer> filmCategoryId2Col = new TableColumn<>("Category Id");
-    private TableColumn<FilmCategory, Date> filmCategoryLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<FilmCategory> filmCategoryObList = FXCollections.observableArrayList();
+//    private TableColumn<FilmActor, Integer> filmActorId1Col = new TableColumn<>("Actor Id");
+//    private TableColumn<FilmActor, Integer> filmActorId2Col = new TableColumn<>("Film Id");
+//    private TableColumn<FilmActor, Date> filmActorLastUpdateCol = new TableColumn<>("Last Update");
+//    private ObservableList<FilmActor> filmActorObList = FXCollections.observableArrayList();
+//
+//    private TableColumn<FilmCategory, Integer> filmCategoryId1Col = new TableColumn<>("Film Id");
+//    private TableColumn<FilmCategory, Integer> filmCategoryId2Col = new TableColumn<>("Category Id");
+//    private TableColumn<FilmCategory, Date> filmCategoryLastUpdateCol = new TableColumn<>("Last Update");
+//    private ObservableList<FilmCategory> filmCategoryObList = FXCollections.observableArrayList();
 
     private String selectedTable;
 
@@ -117,11 +117,11 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film_actor":
                     selectedTable = "FilmActor";
-                    handleFilmActorTable();
+//                    handleFilmActorTable();
                     break;
                 case "Film_category":
                     selectedTable = "FilmCategory";
-                    handleFilmCategoryTable();
+//                    handleFilmCategoryTable();
                     break;
                 case "Film_text":
                     selectedTable = "FilmText";
@@ -289,42 +289,42 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(filmLastUpdateCol);
         }
     }
-    public void handleFilmActorTable() {
-        tableView.getColumns().clear();
-        if (filmActorObList.size() == 0) {
-            FilmActorDAO filmActorDAO = new FilmActorDAO();
-
-            filmActorId1Col.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
-            filmActorId2Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
-            filmActorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-
-            List<FilmActor> filmActorList = filmActorDAO.readAll();
-            filmActorObList.addAll(filmActorList);
-
-            tableView.setItems(filmActorObList);
-            tableView.getColumns().add(filmActorId1Col);
-            tableView.getColumns().add(filmActorId2Col);
-            tableView.getColumns().add(filmActorLastUpdateCol);
-        }
-    }
-    public void handleFilmCategoryTable() {
-        tableView.getColumns().clear();
-        if (filmCategoryObList.size() == 0) {
-            FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
-
-            filmCategoryId1Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
-            filmCategoryId2Col.setCellValueFactory(new PropertyValueFactory<>("category_id"));
-            filmCategoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-
-            List<FilmCategory> filmCategoryList = filmCategoryDAO.readAll();
-            filmCategoryObList.addAll(filmCategoryList);
-
-            tableView.setItems(filmCategoryObList);
-            tableView.getColumns().add(filmCategoryId1Col);
-            tableView.getColumns().add(filmCategoryId2Col);
-            tableView.getColumns().add(filmCategoryLastUpdateCol);
-        }
-    }
+//    public void handleFilmActorTable() {
+//        tableView.getColumns().clear();
+//        if (filmActorObList.size() == 0) {
+//            FilmActorDAO filmActorDAO = new FilmActorDAO();
+//
+//            filmActorId1Col.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+//            filmActorId2Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+//            filmActorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//
+//            List<FilmActor> filmActorList = filmActorDAO.readAll();
+//            filmActorObList.addAll(filmActorList);
+//
+//            tableView.setItems(filmActorObList);
+//            tableView.getColumns().add(filmActorId1Col);
+//            tableView.getColumns().add(filmActorId2Col);
+//            tableView.getColumns().add(filmActorLastUpdateCol);
+//        }
+//    }
+//    public void handleFilmCategoryTable() {
+//        tableView.getColumns().clear();
+//        if (filmCategoryObList.size() == 0) {
+//            FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+//
+//            filmCategoryId1Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+//            filmCategoryId2Col.setCellValueFactory(new PropertyValueFactory<>("category_id"));
+//            filmCategoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//
+//            List<FilmCategory> filmCategoryList = filmCategoryDAO.readAll();
+//            filmCategoryObList.addAll(filmCategoryList);
+//
+//            tableView.setItems(filmCategoryObList);
+//            tableView.getColumns().add(filmCategoryId1Col);
+//            tableView.getColumns().add(filmCategoryId2Col);
+//            tableView.getColumns().add(filmCategoryLastUpdateCol);
+//        }
+//    }
 
     public void updateButtonClick(ActionEvent e) {
         System.out.println("TestButton clicked! : " + choiceBox.getValue());
