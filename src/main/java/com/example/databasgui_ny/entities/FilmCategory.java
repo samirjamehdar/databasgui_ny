@@ -3,6 +3,7 @@ package com.example.databasgui_ny.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Locale;
 
 @Entity
 @Table(name = "Film_category")
@@ -12,6 +13,7 @@ public class FilmCategory {
     @JoinColumn(name = "film_id")
     private Film film;
     @Column(name = "category_id")
+    @Id
     private int category_id;
     @Column(name = "last_update")
     private Date last_update;

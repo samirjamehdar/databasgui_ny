@@ -60,6 +60,31 @@ public class MainMenuController implements Initializable {
     private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
 
+    private TableColumn<Film, Integer> filmIdCol = new TableColumn<>("Film ID");
+    private TableColumn<Film, String> filmTitleCol = new TableColumn<>("Title");
+    private TableColumn<Film, String> filmDescriptionCol = new TableColumn<>("Description");
+    private TableColumn<Film, String> filmReleaseYearCol = new TableColumn<>("Release");
+    private TableColumn<Film, String> filmLanguageIdCol = new TableColumn<>("Language Id");
+    private TableColumn<Film, String> filmOriginalLanguageIdCol = new TableColumn<>("Original Language Id");
+    private TableColumn<Film, String> filmRentalDurationCol = new TableColumn<>("Rental Duration");
+    private TableColumn<Film, String> filmRentalRateCol = new TableColumn<>("Rental Rate");
+    private TableColumn<Film, String> filmLengthCol = new TableColumn<>("Length");
+    private TableColumn<Film, String> filmReplacementCostCol = new TableColumn<>("Replacement Cost");
+    private TableColumn<Film, String> filmRatingCol = new TableColumn<>("Rating");
+    private TableColumn<Film, String> filmSpecialFeaturesCol = new TableColumn<>("Special Features");
+    private TableColumn<Film, Date> filmLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Film> filmObList = FXCollections.observableArrayList();
+
+    private TableColumn<FilmActor, Integer> filmActorId1Col = new TableColumn<>("Actor Id");
+    private TableColumn<FilmActor, Integer> filmActorId2Col = new TableColumn<>("Film Id");
+    private TableColumn<FilmActor, Date> filmActorLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<FilmActor> filmActorObList = FXCollections.observableArrayList();
+
+    private TableColumn<FilmCategory, Integer> filmCategoryId1Col = new TableColumn<>("Film Id");
+    private TableColumn<FilmCategory, Integer> filmCategoryId2Col = new TableColumn<>("Category Id");
+    private TableColumn<FilmCategory, Date> filmCategoryLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<FilmCategory> filmCategoryObList = FXCollections.observableArrayList();
+
     private String selectedTable;
 
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
@@ -89,17 +114,17 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-                    System.out.println("Film is selected, refresh the table to actor values");
+                    handleFilmTable();
                     break;
-                case "FilmActor":
+                case "Film_actor":
                     selectedTable = "FilmActor";
-                    System.out.println("Film_actor is selected, refresh the table to actor values");
+                    handleFilmActorTable();
                     break;
-                case "FilmCategory":
+                case "Film_category":
                     selectedTable = "FilmCategory";
-                    System.out.println("Film_category is selected, refresh the table to actor values");
+                    handleFilmCategoryTable();
                     break;
-                case "FilmText":
+                case "Film_text":
                     selectedTable = "FilmText";
                     System.out.println("Film_text is selected, refresh the table to actor values");
                     break;
@@ -225,6 +250,80 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(customerActiveCol);
             tableView.getColumns().add(customerCreateDateCol);
             tableView.getColumns().add(customerLastUpdateCol);
+        }
+    }
+    public void handleFilmTable() {
+        tableView.getColumns().clear();
+        if (filmObList.size() == 0) {
+            FilmDAO filmDAO = new FilmDAO();
+
+            filmIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            filmDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+            filmReleaseYearCol.setCellValueFactory(new PropertyValueFactory<>("release_year"));
+            filmLanguageIdCol.setCellValueFactory(new PropertyValueFactory<>("language_id"));
+            filmOriginalLanguageIdCol.setCellValueFactory(new PropertyValueFactory<>("original_language_id"));
+            filmRentalDurationCol.setCellValueFactory(new PropertyValueFactory<>("rental_duration"));
+            filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rental_rate"));
+            filmLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+            filmReplacementCostCol.setCellValueFactory(new PropertyValueFactory<>("replacement_cost"));
+            filmRatingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
+            filmSpecialFeaturesCol.setCellValueFactory(new PropertyValueFactory<>("special_features"));
+            filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<Film> filmList = filmDAO.readAll();
+            filmObList.addAll(filmList);
+
+            tableView.setItems(filmObList);
+            tableView.getColumns().add(filmIdCol);
+            tableView.getColumns().add(filmTitleCol);
+            tableView.getColumns().add(filmDescriptionCol);
+            tableView.getColumns().add(filmReleaseYearCol);
+            tableView.getColumns().add(filmLanguageIdCol);
+            tableView.getColumns().add(filmOriginalLanguageIdCol);
+            tableView.getColumns().add(filmRentalDurationCol);
+            tableView.getColumns().add(filmRentalRateCol);
+            tableView.getColumns().add(filmLengthCol);
+            tableView.getColumns().add(filmReplacementCostCol);
+            tableView.getColumns().add(filmRatingCol);
+            tableView.getColumns().add(filmSpecialFeaturesCol);
+            tableView.getColumns().add(filmLastUpdateCol);
+        }
+    }
+    public void handleFilmActorTable() {
+        tableView.getColumns().clear();
+        if (filmActorObList.size() == 0) {
+            FilmActorDAO filmActorDAO = new FilmActorDAO();
+
+            filmActorId1Col.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+            filmActorId2Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmActorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<FilmActor> filmActorList = filmActorDAO.readAll();
+            filmActorObList.addAll(filmActorList);
+
+            tableView.setItems(filmActorObList);
+            tableView.getColumns().add(filmActorId1Col);
+            tableView.getColumns().add(filmActorId2Col);
+            tableView.getColumns().add(filmActorLastUpdateCol);
+        }
+    }
+    public void handleFilmCategoryTable() {
+        tableView.getColumns().clear();
+        if (filmCategoryObList.size() == 0) {
+            FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+
+            filmCategoryId1Col.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmCategoryId2Col.setCellValueFactory(new PropertyValueFactory<>("category_id"));
+            filmCategoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+
+            List<FilmCategory> filmCategoryList = filmCategoryDAO.readAll();
+            filmCategoryObList.addAll(filmCategoryList);
+
+            tableView.setItems(filmCategoryObList);
+            tableView.getColumns().add(filmCategoryId1Col);
+            tableView.getColumns().add(filmCategoryId2Col);
+            tableView.getColumns().add(filmCategoryLastUpdateCol);
         }
     }
 
