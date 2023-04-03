@@ -3,61 +3,104 @@ package com.example.databasgui_ny.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 
 @Entity
-@Table(name = "Payment")
+@Table(name = "payment")
 public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int payment_id;
-    /*@Column(name = "customer_id", length = 255)
-    private String customer_id;
-    @Column(name = "staff_id", length = 255)
-    private String staff_id;*/
-    @Column(name = "rental_id", length = 255)
-    private String rental_id;
-    @Column(name = "amount", length = 255)
-    private String amount;
-    @Column(name = "payment_date", length = 60)
-    private String payment_date;
-    @Column(name = "last_update", length = 60)
-    private Date last_update;
+    @Column(name = "payment_id")
+    private Integer paymentId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-//    @ManyToOne
-//    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-//    private Staff staff;
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
 
-    public Payment(){}
+    @ManyToOne
+    @JoinColumn(name = "rental_id")
+    private Rental rental;
 
-    public int getPayment_id() {return payment_id;}
+    @Column(name = "amount")
+    private double amount;
 
-    public void setPayment_id(int payment_id) {this.payment_id = payment_id;}
+    @Column(name = "payment_date")
+    private LocalDateTime paymentDate;
 
-    public Customer getCustomer_id() {return customer;}
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
-    public void setCustomer_id(String customer_id) {this.customer = customer;}
+    public Payment() {
+    }
 
-//    public Staff getStaff_id() {return staff;}
-//
-//    public void setStaff_id(String staff_id) {this.staff = staff;}
+    public Payment(Customer customer, Staff staff, Rental rental, double amount, LocalDateTime paymentDate, LocalDateTime lastUpdate) {
+        this.customer = customer;
+        this.staff = staff;
+        this.rental = rental;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public String getRental_id() {return rental_id;}
+    public Integer getPaymentId() {
+        return paymentId;
+    }
 
-    public void setRental_id(String rental_id) {this.rental_id = rental_id;}
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
 
-    public String getAmount() {return amount;}
+    public Customer getCustomer() {
+        return customer;
+    }
 
-    public void setAmount(String amount) {this.amount = amount;}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-    public String getPayment_date() {return payment_date;}
+    public Staff getStaff() {
+        return staff;
+    }
 
-    public void setPayment_date(String payment_date) {this.payment_date = payment_date;}
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 
-    public Date getLast_update() {return last_update;}
+    public Rental getRental() {
+        return rental;
+    }
 
-    public void setLast_update(Date last_update) {this.last_update = last_update;}
+    public void setRental(Rental rental) {
+        this.rental = rental;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }

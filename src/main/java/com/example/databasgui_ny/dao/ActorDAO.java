@@ -49,7 +49,6 @@ public class ActorDAO implements DAO<Actor> {
         session.update(actor);
         session.getTransaction().commit();
         session.close();
-
         return true;
     }
 

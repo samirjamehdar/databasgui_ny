@@ -1,72 +1,114 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
-
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "Rental")
+@Table(name = "rental")
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rental_id;
-    @Column(name = "rental_date", length = 60)
-    private String rental_date;
-/*    @Column(name = "inventory_id", length = 255)
-    private String inventory_id;*/
-/*    @Column(name = "customer_id", length = 255)
-    private String customer_id;*/
-    @Column(name = "return_date", length = 60)
-    private String return_date;
-  /*  @Column(name = "staff_id", length = 255)
-    private String staff_id;*/
-    @Column(name = "last_update", length = 60)
-    private Date last_update;
+    @Column(name = "rental_id")
+    private Integer rentalId;
+
+    @Column(name = "rental_date")
+    private LocalDateTime rentalDate;
 
     @ManyToOne
-    @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id")
+    @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-//    @ManyToOne
-//    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-//    private Staff staff;
+    @Column(name = "return_date")
+    private LocalDateTime returnDate;
 
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
 
-    public Rental(){}
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
-    public int getRental_id() {return rental_id;}
+    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Payment> payments;
 
-    public void setRental_id(int rental_id) {this.rental_id = rental_id;}
+    public Rental() {
+    }
 
-    public String getRental_date() {return rental_date;}
+    public Rental(LocalDateTime rentalDate, Inventory inventory, Customer customer, LocalDateTime returnDate, Staff staff, LocalDateTime lastUpdate) {
+        this.rentalDate = rentalDate;
+        this.inventory = inventory;
+        this.customer = customer;
+        this.returnDate = returnDate;
+        this.staff = staff;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public void setRental_date(String rental_date) {this.rental_date = rental_date;}
+    public Integer getRentalId() {
+        return rentalId;
+    }
 
-    public Inventory getInventory_id() {return inventory;}
+    public void setRentalId(Integer rentalId) {
+        this.rentalId = rentalId;
+    }
 
-    public void setInventory_id(String inventory_id) {this.inventory = inventory;}
+    public LocalDateTime getRentalDate() {
+        return rentalDate;
+    }
 
-    public Customer getCustomer_id() {return customer;}
+    public void setRentalDate(LocalDateTime rentalDate) {
+        this.rentalDate = rentalDate;
+    }
 
-    public void setCustomer_id(String customer_id) {this.customer = customer;}
+    public Inventory getInventory() {
+        return inventory;
+    }
 
-    public String getReturn_date() {return return_date;}
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
-    public void setReturn_date(String return_date) {this.return_date = return_date;}
+    public Customer getCustomer() {
+        return customer;
+    }
 
-//    public Staff getStaff_id() {return staff;}
-//
-//    public void setStaff_id(String staff_id) {this.staff = staff;}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-    public Date getLast_update() {return last_update;}
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
 
-    public void setLast_update(Date last_update) {this.last_update = last_update;}
+    public void setReturnDate(LocalDateTime returnDate) {
+        this.returnDate = returnDate;
+    }
 
+    public Staff getStaff() {
+        return staff;
+    }
 
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
 
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
 }

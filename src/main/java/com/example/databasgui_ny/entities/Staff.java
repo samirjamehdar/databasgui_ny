@@ -1,92 +1,173 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
-
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
+@Table(name = "staff")
 public class Staff {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int staff_id;
-    @Column(name = "first_name", length = 45)
-private String first_name;
-    @Column(name = "last_name", length = 45)
-private String last_name;
-    @Column(name = "address_id", length = 255)
-private String address_id;
-    @Column(name = "picture", length = 255)
-private String picture;
-    @Column(name = "email", length = 50)
-private String email;
-    @Column(name = "store_id", length = 255)
-private String store_id;
-    @Column(name = "active", length = 255)
-private String active;
-    @Column(name = "username", length = 16)
-private String username;
-    @Column(name = "password", length = 40)
-private String password;
-    @Column(name = "last_update", length = 60)
-private Date last_update;
+    @Column(name = "staff_id")
+    private Integer staffId;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @Column(name = "picture")
+    private byte[] picture;
+
+    @Column(name = "email")
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
     private Store store;
 
-//    @ManyToOne
-//    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-//    private Address address;
+    @Column(name = "active")
+    private boolean active;
 
+    @Column(name = "username")
+    private String username;
 
+    @Column(name = "password")
+    private String password;
 
-        public Staff(){}
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
-        public int getStaff_id() {return staff_id;}
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Payment> payments;
 
-        public void setStaff_id(int staff_id) {this.staff_id = staff_id;}
+    @OneToMany(mappedBy = "managerStaff", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Store> managedStores;
 
-        public String getFirst_name() {return first_name;}
+    public Staff() {
+    }
 
-        public void setFirst_name(String first_name) {this.first_name = first_name;}
+    public Staff(String firstName, String lastName, Address address, byte[] picture, String email, Store store, boolean active, String username, String password, LocalDateTime lastUpdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.picture = picture;
+        this.email = email;
+        this.store = store;
+        this.active = active;
+        this.username = username;
+        this.password = password;
+        this.lastUpdate = lastUpdate;
+    }
 
-        public String getLast_name() {return last_name;}
+    public Integer getStaffId() {
+        return staffId;
+    }
 
-        public void setLast_name(String last_name) {this.last_name = last_name;}
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
 
-        public String getAddress_id() {return address_id;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-        public void setAddress_id(String address_id) {this.address_id = address_id;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-        public String getPicture() {return picture;}
+    public String getLastName() {
+        return lastName;
+    }
 
-        public void setPicture(String picture) {this.picture = picture;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-        public String getEmail() {return email;}
+    public Address getAddress() {
+        return address;
+    }
 
-        public void setEmail(String email) {this.email = email;}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-        public String getStore_id() {return store_id;}
+    public byte[] getPicture() {
+        return picture;
+    }
 
-        public void setStore_id(String store_id) {this.store_id = store_id;}
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
 
-        public String getActive() {return active;}
+    public String getEmail() {
+        return email;
+    }
 
-        public void setActive(String active) {this.active = active;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public String getUsername() {return username;}
+    public Store getStore() {
+        return store;
+    }
 
-        public void setUsername(String username) {this.username = username;}
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
-        public String getPassword() {return password;}
+    public boolean isActive() {
+        return active;
+    }
 
-        public void setPassword(String password) {this.password = password;}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-        public Date getLast_update() {return last_update;}
+    public String getUsername() {
+        return username;
+    }
 
-        public void setLast_update(Date last_update) {this.last_update = last_update;}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
 
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public Set<Store> getManagedStores() {
+        return managedStores;
+    }
+
+    public void setManagedStores(Set<Store> managedStores) {
+        this.managedStores = managedStores;
+    }
 }
