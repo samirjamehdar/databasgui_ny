@@ -1,6 +1,5 @@
 package com.example.databasgui_ny.entities;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;

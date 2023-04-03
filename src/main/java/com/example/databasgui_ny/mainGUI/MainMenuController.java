@@ -145,7 +145,10 @@ public class MainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(menuItems);
         choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-//            tableView.getColumns().clear();
+            tableView.getItems().removeAll();
+            tableView.getColumns().removeAll();
+            tableView.getColumns().clear();
+            tableView.getItems().clear();
             switch (newValue) {
                 case "Actor":
                     selectedTable = "Actor";
