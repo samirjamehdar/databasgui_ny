@@ -1,5 +1,4 @@
 package com.example.databasgui_ny.popGUI;
 
-public class PopController {
-
+public class AddController {
 }
