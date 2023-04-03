@@ -23,12 +23,15 @@
         <mapping class="com.example.databasgui_ny.entities.City"/>
         <mapping class="com.example.databasgui_ny.entities.Customer"/>
         <mapping class="com.example.databasgui_ny.entities.Film"/>
-        <mapping class="com.example.databasgui_ny.entities.FilmText" />
+<!--        <mapping class="com.example.databasgui_ny.entities.FilmText" />-->
         <mapping class="com.example.databasgui_ny.entities.Inventory"/>
         <mapping class="com.example.databasgui_ny.entities.Payment"/>
         <mapping class="com.example.databasgui_ny.entities.Rental"/>
         <mapping class="com.example.databasgui_ny.entities.Staff"/>
         <mapping class="com.example.databasgui_ny.entities.Store"/>
+        <mapping class="com.example.databasgui_ny.entities.Country"/>
+        <mapping class="com.example.databasgui_ny.entities.Language"/>
+        <mapping class="com.example.databasgui_ny.entities.Category"/>
 
 
     </session-factory>

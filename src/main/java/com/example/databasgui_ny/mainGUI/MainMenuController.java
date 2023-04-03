@@ -165,16 +165,16 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-                    System.out.println("Film is selected, refresh the table to actor values");
+                    handleFilmTable();
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
-
+//                    handleFilmActorTable();
                     System.out.println("Film_actor is selected, refresh the table to actor values");
                     break;
                 case "FilmCategory":
                     selectedTable = "FilmCategory";
-
+//                    handleFilmCategoryTable();
                     System.out.println("Film_category is selected, refresh the table to actor values");
                     break;
                 case "FilmText":
@@ -212,6 +212,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleActorTable() {
+        tableView.getColumns().clear();
         if (actorObList.size() == 0) {
         ActorDAO actorDAO = new ActorDAO();
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
@@ -231,6 +232,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleAddressTable() {
+        tableView.getColumns().clear();
         if (addressObList.size() == 0) {
             AddressDAO addressDAO = new AddressDAO();
 
@@ -259,6 +261,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleCityTable() {
+        tableView.getColumns().clear();
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
@@ -279,6 +282,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleCustomerTable() {
+        tableView.getColumns().clear();
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
@@ -384,6 +388,7 @@ public class MainMenuController implements Initializable {
 
 
     public void handleFilmTextTable() {
+        tableView.getColumns().clear();
         if (filmTextObList.size() == 0) {
             FilmTextDAO filmTextDAO = new FilmTextDAO();
 
@@ -402,6 +407,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleInventoryTable() {
+        tableView.getColumns().clear();
         if (inventoryObList.size() == 0) {
             InventoryDAO inventoryDAO = new InventoryDAO();
 
@@ -422,6 +428,7 @@ public class MainMenuController implements Initializable {
     }
 
         public void handlePaymentTable() {
+            tableView.getColumns().clear();
         if (paymentObList.size() == 0) {
             PaymentDAO paymentDAO = new PaymentDAO();
 
@@ -448,6 +455,7 @@ public class MainMenuController implements Initializable {
     }
 
         public void handleRentalTable() {
+            tableView.getColumns().clear();
         if (rentalObList.size() == 0) {
             RentalDAO rentalDAO = new RentalDAO();
 
@@ -474,6 +482,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleStaffTable() {
+        tableView.getColumns().clear();
         if (staffObList.size() == 0) {
             StaffDAO staffDAO = new StaffDAO();
 
@@ -500,6 +509,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleStoreTable() {
+        tableView.getColumns().clear();
         if (storeObList.size() == 0) {
             StoreDAO storeDAO = new StoreDAO();
 
