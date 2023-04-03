@@ -3,36 +3,77 @@ package com.example.databasgui_ny.entities;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "city")
 public class City {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int city_id;
-    @Column(name = "city", length = 50)
+    @Column(name = "city_id")
+    private Integer cityId;
+
+    @Column(name = "city")
     private String city;
-    @Column(name = "country_id")
-    private int country_id;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
     @Column(name = "last_update")
-    private Date last_update;
+    private LocalDateTime lastUpdate;
 
-    public City(){}
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses;
 
-    public int getCity_id() {return city_id;}
+    public City() {
+    }
 
-    public void setCity_id(int city_id) {this.city_id = city_id;}
+    public City(String city, Country country, LocalDateTime lastUpdate) {
+        this.city = city;
+        this.country = country;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public String getCity() {return city;}
+    public Integer getCityId() {
+        return cityId;
+    }
 
-    public void setCity(String city) {this.city = city;}
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
 
-    public int getCountry_id() {return country_id;}
+    public String getCity() {
+        return city;
+    }
 
-    public void setCountry_id(int country_id) {this.country_id = country_id;}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-    public java.sql.Date getLast_update() {return last_update;}
+    public Country getCountry() {
+        return country;
+    }
 
-    public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

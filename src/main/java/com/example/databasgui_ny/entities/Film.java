@@ -1,97 +1,208 @@
 package com.example.databasgui_ny.entities;
 
+import com.example.databasgui_ny.util.Rating;
 import jakarta.persistence.*;
-import java.sql.Date;
-import java.util.List;
-
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "Film")
+@Table(name = "film")
 public class Film {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int film_id;
-    @Column(name = "title", length = 255)
+    @Column(name = "film_id")
+    private Integer filmId;
+
+    @Column(name = "title")
     private String title;
-    @Column(name = "description", length = 255)
+
+    @Column(name = "description")
     private String description;
-    @Column(name = "release_year", length = 255)
-    private String release_year;
-    @Column(name = "language_id", length = 255)
-    private String language_id;
-    @Column(name = "original_language_id", length = 255)
-    private String original_language_id;
-    @Column(name = "rental_duration", length = 255)
-    private String rental_duration;
-    @Column(name = "rental_rate", length = 255)
-    private String rental_rate;
-    @Column(name = "length", length = 255)
-    private String length;
-    @Column(name = "replacement_cost", length = 255)
-    private String replacement_cost;
-    @Column(name = "rating", length = 255)
-    private String rating;
-    @Column(name = "special_features", length = 255)
-    private String special_features;
-    @Column(name = "last_update", length = 60)
-    private Date last_update;
 
-    @OneToMany(mappedBy = "film")
-    private List<Inventory> inventoryList;
+    @Column(name = "release_year")
+    private Integer releaseYear;
 
-    public Film(){}
+    @ManyToOne
+    @JoinColumn(name = "language_id")
+    private Language language;
 
-    public int getFilm_id() {return film_id;}
+    @Column(name = "rental_duration")
+    private Integer rentalDuration;
 
-    public void setFilm_id(int film_id) {this.film_id = film_id;}
+    @Column(name = "rental_rate")
+    private Float rentalRate;
 
-    public String getTitle() {return title;}
+    @Column(name = "length")
+    private Integer length;
 
-    public void setTitle(String title) {this.title = title;}
+    @Column(name = "replacement_cost")
+    private Float replacementCost;
 
-    public String getDescription() {return description;}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rating")
+    private Rating rating;
 
-    public void setDescription(String description) {this.description = description;}
+    @Column(name = "special_features")
+    private String specialFeatures;
 
-    public String getRelease_year() {return release_year;}
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
-    public void setRelease_year(String release_year) {this.release_year = release_year;}
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Inventory> inventories;
 
-    public String getLanguage_id() {return language_id;}
+    @ManyToMany
+    @JoinTable(
+            name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
-    public void setLanguage_id(String language_id) {this.language_id = language_id;}
+    @ManyToMany
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
 
-    public String getOriginal_language_id() {return original_language_id;}
 
-    public void setOriginal_language_id(String original_language_id) {this.original_language_id = original_language_id;}
+    private Set<Actor> actors;
 
-    public String getRental_duration() {return rental_duration;}
+    public Film() {
+    }
 
-    public void setRental_duration(String rental_duration) {this.rental_duration = rental_duration;}
+    public Film(String title, String description, Integer releaseYear, Language language, Integer rentalDuration,
+                Float rentalRate, Integer length, Float replacementCost, Rating rating, String specialFeatures, LocalDateTime lastUpdate) {
+        this.title = title;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.language = language;
+        this.rentalDuration = rentalDuration;
+        this.rentalRate = rentalRate;
+        this.length = length;
+        this.replacementCost = replacementCost;
+        this.rating = rating;
+        this.specialFeatures = specialFeatures;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public String getRental_rate() {return rental_rate;}
+    public Integer getFilmId() {
+        return filmId;
+    }
 
-    public void setRental_rate(String rental_rate) {this.rental_rate = rental_rate;}
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
 
-    public String getLength() {return length;}
+    public String getTitle() {
+        return title;
+    }
 
-    public void setLength(String length) {this.length = length;}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getReplacement_cost() {return replacement_cost;}
+    public String getDescription() {
+        return description;
+    }
 
-    public void setReplacement_cost(String replacement_cost) {this.replacement_cost = replacement_cost;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public String getRating() {return rating;}
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
 
-    public void setRating(String rating) {this.rating = rating;}
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
+    }
 
-    public String getSpecial_features() {return special_features;}
+    public Language getLanguage() {
+        return language;
+    }
 
-    public void setSpecial_features(String special_features) {this.special_features = special_features;}
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
-    public java.sql.Date getLast_update() {return last_update;}
+    public Integer getRentalDuration() {
+        return rentalDuration;
+    }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setRentalDuration(Integer rentalDuration) {
+        this.rentalDuration = rentalDuration;
+    }
+
+    public Float getRentalRate() {
+        return rentalRate;
+    }
+
+    public void setRentalRate(Float rentalRate) {
+        this.rentalRate = rentalRate;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public Float getReplacementCost() {
+        return replacementCost;
+    }
+
+    public void setReplacementCost(Float replacementCost) {
+        this.replacementCost = replacementCost;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    public String getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(Set<Inventory> inventories) {
+        this.inventories = inventories;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Set<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
     }
 }

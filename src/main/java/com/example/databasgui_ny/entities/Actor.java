@@ -2,48 +2,82 @@ package com.example.databasgui_ny.entities;
 
 
 import jakarta.persistence.*;
-
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "actor")
 public class Actor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actor_id;
-    @Column(length = 45)
-    private String first_name;
-    @Column(length = 45)
-    private String last_name;
-    @Column
-    private Date last_update;
+    @Column(name = "actor_id")
+    private Integer actorId;
 
-    public Actor(){}
+    @Column(name = "first_name")
+    private String firstName;
 
-    public int getActor_id() {return actor_id;}
+    @Column(name = "last_name")
+    private String lastName;
 
-    public void setActor_id(int actor_id) {this.actor_id = actor_id;}
+    @Column(name = "last_update")
+    private LocalDateTime lastUpdate;
 
-    public String getFirst_name() {return first_name;}
+    @ManyToMany(mappedBy = "actors")
+    private Set<Film> films;
 
-    public void setFirst_name(String first_name) {this.first_name = first_name;}
+//    @ManyToMany(mappedBy = "actors", cascade = CascadeType.REMOVE)
+//    private Set<Film> films;
 
-    public String getLast_name() {return last_name;}
+    // Constructors, getters, and setters
 
-    public void setLast_name(String last_name) {this.last_name = last_name;}
+    public Actor() {
+    }
 
-    public java.sql.Date getLast_update() {return last_update;}
+    public Actor(String firstName, String lastName, LocalDateTime lastUpdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
+    public Integer getActorId() {
+        return actorId;
+    }
 
+    public void setActorId(Integer actorId) {
+        this.actorId = actorId;
+    }
 
-    @Override
-    public String toString() {
-        return "Actor{" +
-                "actor_id=" + actor_id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                '}';
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
     }
 }
 

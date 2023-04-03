@@ -2,66 +2,115 @@ package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "address")
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int address_id;
-    @Column(name = "address", length = 50)
+    @Column(name = "address_id")
+    private Integer addressId;
+
+    @Column(name = "address")
     private String address;
-    @Column(name = "address2", length = 50)
+
+    @Column(name = "address2")
     private String address2;
-    @Column(name = "district", length = 20)
+
+    @Column(name = "district")
     private String district;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 
-    @Column(name = "postal_code", length = 10)
-    private String postal_code;
-    @Column(name = "phone", length = 20)
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "phone")
     private String phone;
+
     @Column(name = "last_update")
-    private Date last_update;
+    private LocalDateTime lastUpdate;
 
+    // Constructors, getters, and setters
+    public Address() {
+    }
 
-    public Address(){}
+    public Address(String address, String address2, String district, City city, String postalCode, String phone, LocalDateTime lastUpdate) {
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public int getAddress_id() {return address_id;}
+    public Integer getAddressId() {
+        return addressId;
+    }
 
-    public void setAddress_id(int address_id) {this.address_id = address_id;}
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
 
-    public String getAddress() {return address;}
+    public String getAddress() {
+        return address;
+    }
 
-    public void setAddress(String address) {this.address = address;}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-    public String getAddress2() {return address2;}
+    public String getAddress2() {
+        return address2;
+    }
 
-    public void setAddress2(String address2) {this.address2 = address2;}
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
 
-    public String getDistrict() {return district;}
+    public String getDistrict() {
+        return district;
+    }
 
-    public void setDistrict(String district) {this.district = district;}
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 
-    public City getCity() {return city;}
+    public City getCity() {
+        return city;
+    }
 
-    public void setCity_id(City city) {this.city = city;}
+    public void setCity(City city) {
+        this.city = city;
+    }
 
-    public String getPostal_code() {return postal_code;}
+    public String getPostalCode() {
+        return postalCode;
+    }
 
-    public void setPostal_code(String postal_code) {this.postal_code = postal_code;}
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
-    public String getPhone() {return phone;}
+    public String getPhone() {
+        return phone;
+    }
 
-    public void setPhone(String phone) {this.phone = phone;}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-    public java.sql.Date getLast_update() {return last_update;}
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
 
-    public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
-
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }
-

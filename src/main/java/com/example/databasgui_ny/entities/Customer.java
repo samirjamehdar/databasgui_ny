@@ -1,69 +1,149 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customer_id;
+    @Column(name = "customer_id")
+    private Integer customerId;
+
     @ManyToOne
     @JoinColumn(name = "store_id")
     private Store store;
-    @Column(name = "first_name", length = 45)
-    private String first_name;
-    @Column(name = "last_name", length = 45)
-    private String last_name;
-    @Column(name = "email", length = 50)
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email")
     private String email;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
     @Column(name = "active")
     private boolean active;
+
     @Column(name = "create_date")
-    private Date create_date;
+    private LocalDateTime createDate;
+
     @Column(name = "last_update")
-    private Date last_update;
+    private LocalDateTime lastUpdate;
 
-    public Customer(){}
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Rental> rentals;
 
-    public int getCustomer_id() {return customer_id;}
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Payment> payments;
 
-    public void setCustomer_id(int customer_id) {this.customer_id = customer_id;}
+    public Customer() {
+    }
 
-    public Store getStore() {return store;}
+    public Customer(Store store, String firstName, String lastName, String email, Address address, boolean active, LocalDateTime createDate, LocalDateTime lastUpdate) {
+        this.store = store;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.active = active;
+        this.createDate = createDate;
+        this.lastUpdate = lastUpdate;
+    }
 
-    public void setStore(Store store) {this.store = store;}
+    public Integer getCustomerId() {
+        return customerId;
+    }
 
-    public String getFirst_name() {return first_name;}
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 
-    public void setFirst_name(String first_name) {this.first_name = first_name;}
+    public Store getStore() {
+        return store;
+    }
 
-    public String getLast_name() {return last_name;}
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
-    public void setLast_name(String last_name) {this.last_name = last_name;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getEmail() {return email;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public Address getAddress() {return address;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public void setAddress(Address address) {this.address = address;}
+    public String getEmail() {
+        return email;
+    }
 
-    public boolean isActive() {return active;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setActive(boolean active) {this.active = active;}
+    public Address getAddress() {
+        return address;
+    }
 
-    public java.sql.Date getCreate_date() {return create_date;}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-    public void setCreate_date(java.sql.Date create_date) {this.create_date = create_date;}
+    public boolean isActive() {
+        return active;
+    }
 
-    public java.sql.Date getLast_update() {return last_update;}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-    public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
 
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Set<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
 }
