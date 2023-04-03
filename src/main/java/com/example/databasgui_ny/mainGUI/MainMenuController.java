@@ -130,10 +130,10 @@ public class MainMenuController implements Initializable {
     public void handleActorTable() {
         if (actorObList.size() == 0) {
         ActorDAO actorDAO = new ActorDAO();
-        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
-        actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-        actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-        actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
+        actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
         List<Actor> actorList = actorDAO.readAll();
         actorObList.addAll(actorList);

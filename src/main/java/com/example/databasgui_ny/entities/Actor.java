@@ -23,13 +23,12 @@ public class Actor {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @ManyToMany(mappedBy = "actors")
-    private Set<Film> films;
-
-//    @ManyToMany(mappedBy = "actors", cascade = CascadeType.REMOVE)
+//    @ManyToMany(mappedBy = "actors")
 //    private Set<Film> films;
 
-    // Constructors, getters, and setters
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.REMOVE)
+    private Set<Film> films;
+
 
     public Actor() {
     }

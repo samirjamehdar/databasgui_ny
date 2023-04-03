@@ -39,9 +39,9 @@ public class Film {
     @Column(name = "replacement_cost")
     private Float replacementCost;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "rating")
-    private Rating rating;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "rating")
+//    private Rating rating;
 
     @Column(name = "special_features")
     private String specialFeatures;
@@ -64,11 +64,10 @@ public class Film {
             name = "film_actor",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
-
-
     private Set<Actor> actors;
 
     public Film() {
+
     }
 
     public Film(String title, String description, Integer releaseYear, Language language, Integer rentalDuration,
@@ -81,7 +80,7 @@ public class Film {
         this.rentalRate = rentalRate;
         this.length = length;
         this.replacementCost = replacementCost;
-        this.rating = rating;
+//        this.rating = rating;
         this.specialFeatures = specialFeatures;
         this.lastUpdate = lastUpdate;
     }
@@ -158,13 +157,13 @@ public class Film {
         this.replacementCost = replacementCost;
     }
 
-    public Rating getRating() {
-        return rating;
-    }
+//    public Rating getRating() {
+//        return rating;
+//    }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
-    }
+//    public void setRating(Rating rating) {
+//        this.rating = rating;
+//    }
 
     public String getSpecialFeatures() {
         return specialFeatures;
