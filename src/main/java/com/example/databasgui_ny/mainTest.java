@@ -15,7 +15,7 @@ import java.util.List;
 public class mainTest {
     public static void main(String args[]) {
         ActorDAO actorDAO = new ActorDAO();
-        Actor testActor = actorDAO.read(1);
+        Actor testActor = actorDAO.read(2);
 
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -24,7 +24,5 @@ public class mainTest {
 
         session.getTransaction().commit();
         session.close();
-
     }
-
 }
