@@ -144,34 +144,42 @@ public class MainMenuController implements Initializable {
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
+
                     System.out.println("Film_actor is selected, refresh the table to actor values");
                     break;
                 case "FilmCategory":
                     selectedTable = "FilmCategory";
+
                     System.out.println("Film_category is selected, refresh the table to actor values");
                     break;
                 case "FilmText":
                     selectedTable = "FilmText";
+                    handleFilmTextTable();
                     System.out.println("Film_text is selected, refresh the table to actor values");
                     break;
                 case "Inventory":
                     selectedTable = "Inventory";
+                    handleInventoryTable();
                     System.out.println("Inventory is selected, refresh the table to actor values");
                     break;
                 case "Payment":
                     selectedTable = "Payment";
+                    handlePaymentTable();
                     System.out.println("Payment is selected, refresh the table to actor values");
                     break;
                 case "Rental":
                     selectedTable = "Rental";
+                    handleRentalTable();
                     System.out.println("Rental is selected, refresh the table to actor values");
                     break;
                 case "Staff":
                     selectedTable = "Staff";
+                    handleStaffTable();
                     System.out.println("Staff is selected, refresh the table to actor values");
                     break;
                 case "Store":
-                    selectedTable = "Staff";
+                    selectedTable = "Store";
+                    handleStoreTable();
                     System.out.println("Store is selected, refresh the table to actor values");
                     break;
             }
@@ -338,6 +346,7 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(paymentPaymentDateCol);
             tableView.getColumns().add(paymentLastUpdateCol);
         }
+    }
 
         public void handleRentalTable() {
         if (rentalObList.size() == 0) {
