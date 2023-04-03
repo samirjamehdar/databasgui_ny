@@ -239,14 +239,14 @@ public class MainMenuController implements Initializable {
         if (addressObList.size() == 0) {
             AddressDAO addressDAO = new AddressDAO();
 
-            addressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            addressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
             address1Col.setCellValueFactory(new PropertyValueFactory<>("address"));
             address2Col.setCellValueFactory(new PropertyValueFactory<>("address2"));
             addressDistrictCol.setCellValueFactory(new PropertyValueFactory<>("district"));
-            addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
-            addressPostalCol.setCellValueFactory(new PropertyValueFactory<>("postal_code"));
+            addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+            addressPostalCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            addressLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Address> addressList = addressDAO.readAll();
             addressObList.addAll(addressList);
@@ -289,15 +289,15 @@ public class MainMenuController implements Initializable {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
-            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("create_date"));
-            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Customer> customerList = customerDAO.readAll();
             customerObList.addAll(customerList);
