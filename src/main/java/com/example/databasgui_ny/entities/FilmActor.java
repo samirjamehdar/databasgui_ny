@@ -2,6 +2,7 @@ package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Film_actor")
@@ -30,5 +31,27 @@ public class FilmActor {
     public java.sql.Date getLast_update() {return last_update;}
 
     public void setLast_update(java.sql.Date last_update) {this.last_update = last_update;}
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof FilmActor)) return false;
+//        FilmActor filmActor = (FilmActor) o;
+//        return actor == filmActor.actor &&
+//                film == filmActor.film;
+//    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(actor, film);
+//    }
+
+    @Override
+    public String toString() {
+        return "FilmActor{" +
+                "actor_id=" + actor +
+                ", film_id='" + film + '\'' +
+                ", last_update='" + last_update + '\'' +
+                '}';
+    }
 
 }

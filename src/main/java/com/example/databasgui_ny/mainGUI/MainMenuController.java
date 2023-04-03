@@ -133,6 +133,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleActorTable() {
+        tableView.getColumns().clear();
         if (actorObList.size() == 0) {
         ActorDAO actorDAO = new ActorDAO();
 
@@ -153,6 +154,7 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleAddressTable() {
+        tableView.getColumns().clear();
         if (addressObList.size() == 0) {
             AddressDAO addressDAO = new AddressDAO();
 
@@ -163,7 +165,7 @@ public class MainMenuController implements Initializable {
             addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
             addressPostalCol.setCellValueFactory(new PropertyValueFactory<>("postal_code"));
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            addressLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
             List<Address> addressList = addressDAO.readAll();
             addressObList.addAll(addressList);
@@ -180,10 +182,11 @@ public class MainMenuController implements Initializable {
         }
     }
     public void handleCityTable() {
+        tableView.getColumns().clear();
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
-            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
             cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
             cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country_id"));
             cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
@@ -199,6 +202,7 @@ public class MainMenuController implements Initializable {
         }
     }
     public void handleCustomerTable() {
+        tableView.getColumns().clear();
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 

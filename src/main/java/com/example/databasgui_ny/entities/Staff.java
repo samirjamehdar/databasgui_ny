@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "Staff")
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +31,9 @@ private String password;
     @Column(name = "last_update", length = 60)
 private Date last_update;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store store;
+//    @ManyToOne
+//    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+//    private Store store;
 
 //    @ManyToOne
 //    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
