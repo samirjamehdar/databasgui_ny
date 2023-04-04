@@ -1,6 +1,7 @@
 package com.example.databasgui_ny.mainGUI;
 
 import com.example.databasgui_ny.HelloApplication;
+import com.example.databasgui_ny.popGUI.AddController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ public class MainMenu extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
     @Override
