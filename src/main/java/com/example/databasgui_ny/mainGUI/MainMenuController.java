@@ -502,19 +502,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Address":
                     System.out.println("Address PopUp");
-                    Address selectedAddress = (Address) tableView.getSelectionModel().getSelectedItem();
-                    if (selectedAddress != null) {
-                        int addressId = selectedAddress.getAddressId();
-                        System.out.println("Selected Address ID: " + addressId);
-                        try {
-                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateAdress.fxml";
-                            showUpdatePopup(fxmlPath);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    } else {
-                        System.out.println("No address selected.");
-                    }
+//
                     break;
                 case "City":
                     System.out.println("City PopUp");
@@ -781,7 +769,6 @@ public class MainMenuController implements Initializable {
         try {
             Stage updateStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-
             loader.setLocation(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Scene scene = new Scene(root);
