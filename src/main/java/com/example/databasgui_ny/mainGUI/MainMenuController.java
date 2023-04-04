@@ -519,6 +519,7 @@ public class MainMenuController implements Initializable {
                     } else {
                         System.out.println("No City selected.");
                     }
+
                     break;
                 case "Customer":
                     System.out.println("Customer PopUp");
