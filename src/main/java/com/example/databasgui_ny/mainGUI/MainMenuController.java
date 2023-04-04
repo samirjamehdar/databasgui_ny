@@ -505,7 +505,7 @@ public class MainMenuController implements Initializable {
                     Address selectedAddress = (Address) tableView.getSelectionModel().getSelectedItem();
                     if (selectedAddress != null) {
                         int addressId = selectedAddress.getAddressId();
-                        System.out.println("Selected actor ID: " + addressId);
+                        System.out.println("Selected Address ID: " + addressId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateAdress.fxml";
                             showUpdatePopup(fxmlPath);
@@ -521,7 +521,7 @@ public class MainMenuController implements Initializable {
                     City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
                     if (selectedCity != null) {
                         int cityId = selectedCity.getCityId();
-                        System.out.println("Selected actor ID: " + cityId);
+                        System.out.println("Selected City ID: " + cityId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
                             showUpdatePopup(fxmlPath);
@@ -537,7 +537,7 @@ public class MainMenuController implements Initializable {
                     Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
                     if (selectedCustomer != null) {
                         int customerId = selectedCustomer.getCustomerId();
-                        System.out.println("Selected actor ID: " + customerId);
+                        System.out.println("Selected Customer ID: " + customerId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCustomer.fxml";
                             showUpdatePopup(fxmlPath);
@@ -553,7 +553,7 @@ public class MainMenuController implements Initializable {
                     Film selectedFilm = (Film) tableView.getSelectionModel().getSelectedItem();
                     if (selectedFilm != null) {
                         int filmId = selectedFilm.getFilmId();
-                        System.out.println("Selected actor ID: " + filmId);
+                        System.out.println("Selected Film ID: " + filmId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
                             showUpdatePopup(fxmlPath);
@@ -584,21 +584,99 @@ public class MainMenuController implements Initializable {
                     break;
                 case "FilmText":
                     System.out.println("FilmText PopUp");
+//                    FilmText selectedFilmText = (FilmText) tableView.getSelectionModel().getSelectedItem();
+//                    if (selectedFilmText != null) {
+//                        int filmTextId = selectedFilmText.getFilmTextId();
+//                        System.out.println("Selected Film Text ID: " + filmTextId);
+//                        try {
+//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilmText.fxml";
+//                            showUpdatePopup(fxmlPath);
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    } else {
+//                        System.out.println("No Film Text selected.");
+//                    }
                     break;
                 case "Inventory":
                     System.out.println("Inventory PopUp");
+                    Inventory selectedInventory = (Inventory) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedInventory != null) {
+                        int inventoryId = selectedInventory.getInventoryId();
+                        System.out.println("Selected Inventory ID: " + inventoryId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No inventory selected.");
+                    }
                     break;
                 case "Payment":
                     System.out.println("Payment PopUp");
+                    Payment selectedPayment = (Payment) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedPayment != null) {
+                        int paymentId = selectedPayment.getPaymentId();
+                        System.out.println("Selected Payment ID: " + paymentId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Payment selected.");
+                    }
                     break;
                 case "Rental":
                     System.out.println("Rental PopUp");
+                    Rental selectedRental = (Rental) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedRental != null) {
+                        int rentalId = selectedRental.getRentalId();
+                        System.out.println("Selected Rental ID: " + rentalId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateRental.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Rental selected.");
+                    }
                     break;
                 case "Staff":
                     System.out.println("Staff PopUp");
+                    Staff selectedStaff = (Staff) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedStaff != null) {
+                        int staffId = selectedStaff.getStaffId();
+                        System.out.println("Selected Staff ID: " + staffId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStaff.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Staff selected.");
+                    }
                     break;
                 case "Store":
                     System.out.println("Store PopUp");
+                    Store selectedStore = (Store) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedStore != null) {
+                        int storeId = selectedStore.getStoreId();
+                        System.out.println("Selected Store ID: " + storeId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStore.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Store selected.");
+                    }
                     break;
             }
         }
