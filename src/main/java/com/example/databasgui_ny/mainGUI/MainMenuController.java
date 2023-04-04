@@ -6,15 +6,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,9 +65,6 @@ public class MainMenuController implements Initializable {
     private TableColumn<Customer, Date> customerCreateDateCol = new TableColumn<>("Created");
     private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
-
-
-
 
 
     private TableColumn<FilmText, Integer> filmTextIdCol = new TableColumn<>("Film ID");
@@ -111,10 +114,25 @@ public class MainMenuController implements Initializable {
     private TableColumn<Store, Date> storeLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Store> storeObList = FXCollections.observableArrayList();
 
+    private TableColumn<Film, Integer> filmIdCol = new TableColumn<>("Film ID");
+    private TableColumn<Film, String> filmtitleCol = new TableColumn<>("Title");
+    private TableColumn<Film, String> filmDescriptionCol = new TableColumn<>("Description");
+    private TableColumn<Film, String> filmReleaseCol = new TableColumn<>("Release");
+    private TableColumn<Film, Integer> filmLanguageCol = new TableColumn<>("Language ID");
+    private TableColumn<Film, Integer> filmOrgLanguageCol = new TableColumn<>("Original Language ID");
+    private TableColumn<Film, Integer> filmRentalDurCol = new TableColumn<>("Rental Duration");
+    private TableColumn<Film, Integer> filmRentalRateCol = new TableColumn<>("Rental Rate");
+    private TableColumn<Film, Integer> filmLengthCol = new TableColumn<>("Length");
+    private TableColumn<Film, Integer> filmReplacementCol = new TableColumn<>("Replacement Cost");
+    private TableColumn<Film, String> filmRatingCol = new TableColumn<>("Rating");
+    private TableColumn<Film, String> filmSpecialCol = new TableColumn<>("Special Features");
+    private TableColumn<Film, Date> filmLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Film> filmObList = FXCollections.observableArrayList();
+
     private String selectedTable;
 
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
-                                                                "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
+            "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,7 +161,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-                    System.out.println("Film is selected, refresh the table to actor values");
+                    handleFilmTable();
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
@@ -191,20 +209,20 @@ public class MainMenuController implements Initializable {
 
     public void handleActorTable() {
         if (actorObList.size() == 0) {
-        ActorDAO actorDAO = new ActorDAO();
-        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
-        actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+            ActorDAO actorDAO = new ActorDAO();
+            actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
+            actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-        List<Actor> actorList = actorDAO.readAll();
-        actorObList.addAll(actorList);
+            List<Actor> actorList = actorDAO.readAll();
+            actorObList.addAll(actorList);
 
-        tableView.setItems(actorObList);
-        tableView.getColumns().add(actorIdCol);
-        tableView.getColumns().add(actorFirstNameCol);
-        tableView.getColumns().add(actorLastNameCol);
-        tableView.getColumns().add(actorLastUpdateCol);
+            tableView.setItems(actorObList);
+            tableView.getColumns().add(actorIdCol);
+            tableView.getColumns().add(actorFirstNameCol);
+            tableView.getColumns().add(actorLastNameCol);
+            tableView.getColumns().add(actorLastUpdateCol);
         }
     }
 
@@ -285,6 +303,39 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(customerLastUpdateCol);
         }
     }
+    public void handleFilmTable() {
+        if (filmObList.size() == 0) {
+            FilmDAO filmDAO = new FilmDAO();
+
+            filmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+            filmtitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            filmDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+            filmReleaseCol.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+            filmLanguageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
+            filmRentalDurCol.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+            filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+            filmLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+            filmReplacementCol.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
+            filmSpecialCol.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+            filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+            List<Film> filmList = filmDAO.readAll();
+            filmObList.addAll(filmList);
+
+            tableView.setItems(filmObList);
+            tableView.getColumns().add(filmIdCol);
+            tableView.getColumns().add(filmtitleCol);
+            tableView.getColumns().add(filmDescriptionCol);
+            tableView.getColumns().add(filmReleaseCol);
+            tableView.getColumns().add(filmLanguageCol);
+            tableView.getColumns().add(filmRentalDurCol);
+            tableView.getColumns().add(filmRentalRateCol);
+            tableView.getColumns().add(filmLengthCol);
+            tableView.getColumns().add(filmReplacementCol);
+            tableView.getColumns().add(filmSpecialCol);
+            tableView.getColumns().add(filmLastUpdateCol);
+        }
+    }
 
 
     public void handleFilmTextTable() {
@@ -326,7 +377,7 @@ public class MainMenuController implements Initializable {
         }
     }
 
-        public void handlePaymentTable() {
+    public void handlePaymentTable() {
         if (paymentObList.size() == 0) {
             PaymentDAO paymentDAO = new PaymentDAO();
 
@@ -352,7 +403,7 @@ public class MainMenuController implements Initializable {
         }
     }
 
-        public void handleRentalTable() {
+    public void handleRentalTable() {
         if (rentalObList.size() == 0) {
             RentalDAO rentalDAO = new RentalDAO();
 
@@ -424,16 +475,201 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public void updateButtonClick(ActionEvent e) {
-        System.out.println("TestButton clicked! : " + choiceBox.getValue());
-        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+    public void updateButtonClick(ActionEvent e) throws IOException {
+        if (selectedTable != null) {
+            switch (selectedTable) {
+                case "Actor":
+                    System.out.println("Actor PopUp");
 
-        if (selectedActor != null) {
-            int actorId = selectedActor.getActorId();
-            System.out.println("Selected actor ID: " + actorId);
-        } else {
-            System.out.println("No actor selected.");
-        };
+                    Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedActor != null) {
+                        int actorId = selectedActor.getActorId();
+                        System.out.println("Selected actor ID: " + actorId);
+                        try {
+                            Stage updateStage = new Stage();
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/com/example/databasgui_ny/updatePopups/UpdateActor.fxml"));
+                            Parent root = loader.load();
+                            Scene scene = new Scene(root);
+                            updateStage.setScene(scene);
+                            updateStage.show();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No actor selected.");
+                    }
+                    break;
+                case "Address":
+                    System.out.println("Address PopUp");
+
+                    break;
+                case "City":
+                    System.out.println("City PopUp");
+                    City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedCity != null) {
+                        int cityId = selectedCity.getCityId();
+                        System.out.println("Selected City ID: " + cityId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No City selected.");
+                    }
+
+                    break;
+                case "Customer":
+                    System.out.println("Customer PopUp");
+                    Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedCustomer != null) {
+                        int customerId = selectedCustomer.getCustomerId();
+                        System.out.println("Selected Customer ID: " + customerId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCustomer.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Customer selected.");
+                    }
+                    break;
+                case "Film":
+                    System.out.println("Film PopUp");
+                    Film selectedFilm = (Film) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedFilm != null) {
+                        int filmId = selectedFilm.getFilmId();
+                        System.out.println("Selected Film ID: " + filmId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Film selected.");
+                    }
+                    break;
+                case "FilmActor":
+//                    FilmActorDAO filmActorDAO = new FilmActorDAO();
+                    /** Vi har ingen kopplingstabell till filmactor så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt actor iställer för en egen tabell.
+                     */
+//                    FilmActor selectedFilmActor = (FilmActor) tableView.getSelectionModel().getSelectedItem();
+//                    filmActorDAO.delete(selectedFilmActor.getActor().getActor_id());
+                    System.out.println("INTE KLAR");
+                    /** Fundera vad som ska tas bort här inne egenligen **/
+                    break;
+                case "FilmCategory":
+//                    FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+                    /** Vi har ingen kopplingstabell till FilmCategory så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt Category iställer för en egen tabell.
+                     */
+//                    FilmCategory selectedCategory = (FilmCategory) tableView.getSelectionModel().getSelectedItem();
+//                    filmCategoryDAO.delete(selectedCategory.getCategory_id());
+                    break;
+                case "FilmText":
+                    System.out.println("FilmText PopUp");
+//                    FilmText selectedFilmText = (FilmText) tableView.getSelectionModel().getSelectedItem();
+//                    if (selectedFilmText != null) {
+//                        int filmTextId = selectedFilmText.getFilmTextId();
+//                        System.out.println("Selected Film Text ID: " + filmTextId);
+//                        try {
+//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilmText.fxml";
+//                            showUpdatePopup(fxmlPath);
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    } else {
+//                        System.out.println("No Film Text selected.");
+//                    }
+                    break;
+                case "Inventory":
+                    System.out.println("Inventory PopUp");
+                    Inventory selectedInventory = (Inventory) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedInventory != null) {
+                        int inventoryId = selectedInventory.getInventoryId();
+                        System.out.println("Selected Inventory ID: " + inventoryId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No inventory selected.");
+                    }
+                    break;
+                case "Payment":
+                    System.out.println("Payment PopUp");
+                    Payment selectedPayment = (Payment) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedPayment != null) {
+                        int paymentId = selectedPayment.getPaymentId();
+                        System.out.println("Selected Payment ID: " + paymentId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Payment selected.");
+                    }
+                    break;
+                case "Rental":
+                    System.out.println("Rental PopUp");
+                    Rental selectedRental = (Rental) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedRental != null) {
+                        int rentalId = selectedRental.getRentalId();
+                        System.out.println("Selected Rental ID: " + rentalId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateRental.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Rental selected.");
+                    }
+                    break;
+                case "Staff":
+                    System.out.println("Staff PopUp");
+                    Staff selectedStaff = (Staff) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedStaff != null) {
+                        int staffId = selectedStaff.getStaffId();
+                        System.out.println("Selected Staff ID: " + staffId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStaff.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Staff selected.");
+                    }
+                    break;
+                case "Store":
+                    System.out.println("Store PopUp");
+                    Store selectedStore = (Store) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedStore != null) {
+                        int storeId = selectedStore.getStoreId();
+                        System.out.println("Selected Store ID: " + storeId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStore.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Store selected.");
+                    }
+                    break;
+            }
+        }
+
     }
 
     public void deleteButtonClick(ActionEvent e) {
@@ -530,6 +766,17 @@ public class MainMenuController implements Initializable {
         return selectedTable;
     }
 
-
-
+    public void showUpdatePopup(String fxmlPath) {
+        try {
+            Stage updateStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            updateStage.setScene(scene);
+            updateStage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
