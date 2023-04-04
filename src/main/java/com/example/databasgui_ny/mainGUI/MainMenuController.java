@@ -60,10 +60,6 @@ public class MainMenuController implements Initializable {
     private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
 
-
-
-
-
     private TableColumn<FilmText, Integer> filmTextIdCol = new TableColumn<>("Film ID");
     private TableColumn<FilmText, String> filmTextTitleCol = new TableColumn<>("Title");
     private TableColumn<FilmText, String> filmTextDescriptionCol = new TableColumn<>("Description");
@@ -181,7 +177,7 @@ public class MainMenuController implements Initializable {
                     System.out.println("Film_category is selected, refresh the table to actor values");
                     break;
                 case "FilmText":
-                    selectedTable = "FilmText";
+                    selectedTable = "Film_text";
                     handleFilmTextTable();
                     System.out.println("Film_text is selected, refresh the table to actor values");
                     break;
@@ -268,10 +264,10 @@ public class MainMenuController implements Initializable {
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
-            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("cityId"));
             cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
-            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country_id"));
-            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<City> cityList = cityDAO.readAll();
             cityObList.addAll(cityList);
@@ -319,19 +315,19 @@ public class MainMenuController implements Initializable {
         if (filmObList.size() == 0) {
             FilmDAO filmDAO = new FilmDAO();
 
-            filmIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
             filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
             filmDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-            filmReleaseYearCol.setCellValueFactory(new PropertyValueFactory<>("release_year"));
-            filmLanguageIdCol.setCellValueFactory(new PropertyValueFactory<>("language_id"));
+            filmReleaseYearCol.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+            filmLanguageIdCol.setCellValueFactory(new PropertyValueFactory<>("language"));
             filmOriginalLanguageIdCol.setCellValueFactory(new PropertyValueFactory<>("original_language_id"));
-            filmRentalDurationCol.setCellValueFactory(new PropertyValueFactory<>("rental_duration"));
-            filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rental_rate"));
+            filmRentalDurationCol.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+            filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
             filmLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
-            filmReplacementCostCol.setCellValueFactory(new PropertyValueFactory<>("replacement_cost"));
+            filmReplacementCostCol.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
             filmRatingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
-            filmSpecialFeaturesCol.setCellValueFactory(new PropertyValueFactory<>("special_features"));
-            filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            filmSpecialFeaturesCol.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+            filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Film> filmList = filmDAO.readAll();
             filmObList.addAll(filmList);
@@ -395,7 +391,7 @@ public class MainMenuController implements Initializable {
         if (filmTextObList.size() == 0) {
             FilmTextDAO filmTextDAO = new FilmTextDAO();
 
-            filmTextIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
+            filmTextIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
             filmTextTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
             filmTextDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
 
@@ -414,10 +410,10 @@ public class MainMenuController implements Initializable {
         if (inventoryObList.size() == 0) {
             InventoryDAO inventoryDAO = new InventoryDAO();
 
-            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
-            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
+            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Inventory> inventoryList = inventoryDAO.readAll();
             inventoryObList.addAll(inventoryList);
@@ -435,13 +431,13 @@ public class MainMenuController implements Initializable {
         if (paymentObList.size() == 0) {
             PaymentDAO paymentDAO = new PaymentDAO();
 
-            paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("payment_id"));
-            paymentCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-            paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
-            paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
+            paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
+            paymentCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
+            paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff"));
+            paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental"));
             paymentAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-            paymentPaymentDateCol.setCellValueFactory(new PropertyValueFactory<>("payment_date"));
-            paymentLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            paymentPaymentDateCol.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
+            paymentLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Payment> paymentList = paymentDAO.readAll();
             paymentObList.addAll(paymentList);
@@ -462,13 +458,13 @@ public class MainMenuController implements Initializable {
         if (rentalObList.size() == 0) {
             RentalDAO rentalDAO = new RentalDAO();
 
-            rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
-            rentalDateCol.setCellValueFactory(new PropertyValueFactory<>("rental_date"));
-            rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-            rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-            rentalReturnDateCol.setCellValueFactory(new PropertyValueFactory<>("return_date"));
-            rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
-            rentalLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
+            rentalDateCol.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
+            rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
+            rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
+            rentalReturnDateCol.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+            rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff"));
+            rentalLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Rental> rentalList = rentalDAO.readAll();
             rentalObList.addAll(rentalList);
@@ -489,12 +485,12 @@ public class MainMenuController implements Initializable {
         if (staffObList.size() == 0) {
             StaffDAO staffDAO = new StaffDAO();
 
-            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
-            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
             staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
 
             List<Staff> staffList = staffDAO.readAll();
@@ -516,10 +512,10 @@ public class MainMenuController implements Initializable {
         if (storeObList.size() == 0) {
             StoreDAO storeDAO = new StoreDAO();
 
-            storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-            storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
-            storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-            storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            storeIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
+            storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("managerStaff"));
+            storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+            storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Store> storeList = storeDAO.readAll();
             storeObList.addAll(storeList);
