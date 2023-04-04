@@ -30,6 +30,7 @@ public class Inventory {
     private Set<Rental> rentals;
 
     public Inventory() {
+
     }
 
     public Inventory(Film film, Store store, LocalDateTime lastUpdate) {
@@ -76,5 +77,16 @@ public class Inventory {
 
     public void setRentals(Set<Rental> rentals) {
         this.rentals = rentals;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventoryId=" + inventoryId +
+                ", film=" + film +
+                ", store=" + store +
+                ", lastUpdate=" + lastUpdate +
+                ", rentals=" + rentals +
+                '}';
     }
 }
