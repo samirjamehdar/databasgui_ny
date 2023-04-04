@@ -197,8 +197,8 @@ public class MainMenuController implements Initializable {
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-        List<Actor> actorList = actorDAO.readAll();
-        actorObList.addAll(actorList);
+//        List<Actor> actorList = actorDAO.readAll();
+//        actorObList.addAll(actorList);
 
         tableView.setItems(actorObList);
         tableView.getColumns().add(actorIdCol);
@@ -221,8 +221,8 @@ public class MainMenuController implements Initializable {
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
             addressLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-            List<Address> addressList = addressDAO.readAll();
-            addressObList.addAll(addressList);
+//            List<Address> addressList = addressDAO.readAll();
+//            addressObList.addAll(addressList);
 
             tableView.setItems(addressObList);
             tableView.getColumns().add(addressIdCol);

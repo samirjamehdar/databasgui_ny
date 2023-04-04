@@ -1,6 +1,6 @@
 package com.example.databasgui_ny.dao;
 
-import com.example.databasgui_ny.entities.Actor;
+import com.example.databasgui_ny.EntityMapping.AddressEntity;
 import com.example.databasgui_ny.repositories.DAO;
 import com.example.databasgui_ny.util.SessionFactorySingleton;
 import org.hibernate.Session;
@@ -9,12 +9,12 @@ import org.hibernate.query.Query;
 import com.example.databasgui_ny.entities.Address;
 import java.util.List;
 
-public class AddressDAO implements DAO<Address> {
+public class AddressDAO implements DAO<AddressEntity> {
 
 
 
         @Override
-        public void create(Address address) {
+        public void create(AddressEntity address) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
@@ -24,34 +24,33 @@ public class AddressDAO implements DAO<Address> {
         }
 
         @Override
-        public List<Address> readAll() {
+        public List<AddressEntity> readAll() {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            Query<Address> query = session.createQuery("FROM Address", Address.class);
-            List<Address> address = query.list();
+            Query<AddressEntity> query = session.createQuery("FROM AddressEntity ", AddressEntity.class);
+            List<AddressEntity> address = query.list();
             session.close();
             return address;
         }
 
         @Override
-        public Address read(int id) {
+        public AddressEntity read(int id) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
-            Address address = session.get(Address.class, id);
+            AddressEntity address = session.get(AddressEntity.class, id);
             session.close();
             return address;
         }
 
         @Override
-        public boolean update(Address address) {
+        public boolean update(AddressEntity address) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.getTransaction().begin();
             session.update(address);
             session.getTransaction().commit();
             session.close();
-
             return true;
         }
 
@@ -69,8 +68,8 @@ public class AddressDAO implements DAO<Address> {
         }
 
         public void displayAddress() {
-            List<Address> addressList = readAll();
-            for (Address address : addressList) {
+            List<AddressEntity> addressList = readAll();
+            for (AddressEntity address : addressList) {
                 System.out.println(address.toString());
             }
         }
