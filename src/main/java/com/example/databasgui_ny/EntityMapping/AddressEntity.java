@@ -11,7 +11,7 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "address_id", nullable = false)
-    private int addressId;
+    private Integer addressId;
     @Basic
     @Column(name = "address", nullable = false, length = 50)
     private String address;
@@ -40,11 +40,11 @@ public class AddressEntity {
     @Column(name = "city_city_id", nullable = true)
     private Integer cityCityId;
 
-    public int getAddressId() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 
@@ -131,5 +131,21 @@ public class AddressEntity {
     @Override
     public int hashCode() {
         return Objects.hash(addressId, address, address2, district, cityId, postalCode, phone, location, lastUpdate, cityCityId);
+    }
+
+    @Override
+    public String toString() {
+        return "AddressEntity{" +
+                "addressId=" + addressId +
+                ", address='" + address + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", district='" + district + '\'' +
+                ", cityId=" + cityId +
+                ", postalCode='" + postalCode + '\'' +
+                ", phone='" + phone + '\'' +
+                ", location=" + location +
+                ", lastUpdate=" + lastUpdate +
+                ", cityCityId=" + cityCityId +
+                '}';
     }
 }

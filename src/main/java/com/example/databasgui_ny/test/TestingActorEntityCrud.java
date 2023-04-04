@@ -36,7 +36,7 @@ public class TestingActorEntityCrud {
     }
 
     @Test
-    public void testingRemoveFromDatabase() {
+    public void testRemoveFromDatabase() {
         /*
             Ändra på idToRemove till den actor_id som ska tas bort
          */

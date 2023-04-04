@@ -1,5 +1,6 @@
 package com.example.databasgui_ny;
 
+import com.example.databasgui_ny.EntityMapping.ActorEntity;
 import com.example.databasgui_ny.dao.ActorDAO;
 import com.example.databasgui_ny.dao.AddressDAO;
 import com.example.databasgui_ny.dao.InventoryDAO;
@@ -16,12 +17,6 @@ import java.util.List;
 
 public class mainTest {
     public static void main(String args[]) {
-        AddressDAO addressDAO = new AddressDAO();
 
-        SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Address address = addressDAO.read(20);
-        System.out.println(address.getCity());
-        session.close();
     }
 }

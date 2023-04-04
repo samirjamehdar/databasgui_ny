@@ -24,9 +24,10 @@ public class CustomerEntity {
     @Basic
     @Column(name = "email", nullable = true, length = 50)
     private String email;
-    @Basic
-    @Column(name = "address_id", nullable = false)
-    private Object addressId;
+
+    @OneToOne(cascade = CascadeType.ALL) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
+    @JoinColumn(name = "address_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
+    private AddressEntity address;
     @Basic
     @Column(name = "active", nullable = false)
     private byte active;
@@ -77,12 +78,12 @@ public class CustomerEntity {
         this.email = email;
     }
 
-    public Object getAddressId() {
-        return addressId;
+    public AddressEntity getAddressId() {
+        return address;
     }
 
-    public void setAddressId(Object addressId) {
-        this.addressId = addressId;
+    public void setAddressId(AddressEntity addressId) {
+        this.address = addressId;
     }
 
     public byte getActive() {
@@ -114,11 +115,11 @@ public class CustomerEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerEntity that = (CustomerEntity) o;
-        return active == that.active && Objects.equals(customerId, that.customerId) && Objects.equals(storeId, that.storeId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(addressId, that.addressId) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdate, that.lastUpdate);
+        return active == that.active && Objects.equals(customerId, that.customerId) && Objects.equals(storeId, that.storeId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdate, that.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, storeId, firstName, lastName, email, addressId, active, createDate, lastUpdate);
+        return Objects.hash(customerId, storeId, firstName, lastName, email, address, active, createDate, lastUpdate);
     }
 }
