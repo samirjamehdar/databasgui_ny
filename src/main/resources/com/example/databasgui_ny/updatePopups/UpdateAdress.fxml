@@ -22,13 +22,13 @@
          </font>
       </Label>
       <TextField fx:id="UpdateAdress_Adress2" />
-      <Label fx:id="UpdateAddress_Label3" alignment="CENTER" style="&#10;" text="District:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label4" alignment="CENTER" style="&#10;" text="District:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <TextField fx:id="UpdateAdress_District" />
-      <Label fx:id="UpdateAddress_Label4" alignment="CENTER" style="&#10;" text="City ID:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label5" alignment="CENTER" style="&#10;" text="City ID:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>
@@ -42,25 +42,25 @@
    </Label>
    <Button fx:id="UpdateAdress_ConfirmBtn" layoutX="160.0" layoutY="346.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Confim" />
    <VBox layoutX="235.0" layoutY="78.0" prefHeight="211.0" prefWidth="202.0">
-      <Label fx:id="UpdateAddress_Label5" alignment="CENTER" style="&#10;" text="Postal Code:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label6" alignment="CENTER" style="&#10;" text="Postal Code:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <TextField fx:id="UpdateAdress_Postal" />
-      <Label fx:id="UpdateCustomer_Label6" alignment="CENTER" style="&#10;" text="Telephone:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label7" alignment="CENTER" style="&#10;" text="Telephone:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <TextField fx:id="UpdateAdress_Phone" />
-      <Label fx:id="UpdateAddress_Label7" alignment="CENTER" style="&#10;" text="Location:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label8" alignment="CENTER" style="&#10;" text="Location:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <TextField fx:id="UpdateAdress_Location" />
-      <Label fx:id="UpdateAddress_Label8" alignment="CENTER" style="&#10;" text="Enter Date:" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="UpdateAddress_Label9" alignment="CENTER" style="&#10;" text="Enter Date:" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="18.0" />
          </font>

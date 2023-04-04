@@ -114,6 +114,21 @@ public class MainMenuController implements Initializable {
     private TableColumn<Store, Date> storeLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Store> storeObList = FXCollections.observableArrayList();
 
+    private TableColumn<Film, Integer> filmIdCol = new TableColumn<>("Film ID");
+    private TableColumn<Film, String> filmtitleCol = new TableColumn<>("Title");
+    private TableColumn<Film, String> filmDescriptionCol = new TableColumn<>("Description");
+    private TableColumn<Film, String> filmReleaseCol = new TableColumn<>("Release");
+    private TableColumn<Film, Integer> filmLanguageCol = new TableColumn<>("Language ID");
+    private TableColumn<Film, Integer> filmOrgLanguageCol = new TableColumn<>("Original Language ID");
+    private TableColumn<Film, Integer> filmRentalDurCol = new TableColumn<>("Rental Duration");
+    private TableColumn<Film, Integer> filmRentalRateCol = new TableColumn<>("Rental Rate");
+    private TableColumn<Film, Integer> filmLengthCol = new TableColumn<>("Length");
+    private TableColumn<Film, Integer> filmReplacementCol = new TableColumn<>("Replacement Cost");
+    private TableColumn<Film, String> filmRatingCol = new TableColumn<>("Rating");
+    private TableColumn<Film, String> filmSpecialCol = new TableColumn<>("Special Features");
+    private TableColumn<Film, Date> filmLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<Film> filmObList = FXCollections.observableArrayList();
+
     private String selectedTable;
 
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
@@ -146,7 +161,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-                    System.out.println("Film is selected, refresh the table to actor values");
+                    handleFilmTable();
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
@@ -286,6 +301,39 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(customerActiveCol);
             tableView.getColumns().add(customerCreateDateCol);
             tableView.getColumns().add(customerLastUpdateCol);
+        }
+    }
+    public void handleFilmTable() {
+        if (filmObList.size() == 0) {
+            FilmDAO filmDAO = new FilmDAO();
+
+            filmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+            filmtitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            filmDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+            filmReleaseCol.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+            filmLanguageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
+            filmRentalDurCol.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+            filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+            filmLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+            filmReplacementCol.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
+            filmSpecialCol.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+            filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+            List<Film> filmList = filmDAO.readAll();
+            filmObList.addAll(filmList);
+
+            tableView.setItems(filmObList);
+            tableView.getColumns().add(filmIdCol);
+            tableView.getColumns().add(filmtitleCol);
+            tableView.getColumns().add(filmDescriptionCol);
+            tableView.getColumns().add(filmReleaseCol);
+            tableView.getColumns().add(filmLanguageCol);
+            tableView.getColumns().add(filmRentalDurCol);
+            tableView.getColumns().add(filmRentalRateCol);
+            tableView.getColumns().add(filmLengthCol);
+            tableView.getColumns().add(filmReplacementCol);
+            tableView.getColumns().add(filmSpecialCol);
+            tableView.getColumns().add(filmLastUpdateCol);
         }
     }
 
@@ -470,12 +518,51 @@ public class MainMenuController implements Initializable {
                     break;
                 case "City":
                     System.out.println("City PopUp");
+                    City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedCity != null) {
+                        int cityId = selectedCity.getCityId();
+                        System.out.println("Selected actor ID: " + cityId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No City selected.");
+                    }
                     break;
                 case "Customer":
                     System.out.println("Customer PopUp");
+                    Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedCustomer != null) {
+                        int customerId = selectedCustomer.getCustomerId();
+                        System.out.println("Selected actor ID: " + customerId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCustomer.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Customer selected.");
+                    }
                     break;
                 case "Film":
                     System.out.println("Film PopUp");
+                    Film selectedFilm = (Film) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedFilm != null) {
+                        int filmId = selectedFilm.getFilmId();
+                        System.out.println("Selected actor ID: " + filmId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Film selected.");
+                    }
                     break;
                 case "FilmActor":
 //                    FilmActorDAO filmActorDAO = new FilmActorDAO();
