@@ -6,15 +6,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,9 +65,6 @@ public class MainMenuController implements Initializable {
     private TableColumn<Customer, Date> customerCreateDateCol = new TableColumn<>("Created");
     private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
-
-
-
 
 
     private TableColumn<FilmText, Integer> filmTextIdCol = new TableColumn<>("Film ID");
@@ -114,7 +117,7 @@ public class MainMenuController implements Initializable {
     private String selectedTable;
 
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
-                                                                "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
+            "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -191,20 +194,20 @@ public class MainMenuController implements Initializable {
 
     public void handleActorTable() {
         if (actorObList.size() == 0) {
-        ActorDAO actorDAO = new ActorDAO();
-        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
-        actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+            ActorDAO actorDAO = new ActorDAO();
+            actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
+            actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-        List<Actor> actorList = actorDAO.readAll();
-        actorObList.addAll(actorList);
+            List<Actor> actorList = actorDAO.readAll();
+            actorObList.addAll(actorList);
 
-        tableView.setItems(actorObList);
-        tableView.getColumns().add(actorIdCol);
-        tableView.getColumns().add(actorFirstNameCol);
-        tableView.getColumns().add(actorLastNameCol);
-        tableView.getColumns().add(actorLastUpdateCol);
+            tableView.setItems(actorObList);
+            tableView.getColumns().add(actorIdCol);
+            tableView.getColumns().add(actorFirstNameCol);
+            tableView.getColumns().add(actorLastNameCol);
+            tableView.getColumns().add(actorLastUpdateCol);
         }
     }
 
@@ -326,7 +329,7 @@ public class MainMenuController implements Initializable {
         }
     }
 
-        public void handlePaymentTable() {
+    public void handlePaymentTable() {
         if (paymentObList.size() == 0) {
             PaymentDAO paymentDAO = new PaymentDAO();
 
@@ -352,7 +355,7 @@ public class MainMenuController implements Initializable {
         }
     }
 
-        public void handleRentalTable() {
+    public void handleRentalTable() {
         if (rentalObList.size() == 0) {
             RentalDAO rentalDAO = new RentalDAO();
 
@@ -424,16 +427,95 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public void updateButtonClick(ActionEvent e) {
-        System.out.println("TestButton clicked! : " + choiceBox.getValue());
-        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+    public void updateButtonClick(ActionEvent e) throws IOException {
+        if (selectedTable != null) {
+            switch (selectedTable) {
+                case "Actor":
+                    System.out.println("Actor PopUp");
 
-        if (selectedActor != null) {
-            int actorId = selectedActor.getActorId();
-            System.out.println("Selected actor ID: " + actorId);
-        } else {
-            System.out.println("No actor selected.");
-        };
+                    Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedActor != null) {
+                        int actorId = selectedActor.getActorId();
+                        System.out.println("Selected actor ID: " + actorId);
+                        try {
+                            Stage updateStage = new Stage();
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("/com/example/databasgui_ny/updatePopups/UpdateActor.fxml"));
+                            Parent root = loader.load();
+                            Scene scene = new Scene(root);
+                            updateStage.setScene(scene);
+                            updateStage.show();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No actor selected.");
+                    }
+                    break;
+                case "Address":
+                    System.out.println("Address PopUp");
+                    Address selectedAddress = (Address) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedAddress != null) {
+                        int addressId = selectedAddress.getAddressId();
+                        System.out.println("Selected actor ID: " + addressId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateAdress.fxml";
+                            showUpdatePopup(fxmlPath);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No address selected.");
+                    }
+                    break;
+                case "City":
+                    System.out.println("City PopUp");
+                    break;
+                case "Customer":
+                    System.out.println("Customer PopUp");
+                    break;
+                case "Film":
+                    System.out.println("Film PopUp");
+                    break;
+                case "FilmActor":
+//                    FilmActorDAO filmActorDAO = new FilmActorDAO();
+                    /** Vi har ingen kopplingstabell till filmactor så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt actor iställer för en egen tabell.
+                     */
+//                    FilmActor selectedFilmActor = (FilmActor) tableView.getSelectionModel().getSelectedItem();
+//                    filmActorDAO.delete(selectedFilmActor.getActor().getActor_id());
+                    System.out.println("INTE KLAR");
+                    /** Fundera vad som ska tas bort här inne egenligen **/
+                    break;
+                case "FilmCategory":
+//                    FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+                    /** Vi har ingen kopplingstabell till FilmCategory så vi får fundera hur vi ska göra här,
+                     * De ingår i joincolumn i film samt Category iställer för en egen tabell.
+                     */
+//                    FilmCategory selectedCategory = (FilmCategory) tableView.getSelectionModel().getSelectedItem();
+//                    filmCategoryDAO.delete(selectedCategory.getCategory_id());
+                    break;
+                case "FilmText":
+                    System.out.println("FilmText PopUp");
+                    break;
+                case "Inventory":
+                    System.out.println("Inventory PopUp");
+                    break;
+                case "Payment":
+                    System.out.println("Payment PopUp");
+                    break;
+                case "Rental":
+                    System.out.println("Rental PopUp");
+                    break;
+                case "Staff":
+                    System.out.println("Staff PopUp");
+                    break;
+                case "Store":
+                    System.out.println("Store PopUp");
+                    break;
+            }
+        }
+
     }
 
     public void deleteButtonClick(ActionEvent e) {
@@ -530,6 +612,18 @@ public class MainMenuController implements Initializable {
         return selectedTable;
     }
 
+    public void showUpdatePopup(String fxmlPath) {
+        try {
+            Stage updateStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
 
-
+            loader.setLocation(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            updateStage.setScene(scene);
+            updateStage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

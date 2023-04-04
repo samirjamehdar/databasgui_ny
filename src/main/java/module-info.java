@@ -8,6 +8,7 @@ module com.example.databasgui_v2 {
 
 
     opens com.example.databasgui_ny to javafx.fxml;
+    opens com.example.databasgui_ny.updatePopups to javafx.fxml;
     opens com.example.databasgui_ny.mainGUI to javafx.fxml;
     opens com.example.databasgui_ny.entities to org.hibernate.orm.core, javafx.base;
     opens com.example.databasgui_ny.EntityMapping;
