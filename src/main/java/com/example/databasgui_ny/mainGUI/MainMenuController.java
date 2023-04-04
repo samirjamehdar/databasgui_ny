@@ -240,10 +240,10 @@ public class MainMenuController implements Initializable {
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
-            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
+            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("cityId"));
             cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
-            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country_id"));
-            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<City> cityList = cityDAO.readAll();
             cityObList.addAll(cityList);
@@ -288,6 +288,7 @@ public class MainMenuController implements Initializable {
 
 
     public void handleFilmTextTable() {
+        //* Vänta med den här tills vi vet hur vi ska hantera Entitien "film_text" */
         if (filmTextObList.size() == 0) {
             FilmTextDAO filmTextDAO = new FilmTextDAO();
 
@@ -309,10 +310,10 @@ public class MainMenuController implements Initializable {
         if (inventoryObList.size() == 0) {
             InventoryDAO inventoryDAO = new InventoryDAO();
 
-            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film_id"));
-            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
+            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
             List<Inventory> inventoryList = inventoryDAO.readAll();
             inventoryObList.addAll(inventoryList);
@@ -381,7 +382,7 @@ public class MainMenuController implements Initializable {
         if (staffObList.size() == 0) {
             StaffDAO staffDAO = new StaffDAO();
 
-            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
+            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
             staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
             staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
             staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
@@ -528,5 +529,7 @@ public class MainMenuController implements Initializable {
     public String getSelectedTable() {
         return selectedTable;
     }
+
+
 
 }

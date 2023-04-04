@@ -23,9 +23,13 @@ public class Address {
     @Column(name = "district")
     private String district;
 
+
+    /** ______________**/
     @ManyToOne
     @JoinColumn(name = "city_id")
+//    @OneToOne
     private City city;
+
 
     @Column(name = "postal_code")
     private String postalCode;
