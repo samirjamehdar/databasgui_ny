@@ -1,27 +1,18 @@
 package com.example.databasgui_ny.mainGUI;
 
-import com.example.databasgui_ny.HelloApplication;
 import com.example.databasgui_ny.dao.*;
 import com.example.databasgui_ny.entities.*;
-import com.example.databasgui_ny.popGUI.AddController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -159,14 +150,14 @@ public class MainMenuController implements Initializable {
         if (addressObList.size() == 0) {
             AddressDAO addressDAO = new AddressDAO();
 
-            addressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
+            addressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
             address1Col.setCellValueFactory(new PropertyValueFactory<>("address"));
             address2Col.setCellValueFactory(new PropertyValueFactory<>("address2"));
             addressDistrictCol.setCellValueFactory(new PropertyValueFactory<>("district"));
-            addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("cityId"));
+            addressCityIdCol.setCellValueFactory(new PropertyValueFactory<>("city_id"));
             addressPostalCol.setCellValueFactory(new PropertyValueFactory<>("postal_code"));
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+            addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
             List<Address> addressList = addressDAO.readAll();
             addressObList.addAll(addressList);
@@ -187,10 +178,10 @@ public class MainMenuController implements Initializable {
         if (cityObList.size() == 0) {
             CityDAO cityDAO = new CityDAO();
 
-            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
+            cityIdCol.setCellValueFactory(new PropertyValueFactory<>("actor_id"));
             cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
-            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("countryId"));
-            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+            cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country_id"));
+            cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
             List<City> cityList = cityDAO.readAll();
             cityObList.addAll(cityList);
@@ -207,15 +198,15 @@ public class MainMenuController implements Initializable {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
-            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
-            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
             customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
+            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
             customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
-            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("create_date"));
+            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
             List<Customer> customerList = customerDAO.readAll();
             customerObList.addAll(customerList);
@@ -234,27 +225,15 @@ public class MainMenuController implements Initializable {
     }
 
     public void updateButtonClick(ActionEvent e) {
-        if (selectedTable != null) {
-            switch (selectedTable) {
-                case "Actor":
-                    ActorDAO actorDao = new ActorDAO();
-                    Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
-                    System.out.println("DELETING ACTOR ID: " + selectedActor.getActorId());
-                    actorObList.remove(selectedActor);
-                    actorDao.delete(selectedActor.getActorId());
-                    break;
+        System.out.println("TestButton clicked! : " + choiceBox.getValue());
+        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
 
-//        System.out.println("TestButton clicked! : " + choiceBox.getValue());
-//        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
-//
-//        if (selectedActor != null) {
-//            int actorId = selectedActor.getActorId();
-//            System.out.println("Selected actor ID: " + actorId);
-//        } else {
-//            System.out.println("No actor selected.");
-//        };
-            }
-        }
+        if (selectedActor != null) {
+            int actorId = selectedActor.getActorId();
+            System.out.println("Selected actor ID: " + actorId);
+        } else {
+            System.out.println("No actor selected.");
+        };
     }
 
     public void deleteButtonClick(ActionEvent e) {
@@ -345,67 +324,7 @@ public class MainMenuController implements Initializable {
         System.out.println("TestButton clicked! :D");
         String selected = choiceBox.getValue();
         System.out.println(selected);
-
-        // Load the add_actor.fxml file as the new scene
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/add_actor.fxml"));
-            Parent root = loader.load();
-            Scene newScene = new Scene(root);
-
-            // Get the stage from the button that was clicked and set the new scene
-            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.setScene(newScene);
-            stage.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-
-        }
     }
-
-
-public void addButtonClick(ActionEvent e) throws IOException {
-    System.out.println("TestButton clicked! :D");
-    String selected = choiceBox.getValue();
-    System.out.println(selected);
-
-    // Load the add_actor.fxml file as the new scene
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_actor.fxml"));
-        //Parent root = loader.load();
-        //Scene newScene = new Scene(root);
-        Scene newScene = new Scene(loader.load());
-        // Create a new stage for the popup dialog
-        Stage popupStage = new Stage();
-        popupStage.setScene(newScene);
-
-        // Set the modality of the popup stage to be APPLICATION_MODAL
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-
-        // Show the popup stage and wait for it to be closed
-        popupStage.showAndWait();
-
-    } catch (IOException ex) {
-        ex.printStackTrace();
-
-    }
-    System.out.println("hejehejhre");
-}
-    public void addPopup(String fxmlPath) {
-        try {
-            Stage updateStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            updateStage.setScene(scene);
-            updateStage.show();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
-
 
     public String getSelectedTable() {
         return selectedTable;
