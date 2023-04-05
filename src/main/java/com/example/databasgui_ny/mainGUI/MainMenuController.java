@@ -26,19 +26,26 @@ import javafx.stage.Stage;
 import org.locationtech.jts.geom.Point;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
     private Button MainMenu_Update;
     @FXML
+    private Button addButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button updateButton;
+    @FXML
     private ChoiceBox<String> choiceBox = new ChoiceBox();
-
     @FXML
     private TableView tableView;
     private TableColumn<InventoryEntity, Integer> inventoryIdCol = new TableColumn<>("Inventory ID");
@@ -56,6 +63,8 @@ public class MainMenuController implements Initializable {
         choiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             tableView.getColumns().clear();
             tableView.getItems().clear();
+            addButton.setDisable(false);
+            deleteButton.setDisable(false);
             switch (newValue) {
                 case "Actor":
                     selectedTable = "Actor";
@@ -64,6 +73,8 @@ public class MainMenuController implements Initializable {
                 case "Address":
                     selectedTable = "Address";
                     handleAddressTable();
+                    addButton.setDisable(true);
+                    deleteButton.setDisable(true);
                     break;
                 case "City":
                     selectedTable = "City";
@@ -75,8 +86,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     selectedTable = "Film";
-//                    handleFilmTable();
-                    System.out.println("Film is selected, refresh the table to actor values");
+                    handleFilmTable();
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
@@ -121,12 +131,12 @@ public class MainMenuController implements Initializable {
         TableColumn<ActorEntity, String> actorFirstNameCol = new TableColumn<>("First Name");
         TableColumn<ActorEntity, String> actorLastNameCol = new TableColumn<>("Last Name");
         TableColumn<ActorEntity, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
-        ObservableList<ActorEntity> actorObList = FXCollections.observableArrayList();
-        ActorDAO actorDAO = new ActorDAO();
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
         actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        ObservableList<ActorEntity> actorObList = FXCollections.observableArrayList();
+        ActorDAO actorDAO = new ActorDAO();
         List<ActorEntity> actorList = actorDAO.readAll();
         actorObList.addAll(actorList);
         tableView.setItems(actorObList);
@@ -134,7 +144,6 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(actorFirstNameCol);
         tableView.getColumns().add(actorLastNameCol);
         tableView.getColumns().add(actorLastUpdateCol);
-
     }
 
     public void handleAddressTable() {
@@ -149,8 +158,6 @@ public class MainMenuController implements Initializable {
         TableColumn<AddressEntity, String> addressPhoneCol = new TableColumn<>("Phone");
         TableColumn<AddressEntity, Point> addressLocationCol = new TableColumn<>("Location");
         TableColumn<AddressEntity, Timestamp> addressLastUpdateCol = new TableColumn<>("Last Update");
-        ObservableList<AddressEntity> addressObList = FXCollections.observableArrayList();
-        AddressDAO addressDAO = new AddressDAO();
         addressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
         address1Col.setCellValueFactory(new PropertyValueFactory<>("address"));
         address2Col.setCellValueFactory(new PropertyValueFactory<>("address2"));
@@ -164,6 +171,8 @@ public class MainMenuController implements Initializable {
             StringProperty cityIdProp = new SimpleStringProperty(city.getCity());
             return cityIdProp;
         });
+        ObservableList<AddressEntity> addressObList = FXCollections.observableArrayList();
+        AddressDAO addressDAO = new AddressDAO();
         List<AddressEntity> addressList = addressDAO.readAll();
         addressObList.addAll(addressList);
         tableView.setItems(addressObList);
@@ -185,12 +194,12 @@ public class MainMenuController implements Initializable {
         TableColumn<CityEntity, String> cityNameCol = new TableColumn<>("City");
         TableColumn<CityEntity, Integer> cityCountryIdCol = new TableColumn<>("Country Id");
         TableColumn<CityEntity, Timestamp> cityLastUpdateCol = new TableColumn<>("Last Update");
-        ObservableList<CityEntity> cityObList = FXCollections.observableArrayList();
-        CityDAO cityDAO = new CityDAO();
         cityIdCol.setCellValueFactory(new PropertyValueFactory<>("cityId"));
         cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
         cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("countryId"));
         cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        ObservableList<CityEntity> cityObList = FXCollections.observableArrayList();
+        CityDAO cityDAO = new CityDAO();
         List<CityEntity> cityList = cityDAO.readAll();
         cityObList.addAll(cityList);
         tableView.setItems(cityObList);
@@ -212,8 +221,6 @@ public class MainMenuController implements Initializable {
         TableColumn<CustomerEntity, String> customerActiveCol = new TableColumn<>("Active");
         TableColumn<CustomerEntity, Timestamp> customerCreateDateCol = new TableColumn<>("Created");
         TableColumn<CustomerEntity, Timestamp> customerLastUpdateCol = new TableColumn<>("Last Update");
-        ObservableList<CustomerEntity> customerObList = FXCollections.observableArrayList();
-        CustomerDAO customerDAO = new CustomerDAO();
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
         customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -227,6 +234,8 @@ public class MainMenuController implements Initializable {
             IntegerProperty addressIdProp = new SimpleIntegerProperty(address.getAddressId());
             return addressIdProp.asObject();
         });
+        ObservableList<CustomerEntity> customerObList = FXCollections.observableArrayList();
+        CustomerDAO customerDAO = new CustomerDAO();
         List<CustomerEntity> customerList = customerDAO.readAll();
         customerObList.addAll(customerList);
         tableView.setItems(customerObList);
@@ -241,6 +250,51 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(customerLastUpdateCol);
     }
 
+    public void handleFilmTable() {
+        tableView.getColumns().clear();
+        tableView.getItems().clear();
+        TableColumn<FilmEntity, Integer> filmIdCol = new TableColumn<>("Film ID");
+        TableColumn<FilmEntity, String> filmTitleCol = new TableColumn<>("Title");
+        TableColumn<FilmEntity, String> filmDescCol = new TableColumn<>("Description");
+        TableColumn<FilmEntity, Integer> filmRelease = new TableColumn<>("Release Year");
+        TableColumn<FilmEntity, Object> filmLanguageId = new TableColumn<>("Language ID");
+        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Rental Duration");
+        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Rental Rate");
+        TableColumn<FilmEntity, Integer> filmLength = new TableColumn<>("Length");
+        TableColumn<FilmEntity, BigDecimal> filmReplCost = new TableColumn<>("Replacement Cost");
+        TableColumn<FilmEntity, Object> filmRating = new TableColumn<>("Rating");
+        TableColumn<FilmEntity, Object> filmSpecial = new TableColumn<>("Special Features");
+        TableColumn<FilmEntity, Timestamp> filmLastUpdate = new TableColumn<>("Last Update");
+        filmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+        filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        filmDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        filmRelease.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+        filmLanguageId.setCellValueFactory(new PropertyValueFactory<>("languageId"));
+        filmRentalDur.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+        filmRentalRate.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+        filmLength.setCellValueFactory(new PropertyValueFactory<>("length"));
+        filmReplCost.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
+        filmRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        filmSpecial.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+        filmLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        ObservableList<FilmEntity> filmObList = FXCollections.observableArrayList();
+        FilmDAO filmDAO = new FilmDAO();
+        List<FilmEntity> filmList = filmDAO.readAll();
+        filmObList.setAll(filmList);
+        tableView.setItems(filmObList);
+        tableView.getColumns().add(filmIdCol);
+        tableView.getColumns().add(filmTitleCol);
+        tableView.getColumns().add(filmDescCol);
+        tableView.getColumns().add(filmRelease);
+        tableView.getColumns().add(filmLanguageId);
+        tableView.getColumns().add(filmRentalDur);
+        tableView.getColumns().add(filmRentalRate);
+        tableView.getColumns().add(filmLength);
+        tableView.getColumns().add(filmReplCost);
+        tableView.getColumns().add(filmRating);
+        tableView.getColumns().add(filmSpecial);
+        tableView.getColumns().add(filmLastUpdate);
+    }
 
 
     public void updateButtonClick(ActionEvent e) {
