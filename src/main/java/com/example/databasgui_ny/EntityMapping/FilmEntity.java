@@ -1,13 +1,12 @@
 package com.example.databasgui_ny.EntityMapping;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "film", schema = "sakila", catalog = "")
+@Table(name = "film", schema = "sakila")
 public class FilmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,7 +20,7 @@ public class FilmEntity {
     private String description;
     @Basic
     @Column(name = "release_year", nullable = true)
-    private Object releaseYear;
+    private int releaseYear;
     @Basic
     @Column(name = "language_id", nullable = false)
     private Object languageId;
@@ -30,7 +29,7 @@ public class FilmEntity {
     private Object originalLanguageId;
     @Basic
     @Column(name = "rental_duration", nullable = false)
-    private Object rentalDuration;
+    private int rentalDuration;
     @Basic
     @Column(name = "rental_rate", nullable = false, precision = 2)
     private BigDecimal rentalRate;
@@ -49,6 +48,24 @@ public class FilmEntity {
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+
+    public FilmEntity(String title, String description, int releaseYear, int rentalDuration,
+                      double rentalRate, double replacementCost, Timestamp lastUpdate) {
+        BigDecimal rentalRateDec = BigDecimal.valueOf(rentalRate);
+        BigDecimal replaceMentDec = BigDecimal.valueOf(replacementCost);
+        this.languageId = 1;
+        this.title = title;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.rentalDuration = rentalDuration;
+        this.rentalRate = rentalRateDec;
+        this.replacementCost = replaceMentDec;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public FilmEntity() {
+
+    }
 
     public int getFilmId() {
         return filmId;
@@ -74,11 +91,11 @@ public class FilmEntity {
         this.description = description;
     }
 
-    public Object getReleaseYear() {
+    public int getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Object releaseYear) {
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -98,11 +115,11 @@ public class FilmEntity {
         this.originalLanguageId = originalLanguageId;
     }
 
-    public Object getRentalDuration() {
+    public int getRentalDuration() {
         return rentalDuration;
     }
 
-    public void setRentalDuration(Object rentalDuration) {
+    public void setRentalDuration(int rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
@@ -165,5 +182,24 @@ public class FilmEntity {
     @Override
     public int hashCode() {
         return Objects.hash(filmId, title, description, releaseYear, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures, lastUpdate);
+    }
+
+    @Override
+    public String toString() {
+        return "FilmEntity{" +
+                "filmId=" + filmId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", languageId=" + languageId +
+                ", originalLanguageId=" + originalLanguageId +
+                ", rentalDuration=" + rentalDuration +
+                ", rentalRate=" + rentalRate +
+                ", length=" + length +
+                ", replacementCost=" + replacementCost +
+                ", rating=" + rating +
+                ", specialFeatures=" + specialFeatures +
+                ", lastUpdate=" + lastUpdate +
+                '}';
     }
 }

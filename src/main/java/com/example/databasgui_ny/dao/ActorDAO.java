@@ -63,15 +63,16 @@ public class ActorDAO implements DAO<ActorEntity> {
             for (FilmActorEntity filmActorEntity: filmActorEntityList) {
                 session.remove(filmActorEntity);
             }
+            Query quer2 = session.createQuery("FROM ActorEntity where actorId = " + id);
+            ActorEntity actorEntity = (ActorEntity) quer2.uniqueResult();
+            session.remove(actorEntity);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Denna användare är inte kopplat till någon film och tas bort direkt");
-        }
-
-        Query quer2 = session.createQuery("FROM ActorEntity where actorId = " + id);
-        ActorEntity actorEntity = (ActorEntity) quer2.uniqueResult();
-        session.remove(actorEntity);
+            System.out.println("An error occured while saving actor");
+        } finally {
         session.getTransaction().commit();
         session.close();
+        }
+
     }
 
     public void displayActors() {

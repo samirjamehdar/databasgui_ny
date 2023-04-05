@@ -40,7 +40,6 @@ public class TestingActorEntityCrud {
         /*
             Ändra på idToRemove till den actor_id som ska tas bort
          */
-
         int idToRemove = 201;
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -135,6 +134,5 @@ public class TestingActorEntityCrud {
         session.close();
         assertTrue(true);
     }
-
 
 }
