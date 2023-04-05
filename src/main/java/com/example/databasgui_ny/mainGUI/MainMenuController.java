@@ -210,27 +210,14 @@ public class MainMenuController implements Initializable {
     public void handleCustomerTable() {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
-
-//            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-//            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-//            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-//            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-//            customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-//            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-//            customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-//            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("create_date"));
-//            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-
             customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
             customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-//            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
             customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
             customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
-
             customerAddressIdCol.setCellValueFactory(cellData -> {
                 SimpleStringProperty addressId = new SimpleStringProperty();
                 AddressEntity address = cellData.getValue().getAddress();
