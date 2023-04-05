@@ -2,6 +2,7 @@ package com.example.databasgui_ny.mainGUI;
 
 import com.example.databasgui_ny.dao.*;
 import com.example.databasgui_ny.entities.*;
+import com.example.databasgui_ny.popGUI.UpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -480,24 +481,18 @@ public class MainMenuController implements Initializable {
             switch (selectedTable) {
                 case "Actor":
                     System.out.println("Actor PopUp");
-
                     Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
                     if (selectedActor != null) {
                         int actorId = selectedActor.getActorId();
-                        System.out.println("Selected actor ID: " + actorId);
+                        System.out.println("Selected Actor ID: " + actorId);
                         try {
-                            Stage updateStage = new Stage();
-                            FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("/com/example/databasgui_ny/updatePopups/UpdateActor.fxml"));
-                            Parent root = loader.load();
-                            Scene scene = new Scene(root);
-                            updateStage.setScene(scene);
-                            updateStage.show();
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateActor.fxml";
+                            showUpdatePopup(fxmlPath,selectedActor);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
                     } else {
-                        System.out.println("No actor selected.");
+                        System.out.println("No Actor selected.");
                     }
                     break;
                 case "Address":
@@ -512,14 +507,13 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected City ID: " + cityId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath,selectedCity);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
                     } else {
                         System.out.println("No City selected.");
                     }
-
                     break;
                 case "Customer":
                     System.out.println("Customer PopUp");
@@ -529,7 +523,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Customer ID: " + customerId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCustomer.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedCustomer);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -545,7 +539,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Film ID: " + filmId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedFilm);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -595,7 +589,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Inventory ID: " + inventoryId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedInventory);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -611,7 +605,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Payment ID: " + paymentId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedPayment);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -627,7 +621,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Rental ID: " + rentalId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateRental.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedRental);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -643,7 +637,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Staff ID: " + staffId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStaff.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedStaff);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -659,7 +653,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Store ID: " + storeId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStore.fxml";
-                            showUpdatePopup(fxmlPath);
+                            showUpdatePopup(fxmlPath, selectedStore);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -755,7 +749,6 @@ public class MainMenuController implements Initializable {
         }
     }
 
-
     public void testButtonClick(ActionEvent e) {
         System.out.println("TestButton clicked! :D");
         String selected = choiceBox.getValue();
@@ -766,12 +759,14 @@ public class MainMenuController implements Initializable {
         return selectedTable;
     }
 
-    public void showUpdatePopup(String fxmlPath) {
+    public void showUpdatePopup(String fxmlPath, Object selectedCustomer) {
         try {
             Stage updateStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+            UpdateController updateController = loader.getController();
+            updateController.setSelectedObject(selectedCustomer);
             Scene scene = new Scene(root);
             updateStage.setScene(scene);
             updateStage.show();

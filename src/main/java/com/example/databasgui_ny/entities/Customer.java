@@ -1,6 +1,8 @@
 package com.example.databasgui_ny.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -34,10 +36,10 @@ public class Customer {
     private boolean active;
 
     @Column(name = "create_date")
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @Column(name = "last_update")
-    private LocalDateTime lastUpdate;
+    private LocalDate lastUpdate;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rental> rentals;
@@ -48,7 +50,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Store store, String firstName, String lastName, String email, Address address, boolean active, LocalDateTime createDate, LocalDateTime lastUpdate) {
+    public Customer(Store store, String firstName, String lastName, String email, Address address, boolean active, LocalDate createDate, LocalDate lastUpdate) {
         this.store = store;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,19 +117,19 @@ public class Customer {
         this.active = active;
     }
 
-    public LocalDateTime getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getLastUpdate() {
+    public LocalDate getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
+    public void setLastUpdate(LocalDate lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -146,4 +148,6 @@ public class Customer {
     public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
+
+
 }

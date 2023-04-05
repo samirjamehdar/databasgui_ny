@@ -9,12 +9,12 @@ import org.hibernate.query.Query;
 import com.example.databasgui_ny.entities.Address;
 import java.util.List;
 
-public class AddressDAO implements DAO<AddressEntity> {
+public class AddressDAO implements DAO<Address> {
 
 
 
         @Override
-        public void create(AddressEntity address) {
+        public void create(Address address) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
@@ -24,27 +24,27 @@ public class AddressDAO implements DAO<AddressEntity> {
         }
 
         @Override
-        public List<AddressEntity> readAll() {
+        public List<Address> readAll() {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            Query<AddressEntity> query = session.createQuery("FROM AddressEntity ", AddressEntity.class);
-            List<AddressEntity> address = query.list();
+            Query<Address> query = session.createQuery("FROM Address ", Address.class);
+            List<Address> address = query.list();
             session.close();
             return address;
         }
 
         @Override
-        public AddressEntity read(int id) {
+        public Address read(int id) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
-            AddressEntity address = session.get(AddressEntity.class, id);
+            Address address = session.get(Address.class, id);
             session.close();
             return address;
         }
 
         @Override
-        public boolean update(AddressEntity address) {
+        public boolean update(Address address) {
             SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.getTransaction().begin();
@@ -67,12 +67,12 @@ public class AddressDAO implements DAO<AddressEntity> {
             session.close();
         }
 
-        public void displayAddress() {
-            List<AddressEntity> addressList = readAll();
-            for (AddressEntity address : addressList) {
-                System.out.println(address.toString());
-            }
-        }
+//        public void displayAddress() {
+//            List<AddressEntity> addressList = readAll();
+//            for (AddressEntity address : addressList) {
+//                System.out.println(address.toString());
+//            }
+//        }
 
     }
 

@@ -1,7 +1,8 @@
 package com.example.databasgui_ny.dao;
 
-import com.example.databasgui_ny.EntityMapping.ActorEntity;
+
 import com.example.databasgui_ny.EntityMapping.FilmActorEntity;
+import com.example.databasgui_ny.entities.Actor;
 import com.example.databasgui_ny.repositories.DAO;
 import com.example.databasgui_ny.util.SessionFactorySingleton;
 import org.hibernate.Session;
@@ -9,10 +10,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import java.util.List;
 
-public class ActorDAO implements DAO<ActorEntity> {
+public class ActorDAO implements DAO<Actor> {
 
     @Override
-    public void create(ActorEntity actor) {
+    public void create(Actor actor) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -22,27 +23,27 @@ public class ActorDAO implements DAO<ActorEntity> {
     }
 
     @Override
-    public List<ActorEntity> readAll() {
+    public List<Actor> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<ActorEntity> query = session.createQuery("FROM ActorEntity ", ActorEntity.class);
-        List<ActorEntity> actors = query.list();
+        Query<Actor> query = session.createQuery("FROM Actor ", Actor.class);
+        List<Actor> actors = query.list();
         session.close();
         return actors;
     }
 
     @Override
-    public ActorEntity read(int id) {
+    public Actor read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        ActorEntity actor = session.get(ActorEntity.class, id);
+        Actor actor = session.get(Actor.class, id);
         session.close();
         return actor;
     }
 
     @Override
-    public boolean update(ActorEntity actor) {
+    public boolean update(Actor actor) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -67,18 +68,18 @@ public class ActorDAO implements DAO<ActorEntity> {
             System.out.println("Denna användare är inte kopplat till någon film och tas bort direkt");
         }
 
-        Query quer2 = session.createQuery("FROM ActorEntity where actorId = " + id);
-        ActorEntity actorEntity = (ActorEntity) quer2.uniqueResult();
-        session.remove(actorEntity);
+        Query quer2 = session.createQuery("FROM Actor where actorId = " + id);
+        Actor actor = (Actor) quer2.uniqueResult();
+        session.remove(actor);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void displayActors() {
-        List<ActorEntity> actors = readAll();
-        for (ActorEntity actor : actors) {
-            System.out.println(actor.toString());
-        }
-    }
+//    public void displayActors() {
+//        List<Actor> actors = readAll();
+//        for (Actor actor : actors) {
+//            System.out.println(actor.toString());
+//        }
+//    }
 
 }
