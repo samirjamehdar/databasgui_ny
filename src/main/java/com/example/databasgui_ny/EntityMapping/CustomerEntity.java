@@ -1,12 +1,13 @@
 package com.example.databasgui_ny.EntityMapping;
 
+import com.example.databasgui_ny.entities.Address;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customer", schema = "sakila", catalog = "")
+@Table(name = "customer", schema = "sakila")
 public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,7 +15,7 @@ public class CustomerEntity {
     private int customerId;
     @Basic
     @Column(name = "store_id", nullable = false)
-    private Object storeId;
+    private int storeId;
     @Basic
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
@@ -25,9 +26,18 @@ public class CustomerEntity {
     @Column(name = "email", nullable = true, length = 50)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
     @JoinColumn(name = "address_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
     private AddressEntity address;
+
+    @Transient
+    private Integer addressId;
+
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "address_id")
+//    private AddressEntity address;
+
+
     @Basic
     @Column(name = "active", nullable = false)
     private byte active;
@@ -38,6 +48,23 @@ public class CustomerEntity {
     @Column(name = "last_update", nullable = true)
     private Timestamp lastUpdate;
 
+
+    public CustomerEntity(String firstName, String lastName, String email, AddressEntity address, byte active, int storeId, Timestamp createDate) {
+        this.storeId = storeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.active = active;
+        this.createDate = createDate;
+    }
+
+
+
+    public CustomerEntity() {
+        
+    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -46,11 +73,11 @@ public class CustomerEntity {
         this.customerId = customerId;
     }
 
-    public Object getStoreId() {
+    public int getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Object storeId) {
+    public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
 
@@ -78,12 +105,16 @@ public class CustomerEntity {
         this.email = email;
     }
 
-    public AddressEntity getAddressId() {
+    public AddressEntity getAddress() {
         return address;
     }
 
-    public void setAddressId(AddressEntity addressId) {
+    public void setAddress(AddressEntity addressId) {
         this.address = addressId;
+    }
+
+    public Integer getAddressId() {
+        return getAddress().getAddressId();
     }
 
     public byte getActive() {

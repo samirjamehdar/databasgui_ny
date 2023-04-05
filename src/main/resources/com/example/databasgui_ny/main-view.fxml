@@ -17,7 +17,7 @@
             <HBox prefHeight="99.0" prefWidth="1251.0" spacing="20.0">
                <children>
                   <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButtonClick" prefHeight="45.0" prefWidth="159.0" text="Update Selected" />
-                  <Button fx:id="addButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Add" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonClick" prefHeight="45.0" prefWidth="159.0" text="Add" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClick" prefHeight="45.0" prefWidth="159.0" text="Delete Selected" />
                   <Button fx:id="testButton" mnemonicParsing="false" onAction="#testButtonClick" prefHeight="59.0" prefWidth="470.0" text="Test Button" />
                </children>
