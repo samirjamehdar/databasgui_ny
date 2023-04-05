@@ -17,7 +17,7 @@ public class InventoryEntity {
     private Object filmId;
     @Basic
     @Column(name = "store_id", nullable = false)
-    private Object storeId;
+    private int storeId;
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
@@ -38,11 +38,11 @@ public class InventoryEntity {
         this.filmId = filmId;
     }
 
-    public Object getStoreId() {
+    public int getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Object storeId) {
+    public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
 

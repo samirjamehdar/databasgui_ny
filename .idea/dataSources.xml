@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="89516e42-9718-4a16-a70d-bc0ee3639a16">
+    <data-source source="LOCAL" name="sakila@localhost" uuid="61f4faa7-25e7-4005-b1c3-d67fd4b57943">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-C:/Users/maxek/Desktop/databasgui_ny/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost/sakila?serverTimezone=UTC</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/sakila</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
