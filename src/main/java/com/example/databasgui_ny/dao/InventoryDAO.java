@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.dao;
 
+import com.example.databasgui_ny.EntityMapping.InventoryEntity;
 import com.example.databasgui_ny.entities.Inventory;
 import com.example.databasgui_ny.repositories.DAO;
 import com.example.databasgui_ny.util.SessionFactorySingleton;
@@ -9,10 +10,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class InventoryDAO implements DAO<Inventory> {
+public class InventoryDAO implements DAO<InventoryEntity> {
 
     @Override
-    public void create(Inventory inventory) {
+    public void create(InventoryEntity inventory) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -22,27 +23,27 @@ public class InventoryDAO implements DAO<Inventory> {
     }
 
     @Override
-    public List<Inventory> readAll() {
+    public List<InventoryEntity> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Inventory> query = session.createQuery("FROM Inventory", Inventory.class);
-        List<Inventory> inventoryList = query.list();
+        Query<InventoryEntity> query = session.createQuery("FROM InventoryEntity ", InventoryEntity.class);
+        List<InventoryEntity> inventoryList = query.list();
         session.close();
         return inventoryList;
     }
 
     @Override
-    public Inventory read(int id) {
+    public InventoryEntity read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Inventory inventory = session.get(Inventory.class, id);
+        InventoryEntity inventory = session.get(InventoryEntity.class, id);
         session.close();
         return inventory;
     }
 
     @Override
-    public boolean update(Inventory inventory) {
+    public boolean update(InventoryEntity inventory) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -58,7 +59,7 @@ public class InventoryDAO implements DAO<Inventory> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Inventory inventory = session.get(Inventory.class, id);
+        InventoryEntity inventory = session.get(InventoryEntity.class, id);
         if (inventory != null) {
             session.delete(inventory);
         }
@@ -67,8 +68,8 @@ public class InventoryDAO implements DAO<Inventory> {
     }
 
     public void displayInvetories() {
-        List<Inventory> inventoryList = readAll();
-        for (Inventory inventory : inventoryList) {
+        List<InventoryEntity> inventoryList = readAll();
+        for (InventoryEntity inventory : inventoryList) {
             System.out.println(inventory.toString());
         }
     }

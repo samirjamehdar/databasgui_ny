@@ -1,12 +1,13 @@
 package com.example.databasgui_ny.EntityMapping;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "inventory", schema = "sakila", catalog = "")
+@Table(name = "inventory", schema = "sakila")
 public class InventoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,13 +15,24 @@ public class InventoryEntity {
     private int inventoryId;
     @Basic
     @Column(name = "film_id", nullable = false)
-    private Object filmId;
+    private int filmId;
     @Basic
     @Column(name = "store_id", nullable = false)
     private int storeId;
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+
+
+    public InventoryEntity(int filmId, int storeId, Timestamp lastUpdate) {
+        this.filmId = filmId;
+        this.storeId = storeId;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public InventoryEntity() {
+
+    }
 
     public int getInventoryId() {
         return inventoryId;
@@ -30,11 +42,11 @@ public class InventoryEntity {
         this.inventoryId = inventoryId;
     }
 
-    public Object getFilmId() {
+    public int getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(Object filmId) {
+    public void setFilmId(int filmId) {
         this.filmId = filmId;
     }
 
