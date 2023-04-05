@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -9,19 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.databasgui_ny.popGUI.AddController">
    <children>
-      <TextField layoutX="40.0" layoutY="85.0" />
-      <TextField layoutX="40.0" layoutY="141.0" />
-      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add City" wrappingWidth="149.0">
+      <TextField layoutX="40.0" layoutY="87.0" />
+      <Text layoutX="231.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lägg till stad" textAlignment="CENTER" wrappingWidth="149.0">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City ID:" wrappingWidth="131.13671875" />
-      <Text layoutX="40.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:" wrappingWidth="131.13671875" />
-      <Text layoutX="40.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last update:" wrappingWidth="131.13671875" />
-      <Button fx:id="confirmAddCityButton" layoutX="245.0" layoutY="329.0" mnemonicParsing="false" onAction="#confirmButtonOnClick" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
-      <DatePicker layoutX="40.0" layoutY="256.0" />
-      <TextField layoutX="40.0" layoutY="200.0" />
-      <Text layoutX="40.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country ID:" wrappingWidth="131.13671875" />
+      <Text layoutX="40.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stad:" wrappingWidth="131.13671875" />
+      <Button fx:id="confirmAddCityButton" layoutX="245.0" layoutY="329.0" mnemonicParsing="false" onAction="#confirmButtonOnClick" prefHeight="49.0" prefWidth="120.0" text="Bekräfta" />
    </children>
 </AnchorPane>
