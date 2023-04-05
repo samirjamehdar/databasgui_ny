@@ -7,31 +7,15 @@
     <session-factory>
         <!--Här är properties för att konfigurera mot vår databas  -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/sakila</property>
+        <property name="connection.url">jdbc:mysql://localhost/sakila?serverTimezone=UTC</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">9907</property>
+        <property name="connection.password">Andersl_10!</property>
         <property name="connection.pool_size">3</property>
 <!--        <property name="current_session_context_class">thread</property>-->
         <property name="show_sql">true</property>
         <property name="format_sql">false</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="com.example.databasgui_ny.EntityMapping.ActorEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.AddressEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.CategoryEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.CityEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.CountryEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.CustomerEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.FilmEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.FilmActorEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.FilmCategoryEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.FilmTextEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.InventoryEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.LanguageEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.PaymentEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.RentalEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.StaffEntity"/>
-        <mapping class="com.example.databasgui_ny.EntityMapping.StoreEntity"/>
 
         <!-- Här configgar vi vilka klasser som ska mappas motsvarande tabell i databasen -->
         <mapping class="com.example.databasgui_ny.entities.Actor"/>
@@ -47,7 +31,9 @@
         <mapping class="com.example.databasgui_ny.entities.Payment"/>
         <mapping class="com.example.databasgui_ny.entities.Staff"/>
         <mapping class="com.example.databasgui_ny.entities.Store"/>
-<!--                 HÄR BÖRJAR JAG TESTA REVERSE-ENGINEERING FUNCTION-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Film_actor"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.FilmText" />-->
+
 
     </session-factory>
 </hibernate-configuration>

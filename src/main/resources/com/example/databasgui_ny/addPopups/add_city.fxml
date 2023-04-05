@@ -11,7 +11,7 @@
    <children>
       <TextField layoutX="40.0" layoutY="85.0" />
       <TextField layoutX="40.0" layoutY="141.0" />
-      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add" wrappingWidth="149.0">
+      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add City" wrappingWidth="149.0">
          <font>
             <Font size="25.0" />
          </font>
@@ -19,7 +19,7 @@
       <Text layoutX="40.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City ID:" wrappingWidth="131.13671875" />
       <Text layoutX="40.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:" wrappingWidth="131.13671875" />
       <Text layoutX="40.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last update:" wrappingWidth="131.13671875" />
-      <Button layoutX="245.0" layoutY="329.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
+      <Button fx:id="confirmAddCityButton" layoutX="245.0" layoutY="329.0" mnemonicParsing="false" onAction="#confirmButtonOnClick" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
       <DatePicker layoutX="40.0" layoutY="256.0" />
       <TextField layoutX="40.0" layoutY="200.0" />
       <Text layoutX="40.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country ID:" wrappingWidth="131.13671875" />
