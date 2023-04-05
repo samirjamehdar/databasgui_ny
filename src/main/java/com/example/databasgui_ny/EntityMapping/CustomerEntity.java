@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customer", schema = "sakila", catalog = "")
+@Table(name = "customer", schema = "sakila")
 public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,7 +14,7 @@ public class CustomerEntity {
     private int customerId;
     @Basic
     @Column(name = "store_id", nullable = false)
-    private Object storeId;
+    private int storeId;
     @Basic
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
@@ -38,6 +38,21 @@ public class CustomerEntity {
     @Column(name = "last_update", nullable = true)
     private Timestamp lastUpdate;
 
+
+    public CustomerEntity(String firstName, String lastName, String email, AddressEntity address, byte active, int storeId, Timestamp createDate) {
+        this.storeId = storeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.active = active;
+        this.createDate = createDate;
+    }
+
+    public CustomerEntity() {
+        
+    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -46,11 +61,11 @@ public class CustomerEntity {
         this.customerId = customerId;
     }
 
-    public Object getStoreId() {
+    public int getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Object storeId) {
+    public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
 
@@ -78,11 +93,11 @@ public class CustomerEntity {
         this.email = email;
     }
 
-    public AddressEntity getAddressId() {
+    public AddressEntity getAddress() {
         return address;
     }
 
-    public void setAddressId(AddressEntity addressId) {
+    public void setAddress(AddressEntity addressId) {
         this.address = addressId;
     }
 

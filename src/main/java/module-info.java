@@ -4,6 +4,7 @@ module com.example.databasgui_v2 {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;
+    requires org.locationtech.jts;
     requires junit;
 
 

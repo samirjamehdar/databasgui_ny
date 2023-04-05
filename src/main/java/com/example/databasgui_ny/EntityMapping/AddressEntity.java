@@ -2,12 +2,17 @@ package com.example.databasgui_ny.EntityMapping;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+
 
 @Entity
-@Table(name = "address", schema = "sakila", catalog = "")
-public class AddressEntity {
+@Table(name = "address", schema = "sakila")
+public class AddressEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "address_id", nullable = false)
@@ -21,9 +26,11 @@ public class AddressEntity {
     @Basic
     @Column(name = "district", nullable = false, length = 20)
     private String district;
-    @Basic
-    @Column(name = "city_id", nullable = false)
-    private Object cityId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id")
+    private CityEntity city;
+
     @Basic
     @Column(name = "postal_code", nullable = true, length = 10)
     private String postalCode;
@@ -32,13 +39,33 @@ public class AddressEntity {
     private String phone;
     @Basic
     @Column(name = "location", nullable = false)
-    private Object location;
+    private Point location;
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
-    @Basic
-    @Column(name = "city_city_id", nullable = true)
-    private Integer cityCityId;
+//    @Basic
+//    @Column(name = "city_city_id", nullable = true)
+//    private Integer cityCityId;
+
+//    @Transient
+//    GeometryFactory geometryFactory = new GeometryFactory();
+
+    public AddressEntity(String address, String address2, String district,
+                         CityEntity city, String postalCode, String phone, Timestamp lastUpdate) {
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.city = city;
+        GeometryFactory geometryFactory = new GeometryFactory();
+        this.location = geometryFactory.createPoint( new Coordinate(10.0, 5.0));
+        this.lastUpdate = lastUpdate;
+    }
+
+    public AddressEntity() {
+
+    }
 
     public Integer getAddressId() {
         return addressId;
@@ -72,12 +99,12 @@ public class AddressEntity {
         this.district = district;
     }
 
-    public Object getCityId() {
-        return cityId;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setCityId(Object cityId) {
-        this.cityId = cityId;
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 
     public String getPostalCode() {
@@ -96,12 +123,13 @@ public class AddressEntity {
         this.phone = phone;
     }
 
-    public Object getLocation() {
+    public Point getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
-        this.location = location;
+    public void setLocation() {
+        GeometryFactory geometryFactory = new GeometryFactory();
+        this.location = geometryFactory.createPoint(new Coordinate(10, 5));
     }
 
     public Timestamp getLastUpdate() {
@@ -112,26 +140,6 @@ public class AddressEntity {
         this.lastUpdate = lastUpdate;
     }
 
-    public Integer getCityCityId() {
-        return cityCityId;
-    }
-
-    public void setCityCityId(Integer cityCityId) {
-        this.cityCityId = cityCityId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AddressEntity that = (AddressEntity) o;
-        return Objects.equals(addressId, that.addressId) && Objects.equals(address, that.address) && Objects.equals(address2, that.address2) && Objects.equals(district, that.district) && Objects.equals(cityId, that.cityId) && Objects.equals(postalCode, that.postalCode) && Objects.equals(phone, that.phone) && Objects.equals(location, that.location) && Objects.equals(lastUpdate, that.lastUpdate) && Objects.equals(cityCityId, that.cityCityId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(addressId, address, address2, district, cityId, postalCode, phone, location, lastUpdate, cityCityId);
-    }
 
     @Override
     public String toString() {
@@ -140,12 +148,11 @@ public class AddressEntity {
                 ", address='" + address + '\'' +
                 ", address2='" + address2 + '\'' +
                 ", district='" + district + '\'' +
-                ", cityId=" + cityId +
+                ", cityId=" + city +
                 ", postalCode='" + postalCode + '\'' +
                 ", phone='" + phone + '\'' +
                 ", location=" + location +
                 ", lastUpdate=" + lastUpdate +
-                ", cityCityId=" + cityCityId +
                 '}';
     }
 }

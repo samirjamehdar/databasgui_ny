@@ -1,7 +1,6 @@
 package com.example.databasgui_ny.EntityMapping;
 
 import jakarta.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -17,10 +16,20 @@ public class CityEntity {
     private String city;
     @Basic
     @Column(name = "country_id", nullable = false)
-    private Object countryId;
+    private int countryId;
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+
+    public CityEntity(String city, int countryId, Timestamp lastUpdate) {
+        this.city = city;
+        this.countryId = countryId;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public CityEntity() {
+
+    }
 
     public int getCityId() {
         return cityId;
@@ -38,11 +47,11 @@ public class CityEntity {
         this.city = city;
     }
 
-    public Object getCountryId() {
+    public int getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(Object countryId) {
+    public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
 
@@ -65,5 +74,15 @@ public class CityEntity {
     @Override
     public int hashCode() {
         return Objects.hash(cityId, city, countryId, lastUpdate);
+    }
+
+    @Override
+    public String toString() {
+        return "CityEntity{" +
+                "cityId=" + cityId +
+                ", city='" + city + '\'' +
+                ", countryId=" + countryId +
+                ", lastUpdate=" + lastUpdate +
+                '}';
     }
 }
