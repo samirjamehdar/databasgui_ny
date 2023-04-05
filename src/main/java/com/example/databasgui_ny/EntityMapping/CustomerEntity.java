@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.EntityMapping;
 
+import com.example.databasgui_ny.entities.Address;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -25,9 +26,18 @@ public class CustomerEntity {
     @Column(name = "email", nullable = true, length = 50)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
     @JoinColumn(name = "address_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
     private AddressEntity address;
+
+    @Transient
+    private Integer addressId;
+
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "address_id")
+//    private AddressEntity address;
+
+
     @Basic
     @Column(name = "active", nullable = false)
     private byte active;
@@ -48,6 +58,8 @@ public class CustomerEntity {
         this.active = active;
         this.createDate = createDate;
     }
+
+
 
     public CustomerEntity() {
         
@@ -99,6 +111,10 @@ public class CustomerEntity {
 
     public void setAddress(AddressEntity addressId) {
         this.address = addressId;
+    }
+
+    public Integer getAddressId() {
+        return getAddress().getAddressId();
     }
 
     public byte getActive() {

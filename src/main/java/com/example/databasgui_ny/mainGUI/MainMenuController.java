@@ -1,7 +1,13 @@
 package com.example.databasgui_ny.mainGUI;
 
+import com.example.databasgui_ny.EntityMapping.ActorEntity;
+import com.example.databasgui_ny.EntityMapping.AddressEntity;
+import com.example.databasgui_ny.EntityMapping.CustomerEntity;
 import com.example.databasgui_ny.dao.*;
 import com.example.databasgui_ny.entities.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +26,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,21 +40,21 @@ public class MainMenuController implements Initializable {
     @FXML
     private TableView tableView;
 
-    private TableColumn<Actor, Integer> actorIdCol = new TableColumn<>("Actor ID");
-    private TableColumn<Actor, String> actorFirstNameCol = new TableColumn<>("First Name");
-    private TableColumn<Actor, String> actorLastNameCol = new TableColumn<>("Last Name");
-    private TableColumn<Actor, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<Actor> actorObList = FXCollections.observableArrayList();
+    private TableColumn<ActorEntity, Integer> actorIdCol = new TableColumn<>("Actor ID");
+    private TableColumn<ActorEntity, String> actorFirstNameCol = new TableColumn<>("First Name");
+    private TableColumn<ActorEntity, String> actorLastNameCol = new TableColumn<>("Last Name");
+    private TableColumn<ActorEntity, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<ActorEntity> actorObList = FXCollections.observableArrayList();
 
-    private TableColumn<Address, Integer> addressIdCol = new TableColumn<>("Address ID");
-    private TableColumn<Address, String> address1Col = new TableColumn<>("Address 1");
-    private TableColumn<Address, String> address2Col = new TableColumn<>("Address 2");
-    private TableColumn<Address, String> addressDistrictCol = new TableColumn<>("District");
-    private TableColumn<Address, Integer> addressCityIdCol = new TableColumn<>("City ID");
-    private TableColumn<Address, String> addressPostalCol = new TableColumn<>("Postal Code");
-    private TableColumn<Address, String> addressPhoneCol = new TableColumn<>("Phone");
-    private TableColumn<Address, Date> addressLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<Address> addressObList = FXCollections.observableArrayList();
+    private TableColumn<AddressEntity, Integer> addressIdCol = new TableColumn<>("Address ID");
+    private TableColumn<AddressEntity, String> address1Col = new TableColumn<>("Address 1");
+    private TableColumn<AddressEntity, String> address2Col = new TableColumn<>("Address 2");
+    private TableColumn<AddressEntity, String> addressDistrictCol = new TableColumn<>("District");
+    private TableColumn<AddressEntity, Integer> addressCityIdCol = new TableColumn<>("City ID");
+    private TableColumn<AddressEntity, String> addressPostalCol = new TableColumn<>("Postal Code");
+    private TableColumn<AddressEntity, String> addressPhoneCol = new TableColumn<>("Phone");
+    private TableColumn<AddressEntity, Date> addressLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<AddressEntity> addressObList = FXCollections.observableArrayList();
 
     private TableColumn<City, Integer> cityIdCol = new TableColumn<>("City ID");
     private TableColumn<City, String> cityNameCol = new TableColumn<>("City");
@@ -54,16 +62,16 @@ public class MainMenuController implements Initializable {
     private TableColumn<City, Date> cityLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<City> cityObList = FXCollections.observableArrayList();
 
-    private TableColumn<Customer, Integer> customerIdCol = new TableColumn<>("Customer ID");
-    private TableColumn<Customer, Integer> customerStoreIdCol = new TableColumn<>("Store ID");
-    private TableColumn<Customer, String> customerFirstNameCol = new TableColumn<>("First Name");
-    private TableColumn<Customer, String> customerLastNameCol = new TableColumn<>("Last Name");
-    private TableColumn<Customer, String> customerEmailCol = new TableColumn<>("E-mail");
-    private TableColumn<Customer, Integer> customerAddressIdCol = new TableColumn<>("Address ID");
-    private TableColumn<Customer, String> customerActiveCol = new TableColumn<>("Active");
-    private TableColumn<Customer, Date> customerCreateDateCol = new TableColumn<>("Created");
-    private TableColumn<Customer, Date> customerLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<Customer> customerObList = FXCollections.observableArrayList();
+    private TableColumn<CustomerEntity, Integer> customerIdCol = new TableColumn<>("Customer ID");
+    private TableColumn<CustomerEntity, Integer> customerStoreIdCol = new TableColumn<>("Store ID");
+    private TableColumn<CustomerEntity, String> customerFirstNameCol = new TableColumn<>("First Name");
+    private TableColumn<CustomerEntity, String> customerLastNameCol = new TableColumn<>("Last Name");
+    private TableColumn<CustomerEntity, String> customerEmailCol = new TableColumn<>("E-mail");
+    private TableColumn<CustomerEntity, Integer> customerAddressIdCol = new TableColumn<>("Address ID");
+    private TableColumn<CustomerEntity, String> customerActiveCol = new TableColumn<>("Active");
+    private TableColumn<CustomerEntity, Timestamp> customerCreateDateCol = new TableColumn<>("Created");
+    private TableColumn<CustomerEntity, Timestamp> customerLastUpdateCol = new TableColumn<>("Last Update");
+    private ObservableList<CustomerEntity> customerObList = FXCollections.observableArrayList();
 
     private String selectedTable;
 
@@ -140,7 +148,7 @@ public class MainMenuController implements Initializable {
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         actorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-        List<Actor> actorList = actorDAO.readAll();
+        List<ActorEntity> actorList = actorDAO.readAll();
         actorObList.addAll(actorList);
 
         tableView.setItems(actorObList);
@@ -164,7 +172,7 @@ public class MainMenuController implements Initializable {
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
             addressPhoneCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
-            List<Address> addressList = addressDAO.readAll();
+            List<AddressEntity> addressList = addressDAO.readAll();
             addressObList.addAll(addressList);
 
             tableView.setItems(addressObList);
@@ -203,17 +211,34 @@ public class MainMenuController implements Initializable {
         if (customerObList.size() == 0) {
             CustomerDAO customerDAO = new CustomerDAO();
 
-            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-            customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-            customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("create_date"));
-            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+//            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+//            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+//            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+//            customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+//            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+//            customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+//            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("create_date"));
+//            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 
-            List<Customer> customerList = customerDAO.readAll();
+            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+            customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
+            customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            customerLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+//            customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+            customerActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+            customerCreateDateCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+            customerLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+            customerAddressIdCol.setCellValueFactory(cellData -> {
+                SimpleStringProperty addressId = new SimpleStringProperty();
+                AddressEntity address = cellData.getValue().getAddress();
+                IntegerProperty addressIdProp = new SimpleIntegerProperty(address.getAddressId());
+                return addressIdProp.asObject();
+            });
+
+            List<CustomerEntity> customerList = customerDAO.readAll();
             customerObList.addAll(customerList);
 
             tableView.setItems(customerObList);
@@ -246,7 +271,7 @@ public class MainMenuController implements Initializable {
             switch (selectedTable) {
                 case "Actor":
                     ActorDAO actorDao = new ActorDAO();
-                    Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+                    ActorEntity selectedActor = (ActorEntity) tableView.getSelectionModel().getSelectedItem();
                     System.out.println("DELETING ACTOR ID: " + selectedActor.getActorId());
                     actorObList.remove(selectedActor);
                     actorDao.delete(selectedActor.getActorId());
@@ -517,12 +542,12 @@ public class MainMenuController implements Initializable {
         }
     }
 
-//
-//    public void testButtonClick(ActionEvent e) {
-//        System.out.println("TestButton clicked! :D");
-//        String selected = choiceBox.getValue();
-//        System.out.println(selected);
-//    }
+
+    public void testButtonClick(ActionEvent e) {
+        System.out.println("TestButton clicked! :D");
+        String selected = choiceBox.getValue();
+        System.out.println(selected);
+    }
 
 
 }
