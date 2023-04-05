@@ -11,14 +11,14 @@
    <children>
       <TextField layoutX="40.0" layoutY="85.0" />
       <TextField layoutX="40.0" layoutY="141.0" />
-      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add" wrappingWidth="149.0">
+      <Text layoutX="253.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Inventory" wrappingWidth="165.0">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
       <Text layoutX="40.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory ID" wrappingWidth="131.13671875" />
       <Text layoutX="40.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Film ID:" wrappingWidth="131.13671875" />
-      <Button layoutX="245.0" layoutY="329.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
+      <Button fx:id="confirmAddInventoryButton" layoutX="245.0" layoutY="329.0" mnemonicParsing="false" onAction="#confirmButtonOnClick" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
       <Text layoutX="40.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store ID:" wrappingWidth="131.13671875" />
       <TextField layoutX="40.0" layoutY="188.0" />
       <DatePicker layoutX="40.0" layoutY="237.0" />
