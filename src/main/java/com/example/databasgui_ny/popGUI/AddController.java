@@ -17,10 +17,10 @@ public class AddController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("adsjfbhsklfbhaskdfbasdfhasfdjbaldf");
+        //System.out.println("adsjfbhsklfbhaskdfbasdfhasfdjbaldf");
     }
 
-    public void confirmAddActorButtonOnClick(ActionEvent e) {
+    public void confirmButtonOnClick(ActionEvent e) {
         // Get the stage associated with the confirm button
         Stage popupStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
@@ -40,6 +40,7 @@ public class AddController implements Initializable {
             ex.printStackTrace();
         }
     }
+
 
 
 

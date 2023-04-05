@@ -6,13 +6,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -319,15 +324,205 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    public void addButtonClick(ActionEvent e) throws IOException {
+        if (selectedTable != null) {
+            switch (selectedTable) {
+                case "Actor":
+                    // Load the add_actor.fxml file as the new scene
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_actor.fxml"));
+                        Scene newScene = new Scene(loader.load());
+                        // Create a new stage for the popup dialog
+                        Stage popupStage = new Stage();
+                        popupStage.setScene(newScene);
+                        // Set the modality of the popup stage to be APPLICATION_MODAL
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        // Show the popup stage and wait for it to be closed
+                        popupStage.showAndWait();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
 
-    public void testButtonClick(ActionEvent e) {
-        System.out.println("TestButton clicked! :D");
-        String selected = choiceBox.getValue();
-        System.out.println(selected);
+                    }
+
+                    break;
+                case "Address":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_adress.fxml"));
+                        Scene newScene = new Scene(loader.load());
+                        Stage popupStage = new Stage();
+                        popupStage.setScene(newScene);
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        popupStage.showAndWait();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    break;
+                case "Customer":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_customer.fxml"));
+                        Scene newScene = new Scene(loader.load());
+                        Stage popupStage = new Stage();
+                        popupStage.setScene(newScene);
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        popupStage.showAndWait();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+
+                    }
+                    break;
+                case "City":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_city.fxml"));
+                        Scene newScene = new Scene(loader.load());
+                        Stage popupStage = new Stage();
+                        popupStage.setScene(newScene);
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        popupStage.showAndWait();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+
+                    }
+                    break;
+                case "Film":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_film.fxml"));
+                        Scene newScene = new Scene(loader.load());
+                        Stage popupStage = new Stage();
+                        popupStage.setScene(newScene);
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        popupStage.showAndWait();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+
+                    }
+                    break;
+                    case "FilmActor":
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_film_actor.fxml"));
+                            Scene newScene = new Scene(loader.load());
+                            Stage popupStage = new Stage();
+                            popupStage.setScene(newScene);
+                            popupStage.initModality(Modality.APPLICATION_MODAL);
+                            popupStage.showAndWait();
+
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+
+                        }
+                        break;
+                        case "FilmCategory":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_film_category.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "FilmText":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_film_text.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "Inventory":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_inventory.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "Payment":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_payment.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "Rental":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_rental.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "Staff":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_staff.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                        case "Store":
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/databasgui_ny/addPopups/add_store.fxml"));
+                                Scene newScene = new Scene(loader.load());
+                                Stage popupStage = new Stage();
+                                popupStage.setScene(newScene);
+                                popupStage.initModality(Modality.APPLICATION_MODAL);
+                                popupStage.showAndWait();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+
+                            }
+                            break;
+                default:
+                    System.out.println("Unsupported");
+                    break;
+            }
+        }
     }
 
-    public String getSelectedTable() {
-        return selectedTable;
-    }
+//
+//    public void testButtonClick(ActionEvent e) {
+//        System.out.println("TestButton clicked! :D");
+//        String selected = choiceBox.getValue();
+//        System.out.println(selected);
+//    }
+
 
 }

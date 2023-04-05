@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.databasgui_ny.popGUI.AddController">
    <children>
       <TextField layoutX="40.0" layoutY="85.0" />
-      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add" wrappingWidth="149.0">
+      <Text layoutX="271.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Film" wrappingWidth="149.0">
          <font>
             <Font size="25.0" />
          </font>
@@ -18,7 +18,7 @@
       <Text layoutX="40.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Film ID:" wrappingWidth="131.13671875" />
       <Text layoutX="40.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="131.13671875" />
       <Text layoutX="40.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release year:" wrappingWidth="131.13671875" />
-      <Button layoutX="242.0" layoutY="431.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
+      <Button fx:id="confirmAddFilmButton" layoutX="242.0" layoutY="431.0" mnemonicParsing="false" onAction="#confirmButtonOnClick" prefHeight="49.0" prefWidth="120.0" text="Confirm" />
       <Text layoutX="40.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" wrappingWidth="131.13671875" />
       <TextField layoutX="40.0" layoutY="133.0" />
       <TextField layoutX="40.0" layoutY="188.0" />
