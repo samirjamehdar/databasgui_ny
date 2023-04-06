@@ -123,27 +123,25 @@ public class UpdateController {
             this.selectedCustomer = (CustomerEntity) selectedObject;
             CustomerDAO customerDAO = new CustomerDAO();
             CustomerEntity customerEntity = customerDAO.read(selectedCustomer.getCustomerId());
-            System.out.println(customerEntity.getFirstName());
-//            CustomerEntity customer = (CustomerEntity) selectedObject;
-//            AddressEntity adress = customer.getAddress();
-//            CityEntity city = adress.getCity();
-//            System.out.println(customer.getFirstName());
-//            System.out.println(adress.getAddress());
-//            System.out.println(city.getCity());
-
             customerFirstNameField.setText(customerEntity.getFirstName());
             customerLastNameField.setText(customerEntity.getLastName());
             customerEMailField.setText(customerEntity.getEmail());
-            customerAddress1Field.setText(customerEntity.getAddress().getAddress());
-            customerAddress2Field.setText(customerEntity.getAddress().getAddress2());
-            customerPostalField.setText(customerEntity.getAddress().getPostalCode());
-            customerPhoneField.setText(customerEntity.getAddress().getPhone());
-            customerDistrictField.setText(customerEntity.getAddress().getDistrict());
-            customerCityNameField.setText(customerEntity.getAddress().getCity().getCity());
-            countryString = Integer.toString(customerEntity.getAddress().getCity().getCountryId());
+
+            AddressDAO addressDao = new AddressDAO();
+            AddressEntity addressEntity = addressDao.read(customerEntity.getAddressId());
+            customerAddress1Field.setText(addressEntity.getAddress());
+            customerAddress2Field.setText(addressEntity.getAddress2());
+            customerPostalField.setText(addressEntity.getPostalCode());
+            customerPhoneField.setText(addressEntity.getPhone());
+            customerDistrictField.setText(addressEntity.getDistrict());
+
+            CityDAO cityDao = new CityDAO();
+            CityEntity cityEntity = cityDao.read(addressEntity.getCityId());
+            customerCityNameField.setText(cityEntity.getCity());
+            countryString = Integer.toString(cityEntity.getCountryId());
             customerCountryIdField.setText(countryString);
 
-//            initializeCustomer();
+            initializeCustomer();
         }
         else if (selectedObject instanceof ActorEntity) {
             this.selectedActor = (ActorEntity) selectedObject;
@@ -218,6 +216,26 @@ public class UpdateController {
     @FXML
     public void handleCustomerUpdate(ActionEvent event) {
         CustomerDAO customerDao = new CustomerDAO();
+        selectedCustomer.setFirstName(customerFirstNameField.getText());
+        selectedCustomer.setLastName(customerLastNameField.getText());
+        selectedCustomer.setEmail(customerEMailField.getText());
+
+        AddressDAO addressDao = new AddressDAO();
+        AddressEntity address = addressDao.read(selectedCustomer.getAddressId());
+        address.setAddress(customerAddress1Field.getText());
+        address.setAddress2(customerAddress2Field.getText());
+        address.setPostalCode(customerPostalField.getText());
+        address.setPhone(customerPhoneField.getText());
+        address.setDistrict(customerDistrictField.getText());
+
+        CityDAO cityDao = new CityDAO();
+        CityEntity city = cityDao.read(address.getCityId());
+        city.setCity(customerCityNameField.getText());
+        countryString = Integer.toString(city.getCountryId());
+        city.setCountryId(Integer.parseInt(countryString));
+
+        address.setCity(city);
+        selectedCustomer.setAddress(address);
 
 
 //        selectedCustomer.setFirstName(UpdateCustomer_Firstname.getText());
@@ -227,7 +245,12 @@ public class UpdateController {
 //        selectedCustomer.setActive(UpdateCustomer_IsActive.isSelected());
 //        selectedCustomer.setLastUpdate(UpdateCustomer_Date.getValue());
 
+        cityDao.update(city);
+        System.out.println("City updated");
+        addressDao.update(address);
+        System.out.println("Address updated");
         customerDao.update(selectedCustomer);
+        System.out.println("Customer updated");
         Stage stage = (Stage) customer_ConfirmBtn.getScene().getWindow();
         stage.close();
     }
