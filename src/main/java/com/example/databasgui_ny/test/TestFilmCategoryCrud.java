@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+
 public class TestFilmCategoryCrud {
     @Test
     public void testGetFilmCategory() {
@@ -44,14 +46,14 @@ public class TestFilmCategoryCrud {
 
     @Test
     public void testCreateUpdateFC() {
-//        SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
-//        FilmCategoryEntity filmCategory = new FilmCategoryEntity(1001, 4);
-//        session.persist(filmCategory);
-//
-//        session.getTransaction().commit();
-//        session.close();
+        SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        FilmCategoryEntity filmCategory = new FilmCategoryEntity(1001, 4, new Timestamp(System.currentTimeMillis()));
+        session.persist(filmCategory);
+
+        session.getTransaction().commit();
+        session.close();
 
     }
 }
