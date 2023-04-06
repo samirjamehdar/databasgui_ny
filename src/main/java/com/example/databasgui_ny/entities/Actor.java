@@ -30,6 +30,7 @@ public class Actor {
 
 
     public Actor() {
+
     }
 
     public Actor(String firstName, String lastName, LocalDateTime lastUpdate) {
