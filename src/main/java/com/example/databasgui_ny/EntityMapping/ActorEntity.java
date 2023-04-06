@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "actor", schema = "sakila", catalog = "")
+@Table(name = "actor", schema = "sakila")
 public class ActorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,6 +21,16 @@ public class ActorEntity {
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+
+    public ActorEntity(String firstName, String lastName, Timestamp lastUpdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public ActorEntity() {
+
+    }
 
     public int getActorId() {
         return actorId;
