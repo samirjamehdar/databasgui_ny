@@ -31,7 +31,6 @@ public class TestingStoreEntityCrud {
         session.close();
         String expectedString = "1 1 1 2006-02-15 04:57:12";
         System.out.println("Retrieving from database: " + actualString);
-
     }
 
 

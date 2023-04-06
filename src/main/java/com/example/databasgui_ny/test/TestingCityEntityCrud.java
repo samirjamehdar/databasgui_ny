@@ -56,5 +56,18 @@ public class TestingCityEntityCrud {
         session.getTransaction().commit();
         session.close();
     }
+    @Test
+    public void testUpdateCity() {
+        int idToUpdate = 20;
+        SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM CityEntity ce WHERE ce.cityId = " + idToUpdate);
+        CityEntity city = (CityEntity) query.getSingleResult();
+        city.setCity("updatedCityName");
+        city.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+        session.getTransaction().commit();
+        session.close();
+    }
 
 }

@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -12,78 +11,72 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.databasgui_ny.popGUI.UpdateController">
    <children>
-      <Label fx:id="UpdateFilm_Label1" alignment="CENTER" layoutX="206.0" layoutY="8.0" style="&#10;" text="Update" textAlignment="CENTER" wrapText="false">
+      <Label fx:id="Film_Label1" alignment="CENTER" layoutX="148.0" layoutY="14.0" style="&#10;" text="Uppdatera Film" textAlignment="CENTER" wrapText="false">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="UpdateFilm_ConfirmBtn" layoutX="194.0" layoutY="545.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Confim" />
+      <Button fx:id="Film_ConfirmBtn" layoutX="194.0" layoutY="545.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Confim" />
       <VBox layoutX="303.0" layoutY="92.0" prefHeight="373.0" prefWidth="202.0">
          <children>
-            <Label fx:id="UpdateFilm_Label5" alignment="CENTER" style="&#10;" text="Rental Duration:" textAlignment="CENTER" wrapText="false">
+            <Label fx:id="Film_Label5" alignment="CENTER" style="&#10;" text="Uthyrningstid:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_RentalDur" />
-            <Label fx:id="UpdateFilm_Label6" alignment="CENTER" style="&#10;" text="Rental Rate:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="rentalDurField" />
+            <Label fx:id="Film_Label6" alignment="CENTER" style="&#10;" text="Uthyrnings kostnad:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_RentalRate" />
-            <Label fx:id="UpdateFilm_Label7" alignment="CENTER" style="&#10;" text="Length:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="rentalRateField" />
+            <Label fx:id="Film_Label7" alignment="CENTER" style="&#10;" text="Speltid:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_Length" />
-            <Label fx:id="UpdateFilm_Label8" alignment="CENTER" style="&#10;" text="Replacement Cost:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="lengthField" />
+            <Label fx:id="Film_Label8" alignment="CENTER" style="&#10;" text="Ersättningskostnad:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_RepCost" />
-            <Label fx:id="UpdateFilm_Label9" alignment="CENTER" style="&#10;" text="Rating:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="repCostField" />
+            <Label fx:id="Film_Label9" alignment="CENTER" style="&#10;" text="Åldergräns:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="UpdateFilm_Rating" prefHeight="25.0" prefWidth="203.0" />
-            <Label fx:id="UpdateFilm_Label10" alignment="CENTER" style="&#10;" text="Special Features:" textAlignment="CENTER" wrapText="false">
+            <ChoiceBox fx:id="ratingBox" prefHeight="25.0" prefWidth="203.0" />
+            <Label fx:id="Film_Label10" alignment="CENTER" style="&#10;" text="Extras:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="UpdateFilm_Features" prefHeight="25.0" prefWidth="203.0" />
-            <Label fx:id="UpdateFilm_Label11" alignment="CENTER" style="&#10;" text="Date:" textAlignment="CENTER" wrapText="false">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="UpdateFilm_Date" prefHeight="25.0" prefWidth="206.0" />
+            <ChoiceBox fx:id="featureBox" prefHeight="25.0" prefWidth="203.0" />
          </children>
       </VBox>
       <VBox layoutX="14.0" layoutY="92.0" prefHeight="312.0" prefWidth="202.0">
          <children>
-            <Label fx:id="UpdateFilm_Label2" alignment="CENTER" style="&#10;" text="Title:" textAlignment="CENTER" wrapText="false">
+            <Label fx:id="Film_Label2" alignment="CENTER" style="&#10;" text="Titel:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_Title" />
-            <Label fx:id="UpdateFilm_Label3" alignment="CENTER" style="&#10;" text="Release Year:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="titleField" />
+            <Label fx:id="Film_Label3" alignment="CENTER" style="&#10;" text="Utgivningsår:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="UpdateFilm_Release" />
-            <Label fx:id="UpdateFilm_Label4" alignment="CENTER" style="&#10;" text="Description:" textAlignment="CENTER" wrapText="false">
+            <TextField fx:id="releaseField" />
+            <Label fx:id="Film_Label4" alignment="CENTER" style="&#10;" text="Beskrivning:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
-            <TextArea fx:id="UpdateFilm_Desc" prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="descArea" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
    </children>
