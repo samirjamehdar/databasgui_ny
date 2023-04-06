@@ -4,6 +4,8 @@ import com.example.databasgui_ny.EntityMapping.*;
 import com.example.databasgui_ny.dao.*;
 import com.example.databasgui_ny.entities.*;
 //import com.example.databasgui_ny.popGUI.UpdateController;
+import com.example.databasgui_ny.util.SessionFactorySingleton;
+import jakarta.persistence.Query;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,8 +25,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.locationtech.jts.geom.Point;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -54,7 +57,7 @@ public class MainMenuController implements Initializable {
     private TableColumn<InventoryEntity, Timestamp> inventoryLastUpdateCol = new TableColumn<>("Last Update");
     private ObservableList<InventoryEntity> inventoryObList = FXCollections.observableArrayList();
     private String selectedTable;
-    private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "Film_actor",
+    private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "FilmActor",
                                                                 "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
@@ -90,7 +93,8 @@ public class MainMenuController implements Initializable {
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
-                    System.out.println("Film_actor is selected, refresh the table to actor values");
+                    System.out.println("TJENA");
+                    handleFilmActorTable();
                     break;
                 case "FilmCategory":
                     selectedTable = "FilmCategory";
@@ -296,22 +300,26 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(filmLastUpdate);
     }
 
+    public void handleFilmActorTable(){
+        tableView.getColumns().clear();
+        tableView.getItems().clear();
+        TableColumn<FilmActorEntity, Integer> filmActorActorIdCol = new TableColumn<>("Actor");
+        TableColumn<FilmActorEntity, Integer> filmActorFilmIdCol = new TableColumn<>("Film");
+        TableColumn<FilmActorEntity, Timestamp> filmActorLastUpdateCol = new TableColumn<>("Last update");
+        filmActorActorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
+        filmActorFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+        filmActorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        ObservableList<FilmActorEntity> filmActorOb = FXCollections.observableArrayList();
+        FilmActorDAO filmActorDAO = new FilmActorDAO();
+        List<FilmActorEntity> filmActorList = filmActorDAO.readAll();
+        filmActorOb.addAll(filmActorList);
+        tableView.setItems(filmActorOb);
+        tableView.getColumns().add(filmActorActorIdCol);
+        tableView.getColumns().add(filmActorFilmIdCol);
+        tableView.getColumns().add(filmActorLastUpdateCol);
+    }
 
-    public void updateButtonClick(ActionEvent e) {
-        System.out.println("TestButton clicked! : " + choiceBox.getValue());
-        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
 
-        if (selectedActor != null) {
-            int actorId = selectedActor.getActorId();
-            System.out.println("Selected actor ID: " + actorId);
-        } else {
-            System.out.println("No actor selected.");
-        };
-//            tableView.setItems(filmTextObList);
-//            tableView.getColumns().add(filmTextIdCol);
-//            tableView.getColumns().add(filmTextTitleCol);
-//            tableView.getColumns().add(filmTextDescriptionCol);
-        }
 
 
     public void handleInventoryTable() {
@@ -622,6 +630,22 @@ public class MainMenuController implements Initializable {
 //
 //    }
 
+    public void updateButtonClick(ActionEvent e) {
+        System.out.println("TestButton clicked! : " + choiceBox.getValue());
+        Actor selectedActor = (Actor) tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedActor != null) {
+            int actorId = selectedActor.getActorId();
+            System.out.println("Selected actor ID: " + actorId);
+        } else {
+            System.out.println("No actor selected.");
+        };
+//            tableView.setItems(filmTextObList);
+//            tableView.getColumns().add(filmTextIdCol);
+//            tableView.getColumns().add(filmTextTitleCol);
+//            tableView.getColumns().add(filmTextDescriptionCol);
+    }
+
     public void deleteButtonClick(ActionEvent e) {
         if (selectedTable != null) {
             switch (selectedTable) {
@@ -888,7 +912,6 @@ public class MainMenuController implements Initializable {
 
                             } catch (IOException ex) {
                                 ex.printStackTrace();
-
                             }
                             break;
                 default:

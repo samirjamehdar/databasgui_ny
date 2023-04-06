@@ -70,4 +70,8 @@ public class TestingCityEntityCrud {
         session.close();
     }
 
+
+
+
+
 }

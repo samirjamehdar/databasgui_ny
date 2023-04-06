@@ -6,13 +6,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "film_category", schema = "sakila", catalog = "")
+@Table(name = "film_category", schema = "sakila")
 @IdClass(FilmCategoryEntityPK.class)
 public class FilmCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "film_id", nullable = false)
     private int filmId;
+//    private FilmEntity filmId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id", nullable = false)
@@ -20,6 +21,16 @@ public class FilmCategoryEntity {
     @Basic
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
+
+    public FilmCategoryEntity(int filmId, int categoryId) {
+        this.filmId = filmId;
+        this.categoryId = categoryId;
+        this.lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
+
+    public FilmCategoryEntity() {
+        this.lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
 
     public Object getFilmId() {
         return filmId;

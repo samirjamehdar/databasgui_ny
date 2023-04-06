@@ -21,6 +21,16 @@ public class FilmActorEntity {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
+    public FilmActorEntity(int actorId, int filmId) {
+        this.actorId =actorId;
+        this.filmId = filmId;
+        lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
+
+    public FilmActorEntity() {
+        lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
+
     public int getActorId() {
         return actorId;
     }
