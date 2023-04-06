@@ -59,7 +59,7 @@ public class MainMenuController implements Initializable {
     private ObservableList<InventoryEntity> inventoryObList = FXCollections.observableArrayList();
     private String selectedTable;
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "FilmActor",
-                                                                "Film_category", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
+                                                                "FilmCategory", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,12 +94,11 @@ public class MainMenuController implements Initializable {
                     break;
                 case "FilmActor":
                     selectedTable = "FilmActor";
-                    System.out.println("TJENA");
                     handleFilmActorTable();
                     break;
                 case "FilmCategory":
                     selectedTable = "FilmCategory";
-                    System.out.println("Film_category is selected, refresh the table to actor values");
+                    handleFilmCategoryTable();
                     break;
                 case "FilmText":
                     selectedTable = "FilmText";
@@ -320,8 +319,21 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().add(filmActorLastUpdateCol);
     }
 
-
-
+    public void handleFilmCategoryTable() {
+        tableView.getColumns().clear();
+        tableView.getItems().clear();
+        TableColumn<FilmCategoryEntity, Integer> filmCatFilmId = new TableColumn<>("Film ID");
+        TableColumn<FilmCategoryEntity, Integer> filmCatId = new TableColumn<>("Category ID");
+        filmCatFilmId.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+        filmCatId.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
+        ObservableList<FilmCategoryEntity> filmCatOb = FXCollections.observableArrayList();
+        FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
+        List<FilmCategoryEntity> filmCatList = filmCategoryDAO.readAll();
+        filmCatOb.addAll(filmCatList);
+        tableView.setItems(filmCatOb);
+        tableView.getColumns().add(filmCatFilmId);
+        tableView.getColumns().add(filmCatId);
+    }
 
     public void handleInventoryTable() {
         if (inventoryObList.size() == 0) {
@@ -342,6 +354,8 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(inventoryLastUpdateCol);
         }
     }
+
+
 //
 //    public void handlePaymentTable() {
 //        if (paymentObList.size() == 0) {
