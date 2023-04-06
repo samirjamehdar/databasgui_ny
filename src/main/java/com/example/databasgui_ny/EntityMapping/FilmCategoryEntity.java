@@ -1,20 +1,19 @@
 package com.example.databasgui_ny.EntityMapping;
 
 import jakarta.persistence.*;
-
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "film_category", schema = "sakila")
 @IdClass(FilmCategoryEntityPK.class)
-public class FilmCategoryEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FilmCategoryEntity implements Serializable {
+
     @Id
     @Column(name = "film_id", nullable = false)
     private int filmId;
-//    private FilmEntity filmId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "category_id", nullable = false)
     private int categoryId;
@@ -22,17 +21,17 @@ public class FilmCategoryEntity {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    public FilmCategoryEntity(int filmId, int categoryId) {
+    public FilmCategoryEntity(int filmId, int categoryId, Timestamp lastUpdate) {
         this.filmId = filmId;
         this.categoryId = categoryId;
-        this.lastUpdate = new Timestamp(System.currentTimeMillis());
+        this.lastUpdate = lastUpdate;
     }
 
     public FilmCategoryEntity() {
-        this.lastUpdate = new Timestamp(System.currentTimeMillis());
+
     }
 
-    public Object getFilmId() {
+    public int getFilmId() {
         return filmId;
     }
 

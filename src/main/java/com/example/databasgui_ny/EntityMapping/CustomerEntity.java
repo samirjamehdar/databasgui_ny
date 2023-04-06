@@ -33,11 +33,6 @@ public class CustomerEntity {
     @Transient
     private Integer addressId;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "address_id")
-//    private AddressEntity address;
-
-
     @Basic
     @Column(name = "active", nullable = false)
     private byte active;
@@ -58,8 +53,6 @@ public class CustomerEntity {
         this.active = active;
         this.createDate = createDate;
     }
-
-
 
     public CustomerEntity() {
         

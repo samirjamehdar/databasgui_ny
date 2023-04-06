@@ -5,9 +5,9 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "film_text", schema = "sakila", catalog = "")
+@Table(name = "film_text", schema = "sakila")
 public class FilmTextEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "film_id", nullable = false)
     private int filmId;
@@ -53,5 +53,14 @@ public class FilmTextEntity {
     @Override
     public int hashCode() {
         return Objects.hash(filmId, title, description);
+    }
+
+    @Override
+    public String toString() {
+        return "FilmTextEntity{" +
+                "filmId=" + filmId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
