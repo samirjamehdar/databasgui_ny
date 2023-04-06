@@ -10,7 +10,7 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/sakila</property>
 <!--        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>-->
         <property name="connection.username">root</property>
-        <property name="connection.password">potatismos</property>
+        <property name="connection.password">9907</property>
         <property name="connection.pool_size">3</property>
 <!--        <property name="current_session_context_class">thread</property>-->
         <property name="show_sql">true</property>
@@ -39,19 +39,19 @@
         <mapping class="com.example.databasgui_ny.EntityMapping.StoreEntity"/>
 
         <!-- Här configgar vi vilka klasser som ska mappas motsvarande tabell i databasen -->
-        <mapping class="com.example.databasgui_ny.entities.Actor"/>
-        <mapping class="com.example.databasgui_ny.entities.Address"/>
-        <mapping class="com.example.databasgui_ny.entities.City"/>
-        <mapping class="com.example.databasgui_ny.entities.Country"/>
-        <mapping class="com.example.databasgui_ny.entities.Customer"/>
-        <mapping class="com.example.databasgui_ny.entities.Film"/>
-        <mapping class="com.example.databasgui_ny.entities.Language"/>
-        <mapping class="com.example.databasgui_ny.entities.Category"/>
-        <mapping class="com.example.databasgui_ny.entities.Inventory"/>
-        <mapping class="com.example.databasgui_ny.entities.Rental"/>
-        <mapping class="com.example.databasgui_ny.entities.Payment"/>
-        <mapping class="com.example.databasgui_ny.entities.Staff"/>
-        <mapping class="com.example.databasgui_ny.entities.Store"/>
+<!--        <mapping class="com.example.databasgui_ny.entities.Actor"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Address"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.City"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Country"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Customer"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Film"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Language"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Category"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Inventory"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Rental"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Payment"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Staff"/>-->
+<!--        <mapping class="com.example.databasgui_ny.entities.Store"/>-->
 <!--                 HÄR BÖRJAR JAG TESTA REVERSE-ENGINEERING FUNCTION-->
 
     </session-factory>
