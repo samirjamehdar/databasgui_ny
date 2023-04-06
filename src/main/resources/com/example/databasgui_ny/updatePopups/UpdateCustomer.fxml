@@ -16,19 +16,19 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="firstNameField" />
+            <TextField fx:id="customerFirstNameField" />
             <Label fx:id="Customer_Label2" alignment="CENTER" style="&#10;" text="Efternamn:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="lastNameField" />
+            <TextField fx:id="customerLastNameField" />
             <Label fx:id="Customer_Label3" alignment="CENTER" style="&#10;" text="E-Mail:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="eMailField" />
+            <TextField fx:id="customerEMailField" />
          </children>
       </VBox>
       <Label fx:id="Customer_Label" alignment="CENTER" layoutX="115.0" layoutY="14.0" style="&#10;" text="Uppdatera Kund" textAlignment="CENTER" wrapText="false">
@@ -36,7 +36,7 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="Customer_ConfirmBtn" layoutX="170.0" layoutY="529.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Bekräfta" />
+      <Button fx:id="customer_ConfirmBtn" layoutX="170.0" layoutY="529.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Bekräfta" />
       <VBox layoutX="235.0" layoutY="131.0" prefHeight="369.0" prefWidth="250.0">
          <children>
             <Label fx:id="Customer_Label4" alignment="CENTER" style="&#10;" text="Adress:" textAlignment="CENTER" wrapText="false">
@@ -44,43 +44,43 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="address1Field" />
+            <TextField fx:id="customerAddress1Field" />
             <Label fx:id="Customer_Label5" alignment="CENTER" style="&#10;" text="Adress 2:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="address2Field" />
+            <TextField fx:id="customerAddress2Field" />
             <Label fx:id="Customer_Label6" alignment="CENTER" style="&#10;" text="Postnummer:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="postalField" />
+            <TextField fx:id="customerPostalField" />
             <Label fx:id="Customer_Label7" alignment="CENTER" style="&#10;" text="Distrikt:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="districtField" />
+            <TextField fx:id="customerDistrictField" />
             <Label fx:id="Customer_Label8" alignment="CENTER" style="&#10;" text="Stad:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="cityNameField" />
+            <TextField fx:id="customerCityNameField" />
             <Label fx:id="Customer_Label10" alignment="CENTER" style="&#10;" text="Landskod:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="countryIdField" />
+            <TextField fx:id="customerCountryIdField" />
             <Label fx:id="Customer_Label9" alignment="CENTER" style="&#10;" text="Telefonnummer:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="phoneField" />
+            <TextField fx:id="customerPhoneField" />
          </children>
       </VBox>
    </children>
