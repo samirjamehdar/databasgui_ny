@@ -219,6 +219,7 @@ public class UpdateController {
         selectedCustomer.setFirstName(customerFirstNameField.getText());
         selectedCustomer.setLastName(customerLastNameField.getText());
         selectedCustomer.setEmail(customerEMailField.getText());
+        selectedCustomer.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
         AddressDAO addressDao = new AddressDAO();
         AddressEntity address = addressDao.read(selectedCustomer.getAddressId());
@@ -227,23 +228,17 @@ public class UpdateController {
         address.setPostalCode(customerPostalField.getText());
         address.setPhone(customerPhoneField.getText());
         address.setDistrict(customerDistrictField.getText());
+        address.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
         CityDAO cityDao = new CityDAO();
         CityEntity city = cityDao.read(address.getCityId());
         city.setCity(customerCityNameField.getText());
         countryString = Integer.toString(city.getCountryId());
         city.setCountryId(Integer.parseInt(countryString));
+        city.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
         address.setCity(city);
         selectedCustomer.setAddress(address);
-
-
-//        selectedCustomer.setFirstName(UpdateCustomer_Firstname.getText());
-//        selectedCustomer.setLastName(UpdateCustomer_Surname.getText());
-//        selectedCustomer.setEmail(UpdateCustomer_Email.getText());
-//        selectedCustomer.setAdress(UpdateCustomer_Adress.getText());
-//        selectedCustomer.setActive(UpdateCustomer_IsActive.isSelected());
-//        selectedCustomer.setLastUpdate(UpdateCustomer_Date.getValue());
 
         cityDao.update(city);
         System.out.println("City updated");
