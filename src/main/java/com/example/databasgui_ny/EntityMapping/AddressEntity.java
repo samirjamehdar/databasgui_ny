@@ -139,6 +139,10 @@ public class AddressEntity implements Serializable {
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+    public Integer getCityId() {
+        return getCity().getCityId();
+    }
+
 
 
     @Override
