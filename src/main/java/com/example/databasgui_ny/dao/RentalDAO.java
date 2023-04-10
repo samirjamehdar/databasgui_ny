@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.dao;
 
+import com.example.databasgui_ny.EntityMapping.RentalEntity;
 import com.example.databasgui_ny.entities.Rental;
 import com.example.databasgui_ny.repositories.DAO;
 import com.example.databasgui_ny.util.SessionFactorySingleton;
@@ -9,10 +10,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class RentalDAO implements DAO<Rental> {
+public class RentalDAO implements DAO<RentalEntity> {
 
     @Override
-    public void create(Rental rental) {
+    public void create(RentalEntity rental) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -22,27 +23,27 @@ public class RentalDAO implements DAO<Rental> {
     }
 
     @Override
-    public List<Rental> readAll() {
+    public List<RentalEntity> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Rental> query = session.createQuery("FROM Rental", Rental.class);
-        List<Rental> rentalList = query.list();
+        Query<RentalEntity> query = session.createQuery("FROM RentalEntity", RentalEntity.class);
+        List<RentalEntity> rentalList = query.list();
         session.close();
         return rentalList;
     }
 
     @Override
-    public Rental read(int id) {
+    public RentalEntity read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Rental rental = session.get(Rental.class, id);
+        RentalEntity rental = session.get(RentalEntity.class, id);
         session.close();
         return rental;
     }
 
     @Override
-    public boolean update(Rental rental) {
+    public boolean update(RentalEntity rental) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -58,7 +59,7 @@ public class RentalDAO implements DAO<Rental> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Rental rental = session.get(Rental.class, id);
+        RentalEntity rental = session.get(RentalEntity.class, id);
         if (rental != null) {
             session.delete(rental);
         }
@@ -67,8 +68,8 @@ public class RentalDAO implements DAO<Rental> {
     }
 
     public void displayRentals() {
-        List<Rental> rentalList = readAll();
-        for (Rental rental : rentalList) {
+        List<RentalEntity> rentalList = readAll();
+        for (RentalEntity rental : rentalList) {
             System.out.println(rental.toString());
         }
     }

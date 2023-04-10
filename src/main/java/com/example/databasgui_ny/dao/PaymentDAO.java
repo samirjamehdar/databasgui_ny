@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.dao;
 
+import com.example.databasgui_ny.EntityMapping.PaymentEntity;
 import com.example.databasgui_ny.entities.Actor;
 import com.example.databasgui_ny.entities.Payment;
 import com.example.databasgui_ny.repositories.DAO;
@@ -10,10 +11,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class PaymentDAO implements DAO<Payment> {
+public class PaymentDAO implements DAO<PaymentEntity> {
 
     @Override
-    public void create(Payment payment) {
+    public void create(PaymentEntity payment) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -23,27 +24,27 @@ public class PaymentDAO implements DAO<Payment> {
     }
 
     @Override
-    public List<Payment> readAll() {
+    public List<PaymentEntity> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Payment> query = session.createQuery("FROM Payment", Payment.class);
-        List<Payment> paymentList = query.list();
+        Query<PaymentEntity> query = session.createQuery("FROM PaymentEntity", PaymentEntity.class);
+        List<PaymentEntity> paymentList = query.list();
         session.close();
         return paymentList;
     }
 
     @Override
-    public Payment read(int id) {
+    public PaymentEntity read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Payment payment = session.get(Payment.class, id);
+        PaymentEntity payment = session.get(PaymentEntity.class, id);
         session.close();
         return payment;
     }
 
     @Override
-    public boolean update(Payment payment) {
+    public boolean update(PaymentEntity payment) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -59,7 +60,7 @@ public class PaymentDAO implements DAO<Payment> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Payment payment = session.get(Payment.class, id);
+        PaymentEntity payment = session.get(PaymentEntity.class, id);
         if (payment != null) {
             session.delete(payment);
         }
@@ -68,8 +69,8 @@ public class PaymentDAO implements DAO<Payment> {
     }
 
     public void displayPayments() {
-        List<Payment> paymentList = readAll();
-        for (Payment payment : paymentList) {
+        List<PaymentEntity> paymentList = readAll();
+        for (PaymentEntity payment : paymentList) {
             System.out.println(payment.toString());
         }
     }

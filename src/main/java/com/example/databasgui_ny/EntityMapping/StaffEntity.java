@@ -31,9 +31,9 @@ public class StaffEntity {
     @Basic
     @Column(name = "email", nullable = true, length = 50)
     private String email;
-    @Basic
-    @Column(name = "store_id", nullable = false)
-    private Object storeId;
+//    @Basic
+//    @Column(name = "store_id", nullable = false)
+//    private Object storeId;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
     @JoinColumn(name = "store_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
     private StoreEntity store;
@@ -114,7 +114,7 @@ public class StaffEntity {
     }
 
     public void setStoreId(StoreEntity storeId) {
-        this.storeId = storeId;
+        this.store = storeId;
     }
 
     public boolean getActive() {
@@ -154,12 +154,12 @@ public class StaffEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StaffEntity that = (StaffEntity) o;
-        return active == that.active && Objects.equals(staffId, that.staffId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Arrays.equals(picture, that.picture) && Objects.equals(email, that.email) && Objects.equals(storeId, that.storeId) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(lastUpdate, that.lastUpdate);
+        return active == that.active && Objects.equals(staffId, that.staffId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Arrays.equals(picture, that.picture) && Objects.equals(email, that.email) && Objects.equals(store, that.store) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(lastUpdate, that.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(staffId, firstName, lastName, address, email, storeId, active, username, password, lastUpdate);
+        int result = Objects.hash(staffId, firstName, lastName, address, email, store, active, username, password, lastUpdate);
         result = 31 * result + Arrays.hashCode(picture);
         return result;
     }
