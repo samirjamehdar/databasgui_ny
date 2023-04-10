@@ -117,8 +117,8 @@ public class MainMenuController implements Initializable {
                     handleStaffTable();
                     break;
                 case "Store":
-                    selectedTable = "Staff";
-                    System.out.println("Store is selected, refresh the table to actor values");
+                    selectedTable = "Store";
+                    handleStoreTable();
                     break;
             }
         });
@@ -434,11 +434,11 @@ public class MainMenuController implements Initializable {
             TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Butik ID");
             TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Aktiv");
             staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
-            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
             staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
             ObservableList<StaffEntity> staffObList = FXCollections.observableArrayList();
             StaffDAO staffDAO = new StaffDAO();
@@ -454,24 +454,28 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(staffActiveCol);
     }
 
-//    public void handleStoreTable() {
-//        StoreDAO storeDAO = new StoreDAO();
-//        TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
-//
-//        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-//        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
-//        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-//        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-//
-//        List<Store> storeList = storeDAO.readAll();
-//        storeObList.addAll(storeList);
-//
-//        tableView.setItems(storeObList);
-//        tableView.getColumns().add(storeIdCol);
-//        tableView.getColumns().add(storeManagerStaffIdCol);
-//        tableView.getColumns().add(storeAddressIdCol);
-//        tableView.getColumns().add(storeLastUpdateCol);
-//    }
+    public void handleStoreTable() {
+        StoreDAO storeDAO = new StoreDAO();
+        TableColumn<StoreEntity, Integer> storeIdCol = new TableColumn<>("Butik ID");
+        TableColumn<StoreEntity, Integer> storeManagerStaffIdCol = new TableColumn<>("Personalchef ID");
+        TableColumn<StoreEntity, Integer> storeAddressIdCol = new TableColumn<>("Adress ID");
+        TableColumn<StoreEntity, Timestamp> storeLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
+
+        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
+        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("managerStaffId"));
+        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
+        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        List<StoreEntity> storeList = storeDAO.readAll();
+        ObservableList<StoreEntity> storeObList = FXCollections.observableArrayList();
+        storeObList.addAll(storeList);
+
+        tableView.setItems(storeObList);
+        tableView.getColumns().add(storeIdCol);
+        tableView.getColumns().add(storeManagerStaffIdCol);
+        tableView.getColumns().add(storeAddressIdCol);
+        tableView.getColumns().add(storeLastUpdateCol);
+    }
 
     public void updateButtonClick(ActionEvent e) throws IOException {
         if (selectedTable != null) {
