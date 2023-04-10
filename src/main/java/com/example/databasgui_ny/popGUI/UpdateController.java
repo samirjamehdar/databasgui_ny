@@ -66,7 +66,21 @@ public class UpdateController {
 //    private FilmText selectedFilmText;
     private Inventory selectedInventory;
     private Language selectedLanguage;
-    private Payment selectedPayment;
+
+    private PaymentEntity selectedPayment;
+    @FXML
+    private TextField Payment_CustomerID;
+    @FXML
+    private TextField Payment_StaffID;
+    @FXML
+    private TextField Payment_RentalID;
+    @FXML
+    private TextField amountField;
+    @FXML
+    private DatePicker payDate_Box;
+    @FXML
+    private Button Payments_ConfirmBtn;
+
     private Rental selectedRental;
     private Staff selectedStaff;
     @FXML
@@ -206,24 +220,11 @@ public class UpdateController {
             actorSurnameField.setText(selectedActor.getLastName());
             initializeActor();
         }
-//        else if (selectedObject instanceof Address) {
-//            this.selectedAddress = (Address) selectedObject;
-//        }
 //        else if (selectedObject instanceof Category) {
 //            this.selectedCategory = (Category) selectedObject;
 //        }
-//        else if (selectedObject instanceof City) {
-////            this.selectedCity = (City) selectedObject;
-////            UpdateCity_City.setText(selectedCity.getCity());
-////            initializeCity();
-//        }
-//        else if (selectedObject instanceof Country) {
-//            this.selectedCoutry = (Country) selectedObject;
-//
-//        }
         else if (selectedObject instanceof FilmEntity) {
             this.selectedFilmEntity = (FilmEntity) selectedObject;
-            FilmDAO filmDAO = new FilmDAO();
             titleField.setText(selectedFilmEntity.getTitle());
             descArea.setText(selectedFilmEntity.getDescription());
             releaseField.setText(String.valueOf(selectedFilmEntity.getReleaseYear()));
@@ -235,22 +236,31 @@ public class UpdateController {
 //            featureBox.setSelected(selectedFilmEntity.getSpecialFeatures());
             initializeFilm();
         }
-//        else if (selectedObject instanceof FilmText) {
-//            this.selectedFilmText = (FilmText) selectedObject;
-//
-//        }
 //        else if (selectedObject instanceof Inventory) {
 //            this.selectedInventory = (Inventory) selectedObject;
 //
 //        }
-//        else if (selectedObject instanceof Language) {
-//            this.selectedLanguage = (Language) selectedObject;
-//
-//        }
-//        else if (selectedObject instanceof Payment) {
-//            this.selectedPayment = (Payment) selectedObject;
-//
-//        }
+        else if (selectedObject instanceof PaymentEntity) {
+            this.selectedPayment = (PaymentEntity) selectedObject;
+            PaymentDAO paymentDAO = new PaymentDAO();
+            PaymentEntity payment = paymentDAO.read(selectedPayment.getPaymentId());
+            amountField.setText(String.valueOf(payment.getAmount()));
+            payDate_Box.setValue(payment.getPaymentDate());
+
+            CustomerDAO customerDAO = new CustomerDAO();
+            CustomerEntity customer = customerDAO.read(payment.getCustomerId());
+            Payment_CustomerID.setText(String.valueOf(customer.getCustomerId()));
+
+            StaffDAO staffDAO = new StaffDAO();
+            StaffEntity staff = staffDAO.read(payment.getStaffId());
+            Payment_StaffID.setText(String.valueOf(staff.getStaffId()));
+
+            RentalDAO rentalDAO = new RentalDAO();
+            RentalEntity rental = rentalDAO.read(payment.getRentalId());
+            Payment_RentalID.setText(String.valueOf(rental.getRentalId()));
+            initializePayment();
+
+        }
 //        else if (selectedObject instanceof Rental) {
 //            this.selectedRental = (Rental) selectedObject;
 //
@@ -265,12 +275,11 @@ public class UpdateController {
             Staff_IsActive.setSelected(staffEntity.getActive());
             Staff_Username.setText(staffEntity.getUsername());
             Staff_Password.setText(staffEntity.getPassword());
-//            countryString = Byte[].toString(staffEntity.getPicture());
-//            Staff_Picture.setText(staffEntity.getPicture());
+            Staff_Picture.setText(staffEntity.getPicture());
 
-//            StoreDAO storeDao = new StoreDAO();
-//            StoreEntity storeEntity = storeDao.read(staffEntity.getStoreId());
-//            Staff_Store.setText(storeEntity.getStoreId());
+            StoreDAO storeDao = new StoreDAO();
+            StoreEntity storeEntity = storeDao.read(staffEntity.getStoreId());
+            Staff_Store.setText(String.valueOf(storeEntity.getStoreId()));
 
 
             AddressDAO addressDao = new AddressDAO();
@@ -287,13 +296,6 @@ public class UpdateController {
             countryString = Integer.toString(cityEntity.getCountryId());
             Staff_CountryIdField.setText(countryString);
 
-
-//            UpdateStaff_Firstname.setText(selectedStaff.getFirstName());
-//            UpdateStaff_Surname.setText(selectedStaff.getLastName());
-//            UpdateStaff_Email.setText(selectedStaff.getEmail());
-//            UpdateStaff_IsActive.setSelected(selectedStaff.isActive());
-//            UpdateStaff_Username.setText(selectedStaff.getUsername());
-//            UpdateStaff_Password.setText(selectedStaff.getPassword());
             initializeStaff();
         }
 //        else if (selectedObject instanceof Store) {
@@ -329,11 +331,8 @@ public class UpdateController {
         selectedCustomer.setAddress(address);
 
         cityDao.update(city);
-        System.out.println("City updated");
         addressDao.update(address);
-        System.out.println("Address updated");
         customerDao.update(selectedCustomer);
-        System.out.println("Customer updated");
         Stage stage = (Stage) customer_ConfirmBtn.getScene().getWindow();
         stage.close();
     }
@@ -366,20 +365,16 @@ public class UpdateController {
 //    }
     @FXML
     public void handleFilmUpdate(ActionEvent event) {
-        /*
-        Film fungerar nu. Men vi bör ändra i entiteterna så att vi kan ändra på "Replacement Cost" och "Rental Rate" till int,
-        nu är dem BigDecimal och vetefan hur det fungerar
-         */
         FilmDAO filmDao = new FilmDAO();
         selectedFilmEntity.setTitle(titleField.getText());
         selectedFilmEntity.setDescription(descArea.getText());
         selectedFilmEntity.setReleaseYear(Integer.parseInt(releaseField.getText()));
         selectedFilmEntity.setRentalDuration(Integer.parseInt(rentalDurField.getText()));
-//        selectedFilmEntity.setRentalRate(Integer.parseInt(rentalRateField.getText()));
+        selectedFilmEntity.setRentalRate(Integer.parseInt(rentalRateField.getText()));
         selectedFilmEntity.setLength(Integer.parseInt(lengthField.getText()));
-//        selectedFilmEntity.setReplacementCost(Integer.parseInt(repCostField.getText()));
+        selectedFilmEntity.setReplacementCost(Integer.parseInt(repCostField.getText()));
 //        selectedFilmEntity.setSpecialFeatures(featureBox.getValue());
-//        selectedFilmEntity.setRating(featureBox.getValue());
+//        selectedFilmEntity.setRating(ratingBox.getValue());
         selectedFilmEntity.setLastUpdate(new Timestamp(System.currentTimeMillis()));
         filmDao.update(selectedFilmEntity);
         Stage stage = (Stage) Film_ConfirmBtn.getScene().getWindow();
@@ -413,27 +408,52 @@ public class UpdateController {
         city.setCity(Staff_CityNameField.getText());
         countryString = Integer.toString(city.getCountryId());
 
-
-//        selectedStaff.setFirstName(UpdateStaff_Firstname.getText());
-//        selectedStaff.setLastName(UpdateStaff_Surname.getText());
-//        selectedStaff.setEmail(UpdateStaff_Email.getText());
-//        selectedStaff.setActive(UpdateStaff_IsActive.isSelected());
-//        selectedStaff.setUsername(UpdateStaff_Username.getText());
-//        selectedStaff.setPassword(UpdateStaff_Password.getText());
         address.setCity(city);
         selectedStaffEntity.setAddress(address);
 
         cityDao.update(city);
-        System.out.println("City updated");
         addressDao.update(address);
-        System.out.println("Address updated");
         staffDao.update(selectedStaffEntity);
-        System.out.println("Staff updated");
         Stage stage = (Stage) Staff_ConfirmBtn.getScene().getWindow();
         stage.close();
     }
     public void initializeStaff() {
         Staff_ConfirmBtn.setOnAction(this::handleStaffUpdate);
+    }
+
+    @FXML
+    public void handlePaymentUpdate(ActionEvent event) {
+        PaymentDAO paymentDao = new PaymentDAO();
+        if (amountField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid amount.");
+            alert.showAndWait();
+            return;
+        }
+        selectedPayment.setAmount(Integer.parseInt(amountField.getText()));
+        selectedPayment.setPaymentDate(payDate_Box.getValue());
+        selectedPayment.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+
+        CustomerDAO customerDao = new CustomerDAO();
+        CustomerEntity customerEntity = customerDao.read(selectedPayment.getCustomerId());
+        customerEntity.setCustomerId(Integer.parseInt(Payment_CustomerID.getText()));
+        customerDao.update(customerEntity);
+
+        StaffDAO staffDao = new StaffDAO();
+        StaffEntity staffEntity = staffDao.read(selectedPayment.getStaffId());
+        staffEntity.setStaffId(Integer.parseInt(Payment_StaffID.getText()));
+        staffDao.update(staffEntity);
+
+        RentalDAO rentalDao = new RentalDAO();
+        RentalEntity rentalEntity = rentalDao.read(selectedPayment.getRentalId());
+        rentalEntity.setRentalId(Integer.parseInt(Payment_RentalID.getText()));
+        rentalDao.update(rentalEntity);
+
+        paymentDao.update(selectedPayment);
+        Stage stage = (Stage) Payments_ConfirmBtn.getScene().getWindow();
+        stage.close();
+    }
+    public void initializePayment() {
+        Payments_ConfirmBtn.setOnAction(this::handlePaymentUpdate);
     }
 
 

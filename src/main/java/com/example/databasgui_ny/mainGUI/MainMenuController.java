@@ -65,6 +65,7 @@ public class MainMenuController implements Initializable {
             tableView.getItems().clear();
             addButton.setDisable(false);
             deleteButton.setDisable(false);
+            updateButton.setDisable(false);
             switch (newValue) {
                 case "Actor":
                     selectedTable = "Actor";
@@ -75,10 +76,12 @@ public class MainMenuController implements Initializable {
                     handleAddressTable();
                     addButton.setDisable(true);
                     deleteButton.setDisable(true);
+                    updateButton.setDisable(true);
                     break;
                 case "City":
                     selectedTable = "City";
                     handleCityTable();
+                    updateButton.setDisable(true);
                     break;
                 case "Customer":
                     selectedTable = "Customer";
@@ -503,19 +506,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "City":
                     System.out.println("City PopUp");
-//                    City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedCity != null) {
-//                        int cityId = selectedCity.getCityId();
-//                        System.out.println("Selected City ID: " + cityId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
-//                            showUpdatePopup(fxmlPath,selectedCity);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No City selected.");
-//                    }
+
                     break;
                 case "Customer":
                     System.out.println("Customer PopUp");
@@ -585,35 +576,35 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Inventory":
                     System.out.println("Inventory PopUp");
-//                    Inventory selectedInventory = (Inventory) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedInventory != null) {
-//                        int inventoryId = selectedInventory.getInventoryId();
-//                        System.out.println("Selected Inventory ID: " + inventoryId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
-//                            showUpdatePopup(fxmlPath, selectedInventory);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No inventory selected.");
-//                    }
+                    InventoryEntity selectedInventory = (InventoryEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedInventory != null) {
+                        int inventoryId = selectedInventory.getInventoryId();
+                        System.out.println("Selected Inventory ID: " + inventoryId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
+                            showUpdatePopup(fxmlPath, selectedInventory);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No inventory selected.");
+                    }
                     break;
                 case "Payment":
                     System.out.println("Payment PopUp");
-//                    Payment selectedPayment = (Payment) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedPayment != null) {
-//                        int paymentId = selectedPayment.getPaymentId();
-//                        System.out.println("Selected Payment ID: " + paymentId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
-//                            showUpdatePopup(fxmlPath, selectedPayment);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No Payment selected.");
-//                    }
+                    PaymentEntity selectedPayment = (PaymentEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedPayment != null) {
+                        int paymentId = selectedPayment.getPaymentId();
+                        System.out.println("Selected Payment ID: " + paymentId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
+                            showUpdatePopup(fxmlPath, selectedPayment);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Payment selected.");
+                    }
                     break;
                 case "Rental":
                     System.out.println("Rental PopUp");

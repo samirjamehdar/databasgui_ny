@@ -127,8 +127,9 @@ public class FilmEntity {
         return rentalRate;
     }
 
-    public void setRentalRate(BigDecimal rentalRate) {
-        this.rentalRate = rentalRate;
+    public void setRentalRate(double rentalRate) {
+
+        this.rentalRate = BigDecimal.valueOf(rentalRate);
     }
 
     public Object getLength() {
@@ -143,8 +144,9 @@ public class FilmEntity {
         return replacementCost;
     }
 
-    public void setReplacementCost(BigDecimal replacementCost) {
-        this.replacementCost = replacementCost;
+    public void setReplacementCost(double replacementCost) {
+
+        this.replacementCost = BigDecimal.valueOf(replacementCost);
     }
 
     public Object getRating() {

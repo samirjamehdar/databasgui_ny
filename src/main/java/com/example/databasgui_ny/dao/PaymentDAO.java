@@ -18,7 +18,7 @@ public class PaymentDAO implements DAO<PaymentEntity> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(payment);
+        session.persist(payment);
         session.getTransaction().commit();
         session.close();
     }
@@ -62,7 +62,7 @@ public class PaymentDAO implements DAO<PaymentEntity> {
         session.getTransaction().begin();
         PaymentEntity payment = session.get(PaymentEntity.class, id);
         if (payment != null) {
-            session.delete(payment);
+            session.remove(payment);
         }
         session.getTransaction().commit();
         session.close();
