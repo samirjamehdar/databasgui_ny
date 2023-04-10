@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.dao;
 
+import com.example.databasgui_ny.EntityMapping.StoreEntity;
 import com.example.databasgui_ny.entities.Store;
 import com.example.databasgui_ny.repositories.DAO;
 import com.example.databasgui_ny.util.SessionFactorySingleton;
@@ -9,10 +10,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class StoreDAO implements DAO<Store> {
+public class StoreDAO implements DAO<StoreEntity> {
 
     @Override
-    public void create(Store store) {
+    public void create(StoreEntity store) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -22,27 +23,27 @@ public class StoreDAO implements DAO<Store> {
     }
 
     @Override
-    public List<Store> readAll() {
+    public List<StoreEntity> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Store> query = session.createQuery("FROM Store", Store.class);
-        List<Store> storeList = query.list();
+        Query<StoreEntity> query = session.createQuery("FROM StoreEntity", StoreEntity.class);
+        List<StoreEntity> storeList = query.list();
         session.close();
         return storeList;
     }
 
     @Override
-    public Store read(int id) {
+    public StoreEntity read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Store store = session.get(Store.class, id);
+        StoreEntity store = session.get(StoreEntity.class, id);
         session.close();
         return store;
     }
 
     @Override
-    public boolean update(Store store) {
+    public boolean update(StoreEntity store) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -58,7 +59,7 @@ public class StoreDAO implements DAO<Store> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        Store store = session.get(Store.class, id);
+        StoreEntity store = session.get(StoreEntity.class, id);
         if (store != null) {
             session.delete(store);
         }
@@ -67,8 +68,8 @@ public class StoreDAO implements DAO<Store> {
     }
 
     public void displayStores() {
-        List<Store> storeList = readAll();
-        for (Store store : storeList) {
+        List<StoreEntity> storeList = readAll();
+        for (StoreEntity store : storeList) {
             System.out.println(store.toString());
         }
     }

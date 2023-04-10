@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "staff", schema = "sakila", catalog = "")
+@Table(name = "staff", schema = "sakila")
 public class StaffEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,9 +19,12 @@ public class StaffEntity {
     @Basic
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
-    @Basic
-    @Column(name = "address_id", nullable = false)
-    private Object addressId;
+//    @Basic
+//    @Column(name = "address_id", nullable = false)
+//    private AddressEntity address;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
+    @JoinColumn(name = "address_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
+    private AddressEntity address;
     @Basic
     @Column(name = "picture", nullable = true)
     private byte[] picture;
@@ -31,9 +34,12 @@ public class StaffEntity {
     @Basic
     @Column(name = "store_id", nullable = false)
     private Object storeId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade handlar om relationen mellan objekten, ALL innebär att operationer på huvudobjektet alltså Employee. Alltså tas childobjektet (computer) om vi tar bort huvudobjektet.
+    @JoinColumn(name = "store_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
+    private StoreEntity store;
     @Basic
     @Column(name = "active", nullable = false)
-    private byte active;
+    private boolean active;
     @Basic
     @Column(name = "username", nullable = false, length = 16)
     private String username;
@@ -68,12 +74,15 @@ public class StaffEntity {
         this.lastName = lastName;
     }
 
-    public Object getAddressId() {
-        return addressId;
+    public AddressEntity getAddress() {
+        return address;
+    }
+    public Integer getAddressId() {
+        return getAddress().getAddressId();
     }
 
-    public void setAddressId(Object addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressEntity addressId) {
+        this.address = addressId;
     }
 
     public byte[] getPicture() {
@@ -92,19 +101,27 @@ public class StaffEntity {
         this.email = email;
     }
 
-    public Object getStoreId() {
-        return storeId;
+    public Integer getStoreId() {
+        return getStore().getStoreId();
     }
 
-    public void setStoreId(Object storeId) {
+    public StoreEntity getStore() {
+        return store;
+    }
+
+    public void setStore(StoreEntity store) {
+        this.store = store;
+    }
+
+    public void setStoreId(StoreEntity storeId) {
         this.storeId = storeId;
     }
 
-    public byte getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(byte active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -137,12 +154,12 @@ public class StaffEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StaffEntity that = (StaffEntity) o;
-        return active == that.active && Objects.equals(staffId, that.staffId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(addressId, that.addressId) && Arrays.equals(picture, that.picture) && Objects.equals(email, that.email) && Objects.equals(storeId, that.storeId) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(lastUpdate, that.lastUpdate);
+        return active == that.active && Objects.equals(staffId, that.staffId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Arrays.equals(picture, that.picture) && Objects.equals(email, that.email) && Objects.equals(storeId, that.storeId) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(lastUpdate, that.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(staffId, firstName, lastName, addressId, email, storeId, active, username, password, lastUpdate);
+        int result = Objects.hash(staffId, firstName, lastName, address, email, storeId, active, username, password, lastUpdate);
         result = 31 * result + Arrays.hashCode(picture);
         return result;
     }

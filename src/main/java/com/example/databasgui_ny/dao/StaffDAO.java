@@ -1,5 +1,6 @@
 package com.example.databasgui_ny.dao;
 
+import com.example.databasgui_ny.EntityMapping.StaffEntity;
 import com.example.databasgui_ny.entities.Actor;
 import com.example.databasgui_ny.entities.Staff;
 import com.example.databasgui_ny.repositories.DAO;
@@ -10,10 +11,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class StaffDAO implements DAO<Staff> {
+public class StaffDAO implements DAO<StaffEntity> {
 
     @Override
-    public void create(Staff staff) {
+    public void create(StaffEntity staff) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -23,34 +24,33 @@ public class StaffDAO implements DAO<Staff> {
     }
 
     @Override
-    public List<Staff> readAll() {
+    public List<StaffEntity> readAll() {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Staff> query = session.createQuery("FROM Staff", Staff.class);
-        List<Staff> staffList = query.list();
+        Query<StaffEntity> query = session.createQuery("FROM StaffEntity", StaffEntity.class);
+        List<StaffEntity> staffList = query.list();
         session.close();
         return staffList;
     }
 
     @Override
-    public Staff read(int id) {
+    public StaffEntity read(int id) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Staff staff = session.get(Staff.class, id);
+        StaffEntity staff = session.get(StaffEntity.class, id);
         session.close();
         return staff;
     }
 
     @Override
-    public boolean update(Staff staff) {
+    public boolean update(StaffEntity staff) {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         session.update(staff);
         session.getTransaction().commit();
         session.close();
-
         return true;
     }
 
@@ -68,8 +68,8 @@ public class StaffDAO implements DAO<Staff> {
     }
 
     public void displayStaffs() {
-        List<Staff> staffList = readAll();
-        for (Staff staff : staffList) {
+        List<StaffEntity> staffList = readAll();
+        for (StaffEntity staff : staffList) {
             System.out.println(staff.toString());
         }
     }
