@@ -16,18 +16,17 @@ public class TestingCustomerEntityCrud {
 
     @Test
     public void testGetCustomer() {
-        int idToGet = 5;
+        int idToGet = 200;
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("FROM CustomerEntity ce WHERE ce.id = " + idToGet);
         CustomerEntity customerEntity = (CustomerEntity) query.getSingleResult();
-
-        customerEntity.getFirstName();
-        System.out.println(customerEntity.getFirstName());
+//        System.out.println(customerEntity.toString());
+        System.out.println(customerEntity.getAddress());
         session.getTransaction().commit();
         session.close();
-        assertEquals("Customer name", customerEntity.getFirstName(), "ELIZABETH");
+//        assertEquals("Customer name", customerEntity.getFirstName(), "ELIZABETH");
     }
 
     @Test

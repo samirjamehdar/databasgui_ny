@@ -356,6 +356,10 @@ public class MainMenuController implements Initializable {
     }
 
 
+
+
+
+
 //
 //    public void handlePaymentTable() {
 //        if (paymentObList.size() == 0) {
@@ -466,7 +470,7 @@ public class MainMenuController implements Initializable {
                         System.out.println("Selected Actor ID: " + actorId);
                         try {
                             String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateActor.fxml";
-                            showUpdatePopup(fxmlPath,selectedActor);
+                            showUpdatePopup(fxmlPath,(ActorEntity) selectedActor);
 
                         } catch (Exception ex) {
                             ex.printStackTrace();

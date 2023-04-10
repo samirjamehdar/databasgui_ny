@@ -30,8 +30,8 @@ public class CustomerEntity {
     @JoinColumn(name = "address_id")     // When you use @JoinColumn annotation, you are indicating that the entity containing the foreign key (i.e., the owning entity) is the owner of the relationship and it will be responsible for updating the foreign key value in the database whenever the association changes.
     private AddressEntity address;
 
-    @Transient
-    private Integer addressId;
+//    @Transient
+//    private Integer addressId;
 
     @Basic
     @Column(name = "active", nullable = false)
@@ -156,7 +156,6 @@ public class CustomerEntity {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", address=" + address +
-                ", addressId=" + addressId +
                 ", active=" + active +
                 ", createDate=" + createDate +
                 ", lastUpdate=" + lastUpdate +

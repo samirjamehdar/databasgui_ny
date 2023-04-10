@@ -5,12 +5,15 @@ import com.example.databasgui_ny.entities.*;
 import com.example.databasgui_ny.entities.Country;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.sql.Timestamp;
+import java.util.ResourceBundle;
 
-public class UpdateController {
+public class UpdateController implements Initializable {
     /*Logik för UpdatePopups*/
     @FXML
     private TextField UpdateCustomer_Firstname;
@@ -118,12 +121,21 @@ public class UpdateController {
     String countryString;
 
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
     public void setSelectedObject(Object selectedObject) {
         if (selectedObject instanceof CustomerEntity) {
-            this.selectedCustomer = (CustomerEntity) selectedObject;
+//            this.selectedCustomer = (CustomerEntity) selectedObject;
+//            CustomerEntity testCustomer = (CustomerEntity) selectedObject;
             CustomerDAO customerDAO = new CustomerDAO();
-            CustomerEntity customerEntity = customerDAO.read(selectedCustomer.getCustomerId());
+            CustomerEntity customerEntity = customerDAO.read(207);
             System.out.println(customerEntity.getFirstName());
+            System.out.println(customerEntity.getLastName());
+            System.out.println(customerEntity.getAddress());
 //            CustomerEntity customer = (CustomerEntity) selectedObject;
 //            AddressEntity adress = customer.getAddress();
 //            CityEntity city = adress.getCity();
@@ -131,17 +143,17 @@ public class UpdateController {
 //            System.out.println(adress.getAddress());
 //            System.out.println(city.getCity());
 
-            customerFirstNameField.setText(customerEntity.getFirstName());
-            customerLastNameField.setText(customerEntity.getLastName());
-            customerEMailField.setText(customerEntity.getEmail());
-            customerAddress1Field.setText(customerEntity.getAddress().getAddress());
-            customerAddress2Field.setText(customerEntity.getAddress().getAddress2());
-            customerPostalField.setText(customerEntity.getAddress().getPostalCode());
-            customerPhoneField.setText(customerEntity.getAddress().getPhone());
-            customerDistrictField.setText(customerEntity.getAddress().getDistrict());
-            customerCityNameField.setText(customerEntity.getAddress().getCity().getCity());
-            countryString = Integer.toString(customerEntity.getAddress().getCity().getCountryId());
-            customerCountryIdField.setText(countryString);
+//            customerFirstNameField.setText(customerEntity.getFirstName());
+//            customerLastNameField.setText(customerEntity.getLastName());
+//            customerEMailField.setText(customerEntity.getEmail());
+//            customerAddress1Field.setText(customerEntity.getAddress().getAddress());
+//            customerAddress2Field.setText(customerEntity.getAddress().getAddress2());
+//            customerPostalField.setText(customerEntity.getAddress().getPostalCode());
+//            customerPhoneField.setText(customerEntity.getAddress().getPhone());
+//            customerDistrictField.setText(customerEntity.getAddress().getDistrict());
+//            customerCityNameField.setText(customerEntity.getAddress().getCity().getCity());
+//            countryString = Integer.toString(customerEntity.getAddress().getCity().getCountryId());
+//            customerCountryIdField.setText(countryString);
 
 //            initializeCustomer();
         }
