@@ -118,7 +118,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Staff":
                     selectedTable = "Staff";
-                    System.out.println("Staff is selected, refresh the table to actor values");
+                    handleStaffTable();
                     break;
                 case "Store":
                     selectedTable = "Staff";
@@ -409,31 +409,36 @@ public class MainMenuController implements Initializable {
 //        }
 //    }
 //
-//    public void handleStaffTable() {
-//        if (staffObList.size() == 0) {
-//            StaffDAO staffDAO = new StaffDAO();
-//
-//            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
-//            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-//            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-//            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-//            staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-//            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-//            staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-//
-//            List<Staff> staffList = staffDAO.readAll();
-//            staffObList.addAll(staffList);
-//
-//            tableView.setItems(staffObList);
-//            tableView.getColumns().add(staffIdCol);
-//            tableView.getColumns().add(staffFirstNameCol);
-//            tableView.getColumns().add(staffLastNameCol);
-//            tableView.getColumns().add(staffAddressIdCol);
-//            tableView.getColumns().add(staffEmailCol);
-//            tableView.getColumns().add(staffStoreIdCol);
-//            tableView.getColumns().add(staffActiveCol);
-//        }
-//    }
+    public void handleStaffTable() {
+            tableView.getColumns().clear();
+            tableView.getItems().clear();
+            TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Staff ID");
+            TableColumn<StaffEntity, String> staffFirstNameCol = new TableColumn<>("First Name");
+            TableColumn<StaffEntity, String> staffLastNameCol = new TableColumn<>("Last Name");
+            TableColumn<StaffEntity, Integer> staffAddressIdCol = new TableColumn<>("Address ID");
+            TableColumn<StaffEntity, String> staffEmailCol = new TableColumn<>("Email");
+            TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Store ID");
+            TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Active");
+            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+            ObservableList<StaffEntity> staffObList = FXCollections.observableArrayList();
+            StaffDAO staffDAO = new StaffDAO();
+            List<StaffEntity> staffList = staffDAO.readAll();
+            staffObList.addAll(staffList);
+            tableView.setItems(staffObList);
+            tableView.getColumns().add(staffIdCol);
+            tableView.getColumns().add(staffFirstNameCol);
+            tableView.getColumns().add(staffLastNameCol);
+            tableView.getColumns().add(staffAddressIdCol);
+            tableView.getColumns().add(staffEmailCol);
+            tableView.getColumns().add(staffStoreIdCol);
+            tableView.getColumns().add(staffActiveCol);
+    }
 //
 //    public void handleStoreTable() {
 //        if (storeObList.size() == 0) {
@@ -513,19 +518,19 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Film":
                     System.out.println("Film PopUp");
-//                    Film selectedFilm = (Film) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedFilm != null) {
-//                        int filmId = selectedFilm.getFilmId();
-//                        System.out.println("Selected Film ID: " + filmId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
-//                            showUpdatePopup(fxmlPath, selectedFilm);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No Film selected.");
-//                    }
+                    FilmEntity selectedFilm = (FilmEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedFilm != null) {
+                        int filmId = selectedFilm.getFilmId();
+                        System.out.println("Selected Film ID: " + filmId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateFilm.fxml";
+                            showUpdatePopup(fxmlPath, selectedFilm);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }finally {handleFilmTable();}
+                    } else {
+                        System.out.println("No Film selected.");
+                    }
                     break;
                 case "FilmActor":
 //                    FilmActorDAO filmActorDAO = new FilmActorDAO();
@@ -611,19 +616,19 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Staff":
                     System.out.println("Staff PopUp");
-//                    Staff selectedStaff = (Staff) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedStaff != null) {
-//                        int staffId = selectedStaff.getStaffId();
-//                        System.out.println("Selected Staff ID: " + staffId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStaff.fxml";
-//                            showUpdatePopup(fxmlPath, selectedStaff);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No Staff selected.");
-//                    }
+                    StaffEntity selectedStaff = (StaffEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedStaff != null) {
+                        int staffId = selectedStaff.getStaffId();
+                        System.out.println("Selected Staff ID: " + staffId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateStaff.fxml";
+                            showUpdatePopup(fxmlPath, selectedStaff);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Staff selected.");
+                    }
                     break;
                 case "Store":
                     System.out.println("Store PopUp");

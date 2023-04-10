@@ -44,7 +44,7 @@ public class FilmDAO implements DAO<FilmEntity> {
         SessionFactory sessionFactory = SessionFactorySingleton.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(film);
+        session.update(film);
         session.getTransaction().commit();
         session.close();
         return true;
