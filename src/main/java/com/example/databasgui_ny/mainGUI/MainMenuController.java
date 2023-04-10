@@ -261,8 +261,8 @@ public class MainMenuController implements Initializable {
         TableColumn<FilmEntity, String> filmDescCol = new TableColumn<>("Beskrivning");
         TableColumn<FilmEntity, Integer> filmRelease = new TableColumn<>("Utgivningsår");
         TableColumn<FilmEntity, Object> filmLanguageId = new TableColumn<>("Språk ID");
-        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Uthyrningstid");
-        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Uthyrningsgraden");
+        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Hyr tid");
+        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Hyr kostnad");
         TableColumn<FilmEntity, Integer> filmLength = new TableColumn<>("Längd");
         TableColumn<FilmEntity, BigDecimal> filmReplCost = new TableColumn<>("Ersättningskostnad");
         TableColumn<FilmEntity, Object> filmRating = new TableColumn<>("Åldersgräns");

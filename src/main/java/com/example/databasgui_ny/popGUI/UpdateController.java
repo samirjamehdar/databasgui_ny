@@ -259,7 +259,6 @@ public class UpdateController {
             RentalEntity rental = rentalDAO.read(payment.getRentalId());
             Payment_RentalID.setText(String.valueOf(rental.getRentalId()));
             initializePayment();
-
         }
 //        else if (selectedObject instanceof Rental) {
 //            this.selectedRental = (Rental) selectedObject;
