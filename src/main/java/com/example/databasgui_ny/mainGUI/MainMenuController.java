@@ -52,11 +52,7 @@ public class MainMenuController implements Initializable {
     private ChoiceBox<String> choiceBox = new ChoiceBox();
     @FXML
     private TableView tableView;
-    private TableColumn<InventoryEntity, Integer> inventoryIdCol = new TableColumn<>("Inventory ID");
-    private TableColumn<InventoryEntity, Integer> inventoryFilmIdCol = new TableColumn<>("Film ID");
-    private TableColumn<InventoryEntity, Integer> inventoryStoreIdCol = new TableColumn<>("Invetory ID");
-    private TableColumn<InventoryEntity, Timestamp> inventoryLastUpdateCol = new TableColumn<>("Last Update");
-    private ObservableList<InventoryEntity> inventoryObList = FXCollections.observableArrayList();
+
     private String selectedTable;
     private final ObservableList<String> menuItems = FXCollections.observableArrayList("Actor", "Address", "City", "Customer", "Film", "FilmActor",
                                                                 "FilmCategory", "Film_text", "Inventory", "Payment", "Rental", "Staff", "Store");
@@ -106,15 +102,15 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Inventory":
                     selectedTable = "Inventory";
-                    System.out.println("Inventory is selected, refresh the table to actor values");
+                    handleInventoryTable();
                     break;
                 case "Payment":
                     selectedTable = "Payment";
-                    System.out.println("Payment is selected, refresh the table to actor values");
+                    handlePaymentTable();
                     break;
                 case "Rental":
                     selectedTable = "Rental";
-                    System.out.println("Rental is selected, refresh the table to actor values");
+                    handleRentalTable();
                     break;
                 case "Staff":
                     selectedTable = "Staff";
@@ -131,10 +127,10 @@ public class MainMenuController implements Initializable {
     public void handleActorTable() {
         tableView.getColumns().clear();
         tableView.getItems().clear();
-        TableColumn<ActorEntity, Integer> actorIdCol = new TableColumn<>("Actor ID");
-        TableColumn<ActorEntity, String> actorFirstNameCol = new TableColumn<>("First Name");
-        TableColumn<ActorEntity, String> actorLastNameCol = new TableColumn<>("Last Name");
-        TableColumn<ActorEntity, Date> actorLastUpdateCol = new TableColumn<>("Last Update");
+        TableColumn<ActorEntity, Integer> actorIdCol = new TableColumn<>("Skådespelar ID");
+        TableColumn<ActorEntity, String> actorFirstNameCol = new TableColumn<>("Förnamn");
+        TableColumn<ActorEntity, String> actorLastNameCol = new TableColumn<>("Efternamn");
+        TableColumn<ActorEntity, Date> actorLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
         actorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
         actorFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         actorLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -153,15 +149,15 @@ public class MainMenuController implements Initializable {
     public void handleAddressTable() {
         tableView.getColumns().clear();
         tableView.getItems().clear();
-        TableColumn<AddressEntity, Integer> addressIdCol = new TableColumn<>("Address ID");
-        TableColumn<AddressEntity, String> address1Col = new TableColumn<>("Address 1");
-        TableColumn<AddressEntity, String> address2Col = new TableColumn<>("Address 2");
-        TableColumn<AddressEntity, String> addressDistrictCol = new TableColumn<>("District");
-        TableColumn<AddressEntity, String> addressCityIdCol = new TableColumn<>("City");
-        TableColumn<AddressEntity, String> addressPostalCol = new TableColumn<>("Postal Code");
-        TableColumn<AddressEntity, String> addressPhoneCol = new TableColumn<>("Phone");
-        TableColumn<AddressEntity, Point> addressLocationCol = new TableColumn<>("Location");
-        TableColumn<AddressEntity, Timestamp> addressLastUpdateCol = new TableColumn<>("Last Update");
+        TableColumn<AddressEntity, Integer> addressIdCol = new TableColumn<>("Adress ID");
+        TableColumn<AddressEntity, String> address1Col = new TableColumn<>("Adress 1");
+        TableColumn<AddressEntity, String> address2Col = new TableColumn<>("Adress 2");
+        TableColumn<AddressEntity, String> addressDistrictCol = new TableColumn<>("Distrikt");
+        TableColumn<AddressEntity, String> addressCityIdCol = new TableColumn<>("Stad ID");
+        TableColumn<AddressEntity, String> addressPostalCol = new TableColumn<>("Postnummer");
+        TableColumn<AddressEntity, String> addressPhoneCol = new TableColumn<>("Telefonnummer");
+        TableColumn<AddressEntity, Point> addressLocationCol = new TableColumn<>("Plats");
+        TableColumn<AddressEntity, Timestamp> addressLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
         addressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
         address1Col.setCellValueFactory(new PropertyValueFactory<>("address"));
         address2Col.setCellValueFactory(new PropertyValueFactory<>("address2"));
@@ -194,10 +190,10 @@ public class MainMenuController implements Initializable {
     public void handleCityTable() {
         tableView.getColumns().clear();
         tableView.getItems().clear();
-        TableColumn<CityEntity, Integer> cityIdCol = new TableColumn<>("City ID");
-        TableColumn<CityEntity, String> cityNameCol = new TableColumn<>("City");
-        TableColumn<CityEntity, Integer> cityCountryIdCol = new TableColumn<>("Country Id");
-        TableColumn<CityEntity, Timestamp> cityLastUpdateCol = new TableColumn<>("Last Update");
+        TableColumn<CityEntity, Integer> cityIdCol = new TableColumn<>("Stad ID");
+        TableColumn<CityEntity, String> cityNameCol = new TableColumn<>("Stad");
+        TableColumn<CityEntity, Integer> cityCountryIdCol = new TableColumn<>("Lands Id");
+        TableColumn<CityEntity, Timestamp> cityLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
         cityIdCol.setCellValueFactory(new PropertyValueFactory<>("cityId"));
         cityNameCol.setCellValueFactory(new PropertyValueFactory<>("city"));
         cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("countryId"));
@@ -216,15 +212,15 @@ public class MainMenuController implements Initializable {
     public void handleCustomerTable() {
         tableView.getColumns().clear();
         tableView.getItems().clear();
-        TableColumn<CustomerEntity, Integer> customerIdCol = new TableColumn<>("Customer ID");
-        TableColumn<CustomerEntity, Integer> customerStoreIdCol = new TableColumn<>("Store ID");
-        TableColumn<CustomerEntity, String> customerFirstNameCol = new TableColumn<>("First Name");
-        TableColumn<CustomerEntity, String> customerLastNameCol = new TableColumn<>("Last Name");
+        TableColumn<CustomerEntity, Integer> customerIdCol = new TableColumn<>("Kund ID");
+        TableColumn<CustomerEntity, Integer> customerStoreIdCol = new TableColumn<>("Butiks ID");
+        TableColumn<CustomerEntity, String> customerFirstNameCol = new TableColumn<>("Förnamn");
+        TableColumn<CustomerEntity, String> customerLastNameCol = new TableColumn<>("Efternamn");
         TableColumn<CustomerEntity, String> customerEmailCol = new TableColumn<>("E-mail");
-        TableColumn<CustomerEntity, Integer> customerAddressIdCol = new TableColumn<>("Address ID");
-        TableColumn<CustomerEntity, String> customerActiveCol = new TableColumn<>("Active");
-        TableColumn<CustomerEntity, Timestamp> customerCreateDateCol = new TableColumn<>("Created");
-        TableColumn<CustomerEntity, Timestamp> customerLastUpdateCol = new TableColumn<>("Last Update");
+        TableColumn<CustomerEntity, Integer> customerAddressIdCol = new TableColumn<>("Adress ID");
+        TableColumn<CustomerEntity, String> customerActiveCol = new TableColumn<>("Aktiv");
+        TableColumn<CustomerEntity, Timestamp> customerCreateDateCol = new TableColumn<>("Skapad");
+        TableColumn<CustomerEntity, Timestamp> customerLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
         customerFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -258,17 +254,17 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().clear();
         tableView.getItems().clear();
         TableColumn<FilmEntity, Integer> filmIdCol = new TableColumn<>("Film ID");
-        TableColumn<FilmEntity, String> filmTitleCol = new TableColumn<>("Title");
-        TableColumn<FilmEntity, String> filmDescCol = new TableColumn<>("Description");
-        TableColumn<FilmEntity, Integer> filmRelease = new TableColumn<>("Release Year");
-        TableColumn<FilmEntity, Object> filmLanguageId = new TableColumn<>("Language ID");
-        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Rental Duration");
-        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Rental Rate");
-        TableColumn<FilmEntity, Integer> filmLength = new TableColumn<>("Length");
-        TableColumn<FilmEntity, BigDecimal> filmReplCost = new TableColumn<>("Replacement Cost");
-        TableColumn<FilmEntity, Object> filmRating = new TableColumn<>("Rating");
-        TableColumn<FilmEntity, Object> filmSpecial = new TableColumn<>("Special Features");
-        TableColumn<FilmEntity, Timestamp> filmLastUpdate = new TableColumn<>("Last Update");
+        TableColumn<FilmEntity, String> filmTitleCol = new TableColumn<>("Titel");
+        TableColumn<FilmEntity, String> filmDescCol = new TableColumn<>("Beskrivning");
+        TableColumn<FilmEntity, Integer> filmRelease = new TableColumn<>("Utgivningsår");
+        TableColumn<FilmEntity, Object> filmLanguageId = new TableColumn<>("Språk ID");
+        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Uthyrningstid");
+        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Uthyrningsgraden");
+        TableColumn<FilmEntity, Integer> filmLength = new TableColumn<>("Längd");
+        TableColumn<FilmEntity, BigDecimal> filmReplCost = new TableColumn<>("Ersättningskostnad");
+        TableColumn<FilmEntity, Object> filmRating = new TableColumn<>("Åldersgräns");
+        TableColumn<FilmEntity, Object> filmSpecial = new TableColumn<>("Extras");
+        TableColumn<FilmEntity, Timestamp> filmLastUpdate = new TableColumn<>("Senast Uppdaterad");
         filmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
         filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         filmDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -303,9 +299,9 @@ public class MainMenuController implements Initializable {
     public void handleFilmActorTable(){
         tableView.getColumns().clear();
         tableView.getItems().clear();
-        TableColumn<FilmActorEntity, Integer> filmActorActorIdCol = new TableColumn<>("Actor");
+        TableColumn<FilmActorEntity, Integer> filmActorActorIdCol = new TableColumn<>("Skådespelare");
         TableColumn<FilmActorEntity, Integer> filmActorFilmIdCol = new TableColumn<>("Film");
-        TableColumn<FilmActorEntity, Timestamp> filmActorLastUpdateCol = new TableColumn<>("Last update");
+        TableColumn<FilmActorEntity, Timestamp> filmActorLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
         filmActorActorIdCol.setCellValueFactory(new PropertyValueFactory<>("actorId"));
         filmActorFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
         filmActorLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
@@ -323,7 +319,7 @@ public class MainMenuController implements Initializable {
         tableView.getColumns().clear();
         tableView.getItems().clear();
         TableColumn<FilmCategoryEntity, Integer> filmCatFilmId = new TableColumn<>("Film ID");
-        TableColumn<FilmCategoryEntity, Integer> filmCatId = new TableColumn<>("Category ID");
+        TableColumn<FilmCategoryEntity, Integer> filmCatId = new TableColumn<>("Kategori ID");
         filmCatFilmId.setCellValueFactory(new PropertyValueFactory<>("filmId"));
         filmCatId.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
         ObservableList<FilmCategoryEntity> filmCatOb = FXCollections.observableArrayList();
@@ -336,89 +332,107 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleInventoryTable() {
-        if (inventoryObList.size() == 0) {
-            InventoryDAO inventoryDAO = new InventoryDAO();
+        TableColumn<InventoryEntity, Integer> inventoryIdCol = new TableColumn<>("Lager ID");
+        TableColumn<InventoryEntity, Integer> inventoryFilmIdCol = new TableColumn<>("Film ID");
+        TableColumn<InventoryEntity, Integer> inventoryStoreIdCol = new TableColumn<>("Butik ID");
+        TableColumn<InventoryEntity, Timestamp> inventoryLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
+        ObservableList<InventoryEntity> inventoryObList = FXCollections.observableArrayList();
 
-            inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
-            inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
-            inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
-            inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        InventoryDAO inventoryDAO = new InventoryDAO();
 
-            List<InventoryEntity> inventoryList = inventoryDAO.readAll();
-            inventoryObList.addAll(inventoryList);
+        inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+        inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("filmId"));
+        inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
+        inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
-            tableView.setItems(inventoryObList);
-            tableView.getColumns().add(inventoryIdCol);
-            tableView.getColumns().add(inventoryFilmIdCol);
-            tableView.getColumns().add(inventoryStoreIdCol);
-            tableView.getColumns().add(inventoryLastUpdateCol);
-        }
+        List<InventoryEntity> inventoryList = inventoryDAO.readAll();
+        inventoryObList.addAll(inventoryList);
+
+        tableView.setItems(inventoryObList);
+        tableView.getColumns().add(inventoryIdCol);
+        tableView.getColumns().add(inventoryFilmIdCol);
+        tableView.getColumns().add(inventoryStoreIdCol);
+        tableView.getColumns().add(inventoryLastUpdateCol);
     }
 
 
-//
-//    public void handlePaymentTable() {
-//        if (paymentObList.size() == 0) {
-//            PaymentDAO paymentDAO = new PaymentDAO();
-//
-//            paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("payment_id"));
-//            paymentCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-//            paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
-//            paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
-//            paymentAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-//            paymentPaymentDateCol.setCellValueFactory(new PropertyValueFactory<>("payment_date"));
-//            paymentLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-//
-//            List<Payment> paymentList = paymentDAO.readAll();
-//            paymentObList.addAll(paymentList);
-//
-//            tableView.setItems(paymentObList);
-//            tableView.getColumns().add(paymentIdCol);
-//            tableView.getColumns().add(paymentCustomerIdCol);
-//            tableView.getColumns().add(paymentStaffIdCol);
-//            tableView.getColumns().add(paymentRentalIdCol);
-//            tableView.getColumns().add(paymentAmountCol);
-//            tableView.getColumns().add(paymentPaymentDateCol);
-//            tableView.getColumns().add(paymentLastUpdateCol);
-//        }
-//    }
-//
-//    public void handleRentalTable() {
-//        if (rentalObList.size() == 0) {
-//            RentalDAO rentalDAO = new RentalDAO();
-//
-//            rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental_id"));
-//            rentalDateCol.setCellValueFactory(new PropertyValueFactory<>("rental_date"));
-//            rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-//            rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
-//            rentalReturnDateCol.setCellValueFactory(new PropertyValueFactory<>("return_date"));
-//            rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff_id"));
-//            rentalLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-//
-//            List<Rental> rentalList = rentalDAO.readAll();
-//            rentalObList.addAll(rentalList);
-//
-//            tableView.setItems(rentalObList);
-//            tableView.getColumns().add(rentalIdCol);
-//            tableView.getColumns().add(rentalDateCol);
-//            tableView.getColumns().add(rentalInventoryIdCol);
-//            tableView.getColumns().add(rentalCustomerIdCol);
-//            tableView.getColumns().add(rentalReturnDateCol);
-//            tableView.getColumns().add(rentalStaffIdCol);
-//            tableView.getColumns().add(rentalLastUpdateCol);
-//        }
-//    }
-//
+
+    public void handlePaymentTable() {
+        PaymentDAO paymentDAO = new PaymentDAO();
+        TableColumn<PaymentEntity, Integer> paymentIdCol = new TableColumn<>("Betalnings ID");
+        TableColumn<PaymentEntity, Integer> paymentCustomerIdCol = new TableColumn<>("Kund ID");
+        TableColumn<PaymentEntity, Integer> paymentStaffIdCol = new TableColumn<>("Personal ID");
+        TableColumn<PaymentEntity, Integer> paymentRentalIdCol = new TableColumn<>("Uthyrnings ID");
+        TableColumn<PaymentEntity, Integer> paymentAmountCol = new TableColumn<>("Belopp");
+        TableColumn<PaymentEntity, Timestamp> paymentPaymentDateCol = new TableColumn<>("Köpdag");
+        TableColumn<PaymentEntity, Timestamp> paymentLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
+
+
+        paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
+        paymentCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+        paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
+        paymentAmountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        paymentPaymentDateCol.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
+        paymentLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        List<PaymentEntity> paymentList = paymentDAO.readAll();
+        ObservableList<PaymentEntity> paymentObList = FXCollections.observableArrayList();
+        paymentObList.addAll(paymentList);
+
+        tableView.setItems(paymentObList);
+        tableView.getColumns().add(paymentIdCol);
+        tableView.getColumns().add(paymentCustomerIdCol);
+        tableView.getColumns().add(paymentStaffIdCol);
+        tableView.getColumns().add(paymentRentalIdCol);
+        tableView.getColumns().add(paymentAmountCol);
+        tableView.getColumns().add(paymentPaymentDateCol);
+        tableView.getColumns().add(paymentLastUpdateCol);
+
+    }
+
+    public void handleRentalTable() {
+        RentalDAO rentalDAO = new RentalDAO();
+        TableColumn<RentalEntity, Integer> rentalIdCol = new TableColumn<>("Uthyrnings ID");
+        TableColumn<RentalEntity, Timestamp> rentalDateCol = new TableColumn<>("Uthyrningsdatum");
+        TableColumn<RentalEntity, Integer> rentalInventoryIdCol = new TableColumn<>("Lager ID");
+        TableColumn<RentalEntity, Integer> rentalCustomerIdCol = new TableColumn<>("Kund ID");
+        TableColumn<RentalEntity, Timestamp> rentalReturnDateCol = new TableColumn<>("Återlämningsdatum");
+        TableColumn<RentalEntity, Integer> rentalStaffIdCol = new TableColumn<>("Personal ID");
+        TableColumn<RentalEntity, Timestamp> rentalLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
+
+        rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
+        rentalDateCol.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
+        rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+        rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        rentalReturnDateCol.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+        rentalLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        List<RentalEntity> rentalList = rentalDAO.readAll();
+        ObservableList<RentalEntity> rentalObList = FXCollections.observableArrayList();
+        rentalObList.addAll(rentalList);
+
+        tableView.setItems(rentalObList);
+        tableView.getColumns().add(rentalIdCol);
+        tableView.getColumns().add(rentalDateCol);
+        tableView.getColumns().add(rentalInventoryIdCol);
+        tableView.getColumns().add(rentalCustomerIdCol);
+        tableView.getColumns().add(rentalReturnDateCol);
+        tableView.getColumns().add(rentalStaffIdCol);
+        tableView.getColumns().add(rentalLastUpdateCol);
+    }
+
     public void handleStaffTable() {
             tableView.getColumns().clear();
             tableView.getItems().clear();
-            TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Staff ID");
-            TableColumn<StaffEntity, String> staffFirstNameCol = new TableColumn<>("First Name");
-            TableColumn<StaffEntity, String> staffLastNameCol = new TableColumn<>("Last Name");
-            TableColumn<StaffEntity, Integer> staffAddressIdCol = new TableColumn<>("Address ID");
-            TableColumn<StaffEntity, String> staffEmailCol = new TableColumn<>("Email");
-            TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Store ID");
-            TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Active");
+            TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
+            TableColumn<StaffEntity, String> staffFirstNameCol = new TableColumn<>("Förnamn");
+            TableColumn<StaffEntity, String> staffLastNameCol = new TableColumn<>("Efternamn");
+            TableColumn<StaffEntity, Integer> staffAddressIdCol = new TableColumn<>("Adress ID");
+            TableColumn<StaffEntity, String> staffEmailCol = new TableColumn<>("E-mail");
+            TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Butik ID");
+            TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Aktiv");
             staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
             staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
             staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
@@ -439,25 +453,24 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(staffStoreIdCol);
             tableView.getColumns().add(staffActiveCol);
     }
-//
+
 //    public void handleStoreTable() {
-//        if (storeObList.size() == 0) {
-//            StoreDAO storeDAO = new StoreDAO();
+//        StoreDAO storeDAO = new StoreDAO();
+//        TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
 //
-//            storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-//            storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
-//            storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-//            storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
+//        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+//        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
+//        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+//        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
 //
-//            List<Store> storeList = storeDAO.readAll();
-//            storeObList.addAll(storeList);
+//        List<Store> storeList = storeDAO.readAll();
+//        storeObList.addAll(storeList);
 //
-//            tableView.setItems(storeObList);
-//            tableView.getColumns().add(storeIdCol);
-//            tableView.getColumns().add(storeManagerStaffIdCol);
-//            tableView.getColumns().add(storeAddressIdCol);
-//            tableView.getColumns().add(storeLastUpdateCol);
-//        }
+//        tableView.setItems(storeObList);
+//        tableView.getColumns().add(storeIdCol);
+//        tableView.getColumns().add(storeManagerStaffIdCol);
+//        tableView.getColumns().add(storeAddressIdCol);
+//        tableView.getColumns().add(storeLastUpdateCol);
 //    }
 
     public void updateButtonClick(ActionEvent e) throws IOException {
