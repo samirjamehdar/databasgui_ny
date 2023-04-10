@@ -8,32 +8,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="253.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.databasgui_ny.popGUI.UpdateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.databasgui_ny.popGUI.UpdateController">
    <children>
-      <VBox layoutX="14.0" layoutY="78.0" prefHeight="65.0" prefWidth="202.0">
+      <VBox layoutX="14.0" layoutY="78.0" prefHeight="167.0" prefWidth="202.0">
          <children>
-            <Label fx:id="Payments_Label1" alignment="CENTER" style="&#10;" text="Belopp:" textAlignment="CENTER" wrapText="false">
+            <Label fx:id="Payments_Label1" alignment="CENTER" style="&#10;" text="Kund ID:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Payment_CustomerID" />
+            <Label fx:id="Payments_Label2" alignment="CENTER" style="&#10;" text="Personal ID:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Payment_StaffID" />
+            <Label fx:id="Payments_Label3" alignment="CENTER" style="&#10;" text="Uthyrnings ID:" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Payment_RentalID" />
+         </children>
+      </VBox>
+      <Label fx:id="Payments_Label" alignment="CENTER" layoutX="71.0" layoutY="14.0" style="&#10;" text="Uppdatera Betalning" textAlignment="CENTER" wrapText="false">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="Payments_ConfirmBtn" layoutX="156.0" layoutY="254.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Bekräfta" />
+      <VBox layoutX="235.0" layoutY="78.0" prefHeight="125.0" prefWidth="202.0">
+         <children>
+            <Label fx:id="Payments_Label4" alignment="CENTER" style="&#10;" text="Belopp:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <TextField fx:id="amountField" />
-         </children>
-      </VBox>
-      <Label fx:id="Payments_Label" alignment="CENTER" layoutX="71.0" layoutY="14.0" style="&#10;" text="Uppdatera Betalning:" textAlignment="CENTER" wrapText="false">
-         <font>
-            <Font size="33.0" />
-         </font>
-      </Label>
-      <Button fx:id="Payments_ConfirmBtn" layoutX="160.0" layoutY="184.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Confim" />
-      <VBox layoutX="235.0" layoutY="78.0" prefHeight="65.0" prefWidth="202.0">
-         <children>
-            <Label fx:id="Payments_Label2" alignment="CENTER" style="&#10;" text="Betalnings Datum:" textAlignment="CENTER" wrapText="false">
+            <Label fx:id="Payments_Label5" alignment="CENTER" style="&#10;" text="Betalnings Datum:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="payDateBox" prefHeight="25.0" prefWidth="203.0" />
+            <DatePicker fx:id="payDate_Box" prefHeight="25.0" prefWidth="203.0" />
          </children>
       </VBox>
    </children>

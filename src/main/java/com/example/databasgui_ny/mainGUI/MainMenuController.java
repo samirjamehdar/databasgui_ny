@@ -65,6 +65,7 @@ public class MainMenuController implements Initializable {
             tableView.getItems().clear();
             addButton.setDisable(false);
             deleteButton.setDisable(false);
+            updateButton.setDisable(false);
             switch (newValue) {
                 case "Actor":
                     selectedTable = "Actor";
@@ -75,10 +76,12 @@ public class MainMenuController implements Initializable {
                     handleAddressTable();
                     addButton.setDisable(true);
                     deleteButton.setDisable(true);
+                    updateButton.setDisable(true);
                     break;
                 case "City":
                     selectedTable = "City";
                     handleCityTable();
+                    updateButton.setDisable(true);
                     break;
                 case "Customer":
                     selectedTable = "Customer";
@@ -117,8 +120,8 @@ public class MainMenuController implements Initializable {
                     handleStaffTable();
                     break;
                 case "Store":
-                    selectedTable = "Staff";
-                    System.out.println("Store is selected, refresh the table to actor values");
+                    selectedTable = "Store";
+                    handleStoreTable();
                     break;
             }
         });
@@ -258,8 +261,8 @@ public class MainMenuController implements Initializable {
         TableColumn<FilmEntity, String> filmDescCol = new TableColumn<>("Beskrivning");
         TableColumn<FilmEntity, Integer> filmRelease = new TableColumn<>("Utgivningsår");
         TableColumn<FilmEntity, Object> filmLanguageId = new TableColumn<>("Språk ID");
-        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Uthyrningstid");
-        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Uthyrningsgraden");
+        TableColumn<FilmEntity, Integer> filmRentalDur = new TableColumn<>("Hyr tid");
+        TableColumn<FilmEntity, BigDecimal> filmRentalRate = new TableColumn<>("Hyr kostnad");
         TableColumn<FilmEntity, Integer> filmLength = new TableColumn<>("Längd");
         TableColumn<FilmEntity, BigDecimal> filmReplCost = new TableColumn<>("Ersättningskostnad");
         TableColumn<FilmEntity, Object> filmRating = new TableColumn<>("Åldersgräns");
@@ -434,11 +437,11 @@ public class MainMenuController implements Initializable {
             TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Butik ID");
             TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Aktiv");
             staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
-            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
+            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
+            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
             staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
             ObservableList<StaffEntity> staffObList = FXCollections.observableArrayList();
             StaffDAO staffDAO = new StaffDAO();
@@ -454,24 +457,28 @@ public class MainMenuController implements Initializable {
             tableView.getColumns().add(staffActiveCol);
     }
 
-//    public void handleStoreTable() {
-//        StoreDAO storeDAO = new StoreDAO();
-//        TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
-//
-//        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("store_id"));
-//        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("manager_staff_id"));
-//        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address_id"));
-//        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("last_update"));
-//
-//        List<Store> storeList = storeDAO.readAll();
-//        storeObList.addAll(storeList);
-//
-//        tableView.setItems(storeObList);
-//        tableView.getColumns().add(storeIdCol);
-//        tableView.getColumns().add(storeManagerStaffIdCol);
-//        tableView.getColumns().add(storeAddressIdCol);
-//        tableView.getColumns().add(storeLastUpdateCol);
-//    }
+    public void handleStoreTable() {
+        StoreDAO storeDAO = new StoreDAO();
+        TableColumn<StoreEntity, Integer> storeIdCol = new TableColumn<>("Butik ID");
+        TableColumn<StoreEntity, Integer> storeManagerStaffIdCol = new TableColumn<>("Personalchef ID");
+        TableColumn<StoreEntity, Integer> storeAddressIdCol = new TableColumn<>("Adress ID");
+        TableColumn<StoreEntity, Timestamp> storeLastUpdateCol = new TableColumn<>("Senast Uppdaterad");
+
+        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("storeId"));
+        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("managerStaffId"));
+        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
+        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        List<StoreEntity> storeList = storeDAO.readAll();
+        ObservableList<StoreEntity> storeObList = FXCollections.observableArrayList();
+        storeObList.addAll(storeList);
+
+        tableView.setItems(storeObList);
+        tableView.getColumns().add(storeIdCol);
+        tableView.getColumns().add(storeManagerStaffIdCol);
+        tableView.getColumns().add(storeAddressIdCol);
+        tableView.getColumns().add(storeLastUpdateCol);
+    }
 
     public void updateButtonClick(ActionEvent e) throws IOException {
         if (selectedTable != null) {
@@ -499,19 +506,7 @@ public class MainMenuController implements Initializable {
                     break;
                 case "City":
                     System.out.println("City PopUp");
-//                    City selectedCity = (City) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedCity != null) {
-//                        int cityId = selectedCity.getCityId();
-//                        System.out.println("Selected City ID: " + cityId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateCity.fxml";
-//                            showUpdatePopup(fxmlPath,selectedCity);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No City selected.");
-//                    }
+
                     break;
                 case "Customer":
                     System.out.println("Customer PopUp");
@@ -581,35 +576,35 @@ public class MainMenuController implements Initializable {
                     break;
                 case "Inventory":
                     System.out.println("Inventory PopUp");
-//                    Inventory selectedInventory = (Inventory) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedInventory != null) {
-//                        int inventoryId = selectedInventory.getInventoryId();
-//                        System.out.println("Selected Inventory ID: " + inventoryId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
-//                            showUpdatePopup(fxmlPath, selectedInventory);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No inventory selected.");
-//                    }
+                    InventoryEntity selectedInventory = (InventoryEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedInventory != null) {
+                        int inventoryId = selectedInventory.getInventoryId();
+                        System.out.println("Selected Inventory ID: " + inventoryId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdateInventory.fxml";
+                            showUpdatePopup(fxmlPath, selectedInventory);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No inventory selected.");
+                    }
                     break;
                 case "Payment":
                     System.out.println("Payment PopUp");
-//                    Payment selectedPayment = (Payment) tableView.getSelectionModel().getSelectedItem();
-//                    if (selectedPayment != null) {
-//                        int paymentId = selectedPayment.getPaymentId();
-//                        System.out.println("Selected Payment ID: " + paymentId);
-//                        try {
-//                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
-//                            showUpdatePopup(fxmlPath, selectedPayment);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("No Payment selected.");
-//                    }
+                    PaymentEntity selectedPayment = (PaymentEntity) tableView.getSelectionModel().getSelectedItem();
+                    if (selectedPayment != null) {
+                        int paymentId = selectedPayment.getPaymentId();
+                        System.out.println("Selected Payment ID: " + paymentId);
+                        try {
+                            String fxmlPath = "/com/example/databasgui_ny/updatePopups/UpdatePayment.fxml";
+                            showUpdatePopup(fxmlPath, selectedPayment);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("No Payment selected.");
+                    }
                     break;
                 case "Rental":
                     System.out.println("Rental PopUp");

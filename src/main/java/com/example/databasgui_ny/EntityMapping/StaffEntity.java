@@ -85,12 +85,14 @@ public class StaffEntity {
         this.address = addressId;
     }
 
-    public byte[] getPicture() {
-        return picture;
+    public String getPicture() {
+
+        return Arrays.toString(picture);
     }
 
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
+    public void setPicture(String picture) {
+
+        this.picture = picture.getBytes();
     }
 
     public String getEmail() {
