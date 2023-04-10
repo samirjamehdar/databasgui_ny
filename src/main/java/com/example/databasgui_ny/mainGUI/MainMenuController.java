@@ -427,34 +427,34 @@ public class MainMenuController implements Initializable {
     }
 
     public void handleStaffTable() {
-            tableView.getColumns().clear();
-            tableView.getItems().clear();
-            TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
-            TableColumn<StaffEntity, String> staffFirstNameCol = new TableColumn<>("Förnamn");
-            TableColumn<StaffEntity, String> staffLastNameCol = new TableColumn<>("Efternamn");
-            TableColumn<StaffEntity, Integer> staffAddressIdCol = new TableColumn<>("Adress ID");
-            TableColumn<StaffEntity, String> staffEmailCol = new TableColumn<>("E-mail");
-            TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Butik ID");
-            TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Aktiv");
-            staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
-            staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-            staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
-            staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
-            staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
-            ObservableList<StaffEntity> staffObList = FXCollections.observableArrayList();
-            StaffDAO staffDAO = new StaffDAO();
-            List<StaffEntity> staffList = staffDAO.readAll();
-            staffObList.addAll(staffList);
-            tableView.setItems(staffObList);
-            tableView.getColumns().add(staffIdCol);
-            tableView.getColumns().add(staffFirstNameCol);
-            tableView.getColumns().add(staffLastNameCol);
-            tableView.getColumns().add(staffAddressIdCol);
-            tableView.getColumns().add(staffEmailCol);
-            tableView.getColumns().add(staffStoreIdCol);
-            tableView.getColumns().add(staffActiveCol);
+        StaffDAO staffDAO = new StaffDAO();
+        TableColumn<StaffEntity, Integer> staffIdCol = new TableColumn<>("Personal ID");
+        TableColumn<StaffEntity, String> staffFirstNameCol = new TableColumn<>("Förnamn");
+        TableColumn<StaffEntity, String> staffLastNameCol = new TableColumn<>("Efternamn");
+        TableColumn<StaffEntity, Integer> staffAddressIdCol = new TableColumn<>("Adress ID");
+        TableColumn<StaffEntity, String> staffEmailCol = new TableColumn<>("E-mail");
+        TableColumn<StaffEntity, Integer> staffStoreIdCol = new TableColumn<>("Butik ID");
+        TableColumn<StaffEntity, Boolean> staffActiveCol = new TableColumn<>("Aktiv");
+        staffIdCol.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+        staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        staffAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        staffEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        staffStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+        staffActiveCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+
+        List<StaffEntity> staffList = staffDAO.readAll();
+        ObservableList<StaffEntity> staffObList = FXCollections.observableArrayList();
+        staffObList.addAll(staffList);
+
+        tableView.setItems(staffObList);
+        tableView.getColumns().add(staffIdCol);
+        tableView.getColumns().add(staffFirstNameCol);
+        tableView.getColumns().add(staffLastNameCol);
+        tableView.getColumns().add(staffAddressIdCol);
+        tableView.getColumns().add(staffEmailCol);
+        tableView.getColumns().add(staffStoreIdCol);
+        tableView.getColumns().add(staffActiveCol);
     }
 
     public void handleStoreTable() {
